@@ -285,7 +285,7 @@
       errorBox.scrollIntoView({behavior:'smooth',block:'center'});
     }
   });
-  fetch('/schema.json').then(response=>response.json()).then(data=>{schema=data;document.getElementById('officialIntro').textContent=data.officialIntro;renderForm();}).catch(()=>{
+  fetch('/schema.json').then(response=>response.json()).then(data=>{schema=data;for(const group of schema.groups)for(const question of group.questions)state.ratings[question.key] ??= '3';document.getElementById('officialIntro').textContent=data.officialIntro;renderForm();}).catch(()=>{
     errorBox.textContent='Không tải được biểu mẫu. Vui lòng tải lại trang hoặc báo nhân viên hỗ trợ.';errorBox.hidden=false;
   });
 })();
