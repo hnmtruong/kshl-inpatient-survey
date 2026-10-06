@@ -278,16 +278,25 @@ class Handler(SimpleHTTPRequestHandler):
                 state = query.get("state", ["pending"])[0]
                 if state not in (*STATE_LABELS, "all"):
                     self._json(400, {"error": "Trạng thái không hợp lệ."}); return True
+                search = query.get("q", [""])[0].strip()[:120]
+                try: page = max(1, int(query.get("page", ["1"])[0]))
+                except ValueError: page = 1
+                page_size = 30
                 with db_connect() as connection:
-                    sql = "SELECT id, created_at, answers_json, state, survey_form FROM submissions"
-                    params = ()
-                    if state != "all": sql += " WHERE state=?"; params = (state,)
-                    rows = connection.execute(sql + " ORDER BY created_at DESC", params).fetchall()
+                    clauses, params = [], []
+                    if state != "all": clauses.append("state=?"); params.append(state)
+                    if search:
+                        clauses.append("(id LIKE ? OR answers_json LIKE ?)")
+                        wildcard = f"%{search}%"; params.extend([wildcard, wildcard])
+                    where = f" WHERE {' AND '.join(clauses)}" if clauses else ""
+                    total = connection.execute("SELECT COUNT(*) FROM submissions" + where, params).fetchone()[0]
+                    offset = (page - 1) * page_size
+                    rows = connection.execute("SELECT id, created_at, answers_json, state, survey_form FROM submissions" + where + " ORDER BY created_at DESC LIMIT ? OFFSET ?", [*params, page_size, offset]).fetchall()
                 items = []
                 for rid, created, blob, status, survey_form in rows:
                     profile = json.loads(blob).get("profile", {})
                     items.append({"id": rid, "created_at": created, "state": status, "state_label": STATE_LABELS.get(status, status), "survey_form": survey_form, "patient_name": profile.get("patient_name", ""), "respondent": profile.get("respondent", ""), "ward_label": profile.get("ward", "")})
-                self._json(200, {"items": items}); return True
+                self._json(200, {"items": items, "total": total, "page": page, "page_size": page_size}); return True
             match = re.fullmatch(r"/api/staff/submissions/(NTP-[A-F0-9]{12})(?:/(export))?", path)
             if match:
                 record_id, export = match.groups()

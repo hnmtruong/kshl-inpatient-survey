@@ -6,6 +6,12 @@
   const staffError = document.getElementById('staffError');
   const queueList = document.getElementById('queueList');
   const queueCount = document.getElementById('queueCount');
+  const navQueueCount = document.getElementById('navQueueCount');
+  const queueSearch = document.getElementById('queueSearch');
+  const queuePager = document.getElementById('queuePager');
+  const queuePrev = document.getElementById('queuePrev');
+  const queueNext = document.getElementById('queueNext');
+  const queuePageInfo = document.getElementById('queuePageInfo');
   const detailPanel = document.getElementById('detailPanel');
   const stateFilter = document.getElementById('stateFilter');
   const logoutButton = document.getElementById('logoutButton');
@@ -15,6 +21,8 @@
   let schema = null;
   let outpatientSchema = null;
   let selectedId = '';
+  let queuePage = 1;
+  let searchTimer = null;
 
   const el = (tag, cls, text) => {
     const node = document.createElement(tag);
@@ -79,11 +87,21 @@
     showError(staffError, '');
     queueList.replaceChildren(el('p','empty-queue','Đang tải danh sách…'));
     try {
-      const result = await call(`/api/staff/submissions?state=${encodeURIComponent(stateFilter.value)}`);
+      const search = (queueSearch?.value || '').trim();
+      const result = await call(`/api/staff/submissions?state=${encodeURIComponent(stateFilter.value)}&q=${encodeURIComponent(search)}&page=${queuePage}`);
       queueList.replaceChildren();
-      queueCount.textContent = String(result.items.length);
-      if (!result.items.length) queueList.append(el('p','empty-queue','Không có phiếu ở trạng thái này.'));
-      for (const item of result.items) {
+      const items = result.items;
+      const total = result.total ?? items.length;
+      const totalPages = Math.max(1, Math.ceil(total / (result.page_size || 30)));
+      if (queuePage > totalPages) { queuePage = totalPages; return loadQueue(); }
+      queueCount.textContent = String(total);
+      if (navQueueCount) navQueueCount.textContent = String(total);
+      queuePager.hidden = totalPages <= 1;
+      queuePageInfo.textContent = `Trang ${result.page}/${totalPages}`;
+      queuePrev.disabled = result.page <= 1;
+      queueNext.disabled = result.page >= totalPages;
+      if (!items.length) queueList.append(el('p','empty-queue',search ? 'Không tìm thấy phiếu phù hợp.' : 'Không có phiếu ở trạng thái này.'));
+      for (const item of items) {
         const button = el('button','queue-item');
         button.type = 'button';
         button.setAttribute('aria-current', item.id === selectedId ? 'true' : 'false');
@@ -323,7 +341,10 @@
     await call('/api/staff/logout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}).catch(()=>{});
     selectedId='';setLoggedIn(false);loginForm.reset();
   });
-  stateFilter.addEventListener('change',()=>loadQueue());
+  stateFilter.addEventListener('change',()=>{ queuePage=1; loadQueue(); });
+  queueSearch?.addEventListener('input',()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(()=>{queuePage=1;loadQueue();},250); });
+  queuePrev?.addEventListener('click',()=>{ if(queuePage>1){queuePage--;loadQueue();} });
+  queueNext?.addEventListener('click',()=>{queuePage++;loadQueue();});
   Promise.all([fetch('/schema.json').then(response=>response.json()),fetch('/schema2.json').then(response=>response.json()),call('/api/staff/session')]).then(([data,outpatient,session])=>{
     schema=data;outpatientSchema=outpatient;setLoggedIn(session.authenticated);if(session.authenticated)loadQueue();
   }).catch(()=>{
