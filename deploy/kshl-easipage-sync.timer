@@ -1,0 +1,10 @@
+[Unit]
+Description=Check Cloudflare Quick Tunnel URL for EasiPage synchronization
+
+[Timer]
+OnBootSec=90s
+OnUnitActiveSec=60s
+Persistent=true
+
+[Install]
+WantedBy=timers.target

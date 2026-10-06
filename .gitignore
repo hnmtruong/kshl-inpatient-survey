@@ -1,6 +1,7 @@
 # Runtime data and secrets
 data/
 tls/
+*.env
 *.pem
 *.key
 *.crt

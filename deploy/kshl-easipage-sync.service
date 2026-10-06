@@ -1,0 +1,9 @@
+[Unit]
+Description=Synchronize Cloudflare Quick Tunnel URL to EasiPage
+After=network-online.target kshl-cloudflared.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/kshl-easipage-sync.env
+ExecStart=/usr/bin/python3 /home/root_admin/kshl-inpatient-survey/easipage_sync.py
