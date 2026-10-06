@@ -10,21 +10,13 @@
   <script src="/staff.js" defer></script>
 </head>
 <body>
-  <header class="site-header staff-header">
-    <div class="site-header-inner staff-header-inner">
-      <a class="site-name" href="/" aria-label="Mở phiếu bệnh nhân">Quản lý khảo sát · Bệnh viện Nguyễn Tri Phương</a>
-      <button class="staff-logout" id="logoutButton" hidden>Đăng xuất</button>
-    </div>
-  </header>
   <main class="staff-shell">
     <section id="loginPanel" class="staff-card login-card" aria-labelledby="staffTitle">
       <div class="staff-login-logos" aria-label="Đơn vị triển khai">
         <img src="/assets/logo-nguyen-tri-phuong.jpg" alt="Bệnh viện Nguyễn Tri Phương">
         <img src="/assets/logo-cong-tac-xa-hoi.png" alt="Phòng Công tác xã hội - Bệnh viện Nguyễn Tri Phương">
       </div>
-      <p class="eyebrow">KHU VỰC NHÂN VIÊN</p>
-      <h1 id="staffTitle">Review phiếu khảo sát</h1>
-      <p class="staff-intro">Đăng nhập để xem, kiểm duyệt và gửi phiếu đã duyệt lên biểu mẫu chính thức của Bộ Y tế.</p>
+      <h1 id="staffTitle">Đăng nhập</h1>
       <form id="loginForm" class="staff-login-form">
         <label for="loginUsername">Tên đăng nhập</label>
         <input id="loginUsername" name="username" autocomplete="username" required>
@@ -33,10 +25,10 @@
         <div id="loginError" class="form-error" role="alert" hidden></div>
         <button class="button button-primary" type="submit">Đăng nhập</button>
       </form>
-      <p class="staff-lock-note">Khu vực này hiển thị thông tin người bệnh và câu trả lời khảo sát. Chỉ nhân viên được phân công mới sử dụng.</p>
     </section>
 
     <section id="workspace" hidden>
+      <div class="workspace-actions"><button class="staff-logout" id="logoutButton" hidden>Đăng xuất</button></div>
       <section class="dashboard" aria-labelledby="dashboardTitle">
         <div class="dashboard-head"><div><p class="eyebrow">TỔNG QUAN</p><h2 id="dashboardTitle">Dashboard khảo sát</h2></div><p id="dashboardUpdated" class="dashboard-updated">Đang tải số liệu…</p></div>
         <div id="metrics" class="metrics" aria-live="polite"></div>
