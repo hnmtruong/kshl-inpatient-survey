@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15584f">
+  <title>Review phiếu khảo sát · Bệnh viện Nguyễn Tri Phương</title>
+  <link rel="stylesheet" href="/app.css">
+  <link rel="stylesheet" href="/staff.css">
+  <script src="/staff.js" defer></script>
+</head>
+<body>
+  <header class="site-header staff-header">
+    <div class="site-header-inner staff-header-inner">
+      <a class="site-name" href="/" aria-label="Mở phiếu bệnh nhân">Quản lý khảo sát · Bệnh viện Nguyễn Tri Phương</a>
+      <button class="staff-logout" id="logoutButton" hidden>Đăng xuất</button>
+    </div>
+  </header>
+  <main class="staff-shell">
+    <section id="loginPanel" class="staff-card login-card" aria-labelledby="staffTitle">
+      <p class="eyebrow">KHU VỰC NHÂN VIÊN</p>
+      <h1 id="staffTitle">Review phiếu khảo sát</h1>
+      <p class="staff-intro">Đăng nhập để xem, kiểm duyệt và gửi phiếu đã duyệt lên biểu mẫu chính thức của Bộ Y tế.</p>
+      <form id="loginForm" class="staff-login-form">
+        <label for="loginUsername">Tên đăng nhập</label>
+        <input id="loginUsername" name="username" autocomplete="username" required>
+        <label for="loginPassword">Mật khẩu</label>
+        <input id="loginPassword" name="password" type="password" autocomplete="current-password" required>
+        <div id="loginError" class="form-error" role="alert" hidden></div>
+        <button class="button button-primary" type="submit">Đăng nhập</button>
+      </form>
+      <p class="staff-lock-note">Khu vực này hiển thị thông tin người bệnh và câu trả lời khảo sát. Chỉ nhân viên được phân công mới sử dụng.</p>
+    </section>
+
+    <section id="workspace" hidden>
+      <section class="dashboard" aria-labelledby="dashboardTitle">
+        <div class="dashboard-head"><div><p class="eyebrow">TỔNG QUAN</p><h2 id="dashboardTitle">Dashboard khảo sát</h2></div><p id="dashboardUpdated" class="dashboard-updated">Đang tải số liệu…</p></div>
+        <div id="metrics" class="metrics" aria-live="polite"></div>
+        <section class="trend-panel" aria-labelledby="trendTitle"><h3 id="trendTitle">Phiếu nhận trong 7 ngày gần nhất</h3><div id="trendChart" class="trend-chart"></div></section>
+      </section>
+      <div class="staff-heading-row">
+        <div><p class="eyebrow">BỘ Y TẾ · MẪU SỐ 1</p><h1>Hàng đợi phiếu khảo sát</h1><p class="staff-intro">Xem nội dung, kiểm duyệt phiếu và bấm Gửi BYT khi sẵn sàng.</p></div>
+        <div class="staff-controls">
+          <label class="filter-field">Trạng thái
+            <select id="stateFilter"><option value="pending">Chờ kiểm duyệt</option><option value="approved">Đã kiểm duyệt</option><option value="failed">Gửi BYT chưa thành công</option><option value="sent">Đã gửi BYT</option><option value="all">Tất cả</option></select>
+          </label>
+        </div>
+      </div>
+      <div id="staffError" class="form-error" role="alert" hidden></div>
+      <div class="staff-layout">
+        <section class="staff-card queue-card" aria-labelledby="queueTitle">
+          <div class="card-heading"><h2 id="queueTitle">Phiếu nhận được</h2><span id="queueCount" class="count-pill">0</span></div>
+          <div id="queueList" class="queue-list" aria-live="polite"></div>
+        </section>
+        <section id="detailPanel" class="staff-card detail-card" aria-labelledby="detailTitle">
+          <div class="detail-placeholder"><h2 id="detailTitle">Chọn một phiếu</h2><p>Thông tin chi tiết và câu trả lời sẽ hiện ở đây sau khi chọn mã phiếu.</p></div>
+        </section>
+      </div>
+      <p class="staff-footnote">Nút <strong>Gửi BYT</strong> thực hiện gửi phiếu đã kiểm duyệt lên cổng Bộ Y tế ngay từ máy chủ. Chỉ bấm nút khi nội dung đã được xác nhận.</p>
+    </section>
+  </main>
+</body>
+</html>

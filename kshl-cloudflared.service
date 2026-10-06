@@ -1,0 +1,15 @@
+[Unit]
+Description=Cloudflare tunnel for the inpatient survey
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root_admin
+WorkingDirectory=/home/root_admin/kshl-inpatient-survey
+ExecStart=/home/root_admin/kshl-inpatient-survey/bin/cloudflared tunnel --protocol http2 --url https://127.0.0.1:8765 --no-tls-verify
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

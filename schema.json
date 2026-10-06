@@ -1,0 +1,496 @@
+{
+  "formTitle": "Phiếu khảo sát sự hài lòng người bệnh nội trú",
+  "facility": {
+    "code": "60242",
+    "name": "Bệnh viện Nguyễn Tri Phương - TP. Hồ Chí Minh"
+  },
+  "scale": [
+    {
+      "value": "1",
+      "label": "Rất không hài lòng hoặc: Rất kém"
+    },
+    {
+      "value": "2",
+      "label": "Không hài lòng hoặc: Kém"
+    },
+    {
+      "value": "3",
+      "label": "Bình thường hoặc: Trung bình"
+    },
+    {
+      "value": "4",
+      "label": "Hài lòng hoặc: Tốt"
+    },
+    {
+      "value": "5",
+      "label": "Rất hài lòng hoặc: Rất tốt"
+    },
+    {
+      "value": "0",
+      "label": "Không sử dụng"
+    }
+  ],
+  "wards": [
+    {
+      "value": "77230",
+      "label": "Ban Giám đốc",
+      "code": ""
+    },
+    {
+      "value": "121211",
+      "label": "2027 Khoa Mắt",
+      "code": "2027"
+    },
+    {
+      "value": "77231",
+      "label": "1001 Phòng Chỉ Đạo tuyến",
+      "code": "1001"
+    },
+    {
+      "value": "77232",
+      "label": "1002 Phòng Điều dưỡng",
+      "code": "1002"
+    },
+    {
+      "value": "77233",
+      "label": "1003 Phòng Hành chính Quản trị",
+      "code": "1003"
+    },
+    {
+      "value": "77234",
+      "label": "1004 Phòng Kế hoạch Tổng hợp",
+      "code": "1004"
+    },
+    {
+      "value": "77235",
+      "label": "1005 Phòng Tài chính Kế toán",
+      "code": "1005"
+    },
+    {
+      "value": "77236",
+      "label": "1006 Phòng Tổ chức Cán bộ",
+      "code": "1006"
+    },
+    {
+      "value": "77237",
+      "label": "1007 Phòng Quản lý Chất lượng",
+      "code": "1007"
+    },
+    {
+      "value": "77238",
+      "label": "1008 Phòng Vật tư Trang thiết bị y tế",
+      "code": "1008"
+    },
+    {
+      "value": "77239",
+      "label": "1009 Phòng Công nghệ Thông tin",
+      "code": "1009"
+    },
+    {
+      "value": "77240",
+      "label": "1010 Phòng Công tác xã hội",
+      "code": "1010"
+    },
+    {
+      "value": "77241",
+      "label": "2001 Khoa Cấp cứu",
+      "code": "2001"
+    },
+    {
+      "value": "77242",
+      "label": "2002 Khoa Hồi sức Tích cực - Chống độc",
+      "code": "2002"
+    },
+    {
+      "value": "77243",
+      "label": "2003 Khoa Khám bệnh",
+      "code": "2003"
+    },
+    {
+      "value": "77244",
+      "label": "2004 Khoa Mắt",
+      "code": "2004"
+    },
+    {
+      "value": "77245",
+      "label": "2005 Khoa Chấn thương Chỉnh hình",
+      "code": "2005"
+    },
+    {
+      "value": "77246",
+      "label": "2006 Khoa Ngoại Thần kinh",
+      "code": "2006"
+    },
+    {
+      "value": "77247",
+      "label": "2007 Khoa Ngoại Tiêu hóa",
+      "code": "2007"
+    },
+    {
+      "value": "77248",
+      "label": "2008 Khoa Ngoại Tổng hợp",
+      "code": "2008"
+    },
+    {
+      "value": "77249",
+      "label": "2009 Khoa Ngoại Thận tiết niệu",
+      "code": "2009"
+    },
+    {
+      "value": "77250",
+      "label": "2010 Khoa Nhi",
+      "code": "2010"
+    },
+    {
+      "value": "77251",
+      "label": "2011 Khoa Nội Cơ Xương khớp",
+      "code": "2011"
+    },
+    {
+      "value": "77252",
+      "label": "2012 Khoa Lão khoa",
+      "code": "2012"
+    },
+    {
+      "value": "77253",
+      "label": "2013 Khoa Nội Hô hấp",
+      "code": "2013"
+    },
+    {
+      "value": "77254",
+      "label": "2014 Khoa Tai Mũi Họng",
+      "code": "2014"
+    },
+    {
+      "value": "77255",
+      "label": "2015 Khoa Nội Thần kinh",
+      "code": "2015"
+    },
+    {
+      "value": "77256",
+      "label": "2016 Khoa Nội tiết",
+      "code": "2016"
+    },
+    {
+      "value": "77257",
+      "label": "2017 Khoa Nội Tiêu hóa",
+      "code": "2017"
+    },
+    {
+      "value": "77258",
+      "label": "2018 Khoa Nội Tim mạch",
+      "code": "2018"
+    },
+    {
+      "value": "77259",
+      "label": "2019 Khoa Nội tổng hợp",
+      "code": "2019"
+    },
+    {
+      "value": "77260",
+      "label": "2020 Khoa Phẫu thuật Gây mê Hồi sức",
+      "code": "2020"
+    },
+    {
+      "value": "77261",
+      "label": "2021 Khoa Phẫu thuật Tạo hình Thẩm Mỹ",
+      "code": "2021"
+    },
+    {
+      "value": "77262",
+      "label": "2022 Khoa Phụ sản",
+      "code": "2022"
+    },
+    {
+      "value": "77263",
+      "label": "2023 Khoa Y học Cổ truyền - VLTL - PHCN",
+      "code": "2023"
+    },
+    {
+      "value": "77264",
+      "label": "2024 Khoa Thận - Lọc máu",
+      "code": "2024"
+    },
+    {
+      "value": "77265",
+      "label": "2025 Khoa Tim mạch can thiệp",
+      "code": "2025"
+    },
+    {
+      "value": "77266",
+      "label": "2026 Khoa Dinh dưỡng tiết chế",
+      "code": "2026"
+    },
+    {
+      "value": "77267",
+      "label": "3001 Khoa Chẩn đoán hình ảnh",
+      "code": "3001"
+    },
+    {
+      "value": "77268",
+      "label": "3002 Khoa Dược",
+      "code": "3002"
+    },
+    {
+      "value": "77269",
+      "label": "3003 Khoa Giải phẫu Bệnh lý",
+      "code": "3003"
+    },
+    {
+      "value": "77270",
+      "label": "3004 Khoa Kiểm soát Nhiễm khuẩn",
+      "code": "3004"
+    },
+    {
+      "value": "77271",
+      "label": "3005 Khoa Xét nghiệm",
+      "code": "3005"
+    },
+    {
+      "value": "77272",
+      "label": "3006 Khoa Nội soi tiêu hóa",
+      "code": "3006"
+    },
+    {
+      "value": "80268",
+      "label": "4001 Đơn vị điều trị Ung Bướu (trực thuộc khoa Ngoại tổng hợp)",
+      "code": "4001"
+    }
+  ],
+  "groups": [
+    {
+      "key": "a",
+      "title": "A. Khả năng tiếp cận",
+      "intro": "",
+      "questions": [
+        {
+          "key": "a1",
+          "label": "Các sơ đồ, biển báo chỉ dẫn đường đến các khoa, phòng và thông báo giờ khám, chữa bệnh, giờ vào thăm rõ ràng, dễ hiểu"
+        },
+        {
+          "key": "a2",
+          "label": "Các tòa nhà, cầu thang bộ, thang máy, buồng bệnh được đánh số và hướng dẫn rõ ràng, dễ tìm"
+        },
+        {
+          "key": "a3",
+          "label": "Các lối đi trong bệnh viện, hành lang bằng phẳng, an toàn, dễ đi"
+        },
+        {
+          "key": "a4",
+          "label": "Thời gian chờ đợi thang máy, làm thủ tục và chờ đợi trong quá trình khám, chữa bệnh chấp nhận được"
+        },
+        {
+          "key": "a5",
+          "label": "Người bệnh hỏi và gọi được nhân viên y tế khi cần thiết"
+        }
+      ]
+    },
+    {
+      "key": "b",
+      "title": "B. Sự minh bạch thông tin và thủ tục khám bệnh, điều trị",
+      "intro": "",
+      "questions": [
+        {
+          "key": "b1",
+          "label": "Quy trình, thủ tục hành chính (nhập, xuất viện, chuyển viện, chuyển khoa…) rõ ràng, công khai, thuận tiện"
+        },
+        {
+          "key": "b2",
+          "label": "Giá dịch vụ y tế được niêm yết, thông báo công khai ở vị trí dễ quan sát, dễ đọc, dễ hiểu và được tư vấn, giải thích các chi phí cao nếu có"
+        },
+        {
+          "key": "b3",
+          "label": "Quy trình, thời gian làm thủ tục thanh toán viện phí khi ra viện rõ ràng, công khai, thuận tiện"
+        },
+        {
+          "key": "b4",
+          "label": "Được phổ biến về nội quy và những thông tin cần thiết khi nằm viện rõ ràng, đầy đủ"
+        },
+        {
+          "key": "b5",
+          "label": "Được giải thích về tình trạng bệnh, phương pháp và thời gian dự kiến điều trị rõ ràng, đầy đủ"
+        },
+        {
+          "key": "b6",
+          "label": "Được giải thích, tư vấn trước khi yêu cầu làm các xét nghiệm, thăm dò, kỹ thuật cao rõ ràng, đầy đủ"
+        },
+        {
+          "key": "b7",
+          "label": "Được công khai và cập nhật thông tin về dùng thuốc và chi phí điều trị"
+        }
+      ]
+    },
+    {
+      "key": "c",
+      "title": "C. Cơ sở vật chất và phương tiện phục vụ người bệnh",
+      "intro": "",
+      "questions": [
+        {
+          "key": "c1",
+          "label": "Buồng bệnh khang trang, sạch sẽ, có đầy đủ các thiết bị điều chỉnh nhiệt độ phù hợp như quạt, máy sưởi, hoặc điều hòa"
+        },
+        {
+          "key": "c2",
+          "label": "Buồng bệnh yên tĩnh, bảo đảm an toàn, an ninh, trật tự, phòng ngừa trộm cắp, yên tâm khi nằm viện"
+        },
+        {
+          "key": "c3",
+          "label": "Giường bệnh, ga, gối đầy đủ cho mỗi người một giường, chắc chắn, sử dụng tốt"
+        },
+        {
+          "key": "c4",
+          "label": "Được cung cấp quần áo đầy đủ, sạch sẽ"
+        },
+        {
+          "key": "c5",
+          "label": "Nhà vệ sinh, nhà tắm thuận tiện, sạch sẽ, sử dụng tốt"
+        },
+        {
+          "key": "c6",
+          "label": "Được cung cấp đầy đủ nước uống nóng, lạnh ngay tại khoa điều trị"
+        },
+        {
+          "key": "c7",
+          "label": "Người bệnh và người nhà người bệnh truy cập được mạng internet không dây (wifi) ngay tại buồng bệnh"
+        },
+        {
+          "key": "c8",
+          "label": "Được bảo đảm sự riêng tư khi nằm viện như thay quần áo, khám bệnh, đi vệ sinh tại giường… có rèm che, vách ngăn hoặc nằm riêng"
+        },
+        {
+          "key": "c9",
+          "label": "Căng-tin bệnh viện phục vụ ăn uống và nhu cầu sinh hoạt thiết yếu đầy đủ và chất lượng"
+        },
+        {
+          "key": "c10",
+          "label": "Môi trường trong khuôn viên bệnh viện xanh, sạch, đẹp"
+        },
+        {
+          "key": "c11",
+          "label": "Được cung cấp phương tiện vận chuyển nội viện như xe lăn, cáng, xe điện đầy đủ, kịp thời, sử dụng tốt khi có nhu cầu"
+        }
+      ]
+    },
+    {
+      "key": "d",
+      "title": "D. Thái độ ứng xử, năng lực chuyên môn của nhân viên y tế",
+      "intro": "",
+      "questions": [
+        {
+          "key": "d1",
+          "label": "Bác sỹ, điều dưỡng có lời nói, thái độ, giao tiếp đúng mực"
+        },
+        {
+          "key": "d2",
+          "label": "Nhân viên phục vụ (hộ lý, bảo vệ, kế toán…) có lời nói, thái độ, giao tiếp đúng mực"
+        },
+        {
+          "key": "d3",
+          "label": "Được nhân viên y tế tôn trọng, đối xử công bằng, quan tâm, giúp đỡ"
+        },
+        {
+          "key": "d4",
+          "label": "Bác sỹ, điều dưỡng hợp tác tốt và xử lý công việc thành thạo, kịp thời"
+        },
+        {
+          "key": "d5",
+          "label": "Được bác sỹ thăm khám, động viên tại phòng điều trị"
+        },
+        {
+          "key": "d6",
+          "label": "Được tư vấn chế độ ăn, vận động, theo dõi và phòng ngừa biến chứng"
+        },
+        {
+          "key": "d7",
+          "label": "Không bị nhân viên y tế gợi ý bồi dưỡng"
+        }
+      ]
+    },
+    {
+      "key": "e",
+      "title": "E. Kết quả cung cấp dịch vụ",
+      "intro": "",
+      "questions": [
+        {
+          "key": "e1",
+          "label": "Thời gian chờ đợi khi khám, chữa bệnh tại bệnh viện"
+        },
+        {
+          "key": "e2",
+          "label": "Được cấp phát cho dùng thuốc đúng giờ, hướng dẫn sử dụng thuốc đầy đủ và các tác dụng phụ nếu có"
+        },
+        {
+          "key": "e3",
+          "label": "Được nhắc lịch tái khám và hướng dẫn thực hành ăn uống, luyện tập, chăm sóc tại nhà trước khi ra viện"
+        },
+        {
+          "key": "e4",
+          "label": "Trang thiết bị, vật tư y tế đầy đủ, hiện đại, đáp ứng nhu cầu khám chữa bệnh"
+        },
+        {
+          "key": "e5",
+          "label": "Kết quả điều trị đáp ứng được nguyện vọng"
+        },
+        {
+          "key": "e6",
+          "label": "Ông/Bà đánh giá mức độ tin tưởng về chất lượng dịch vụ y tế"
+        }
+      ]
+    }
+  ],
+  "costOptions": [
+    {
+      "value": "1",
+      "label": "Rất đắt so với chất lượng"
+    },
+    {
+      "value": "2",
+      "label": "Đắt hơn so với chất lượng"
+    },
+    {
+      "value": "3",
+      "label": "Tương xứng so với chất lượng"
+    },
+    {
+      "value": "4",
+      "label": "Rẻ hơn so với chất lượng"
+    },
+    {
+      "value": "5",
+      "label": "Không tự chi trả nên không biết (do BHYT hoặc người khác thanh toán)"
+    },
+    {
+      "value": "6",
+      "label": "Ý kiến khác, ghi rõ……"
+    }
+  ],
+  "returnOptions": [
+    {
+      "value": "1",
+      "label": "Chắc chắn không bao giờ quay lại"
+    },
+    {
+      "value": "2",
+      "label": "Không muốn quay lại nhưng có ít lựa chọn khác"
+    },
+    {
+      "value": "3",
+      "label": "Muốn chuyển sang bệnh viện khác"
+    },
+    {
+      "value": "4",
+      "label": "Có thể sẽ quay lại"
+    },
+    {
+      "value": "5",
+      "label": "Chắc chắn sẽ quay lại hoặc giới thiệu cho người khác"
+    },
+    {
+      "value": "6",
+      "label": "Khác (ghi rõ) ..."
+    }
+  ],
+  "officialHeading": "PHIẾU KHẢO SÁT SỰ HÀI LÒNG NGƯỜI BỆNH NỘI TRÚ",
+  "officialIntro": "Nhằm nâng cao chất lượng khám, chữa bệnh, hướng tới sự hài lòng người bệnh, chúng tôi tiến hành khảo sát về mức độ hài lòng của Ông/Bà. Ý kiến của Ông/Bà sẽ giúp bệnh viện từng bước cải tiến chất lượng. Các thông tin sẽ được bảo mật và không ảnh hưởng đến việc điều trị của Ông/Bà. Xin trân trọng cảm ơn!",
+  "assessmentInstructions": "Ông/Bà đánh dấu gạch chéo vào một số từ 1 đến 5, tương ứng với mức độ hài lòng hoặc nhận xét từ rất kém đến rất tốt cho từng câu hỏi dưới đây. Nếu không sử dụng dịch vụ hoặc không có ý kiến thì đánh dấu gạch chéo vào số 0."
+}

@@ -1,0 +1,74 @@
+{
+  "formNumber": "2",
+  "formTitle": "Phiếu khảo sát ý kiến người bệnh ngoại trú",
+  "officialIntro": "Nhằm nâng cao chất lượng khám, chữa bệnh, hướng tới sự hài lòng người bệnh, chúng tôi tiến hành khảo sát về mức độ hài lòng của Ông/Bà. Ý kiến của Ông/Bà sẽ giúp bệnh viện từng bước cải tiến chất lượng. Các thông tin sẽ được bảo mật và không ảnh hưởng đến việc điều trị của Ông/Bà. Xin trân trọng cảm ơn!",
+  "facility": {"code":"60242","name":"Bệnh viện Nguyễn Tri Phương - TP. Hồ Chí Minh"},
+  "scale": [
+    {"value":"1","label":"Rất không hài lòng hoặc: Rất kém"},
+    {"value":"2","label":"Không hài lòng hoặc: Kém"},
+    {"value":"3","label":"Bình thường hoặc: Trung bình"},
+    {"value":"4","label":"Hài lòng hoặc: Tốt"},
+    {"value":"5","label":"Rất hài lòng hoặc: Rất tốt"},
+    {"value":"0","label":"Không sử dụng"}
+  ],
+  "assessmentInstructions": "Ông/Bà đánh dấu vào một số từ 1 đến 5, tương ứng với mức độ hài lòng hoặc nhận xét từ rất kém đến rất tốt. Nếu không sử dụng dịch vụ hoặc không có ý kiến thì chọn số 0.",
+  "groups": [
+    {"key":"a","title":"A. Khả năng tiếp cận","questions":[
+      {"key":"a1","label":"Các biển báo, chỉ dẫn đường đến các khoa, phòng trong bệnh viện rõ ràng, dễ hiểu, dễ tìm."},
+      {"key":"a2","label":"Các sơ đồ, biển báo chỉ dẫn đường đến các khoa, phòng trong bệnh viện rõ ràng, dễ hiểu, dễ tìm."},
+      {"key":"a3","label":"Các khối nhà, cầu thang được đánh số rõ ràng, dễ tìm."},
+      {"key":"a4","label":"Các lối đi trong bệnh viện, hành lang bằng phẳng, dễ đi."},
+      {"key":"a5","label":"Có thể tìm hiểu các thông tin và đăng ký khám qua điện thoại, trang tin điện tử của bệnh viện (website) thuận tiện."}
+    ]},
+    {"key":"b","title":"B. Sự minh bạch thông tin và thủ tục khám bệnh, điều trị","questions":[
+      {"key":"b1","label":"Quy trình khám bệnh được niêm yết rõ ràng, công khai, dễ hiểu."},
+      {"key":"b2","label":"Các quy trình, thủ tục khám bệnh đơn giản, thuận tiện."},
+      {"key":"b3","label":"Giá dịch vụ y tế niêm yết rõ ràng, công khai."},
+      {"key":"b4","label":"Nhân viên y tế tiếp đón, hướng dẫn người bệnh làm các thủ tục niềm nở, tận tình."},
+      {"key":"b5","label":"Được xếp hàng theo thứ tự trước sau khi làm các thủ tục đăng ký, nộp tiền, khám bệnh, xét nghiệm, chiếu chụp."},
+      {"key":"b6","label":"Đánh giá thời gian chờ đợi làm thủ tục đăng ký khám."},
+      {"key":"b7","label":"Đánh giá thời gian chờ tới lượt bác sỹ khám."},
+      {"key":"b8","label":"Đánh giá thời gian được bác sỹ khám và tư vấn."},
+      {"key":"b9","label":"Đánh giá thời gian chờ làm xét nghiệm, chiếu chụp."},
+      {"key":"b10","label":"Đánh giá thời gian chờ nhận kết quả xét nghiệm, chiếu chụp."}
+    ]},
+    {"key":"c","title":"C. Cơ sở vật chất và phương tiện phục vụ người bệnh","questions":[
+      {"key":"c1","label":"Có phòng/sảnh chờ khám sạch sẽ, thoáng mát vào mùa hè; kín gió và ấm áp vào mùa đông."},
+      {"key":"c2","label":"Phòng chờ có đủ ghế ngồi cho người bệnh và sử dụng tốt."},
+      {"key":"c3","label":"Phòng chờ có quạt (điều hòa) đầy đủ, hoạt động thường xuyên."},
+      {"key":"c4","label":"Phòng chờ có các phương tiện giúp người bệnh có tâm lý thoải mái như ti-vi, tranh ảnh, tờ rơi, nước uống..."},
+      {"key":"c5","label":"Được bảo đảm sự riêng tư khi khám bệnh, chiếu chụp, làm thủ thuật."},
+      {"key":"c6","label":"Nhà vệ sinh thuận tiện, sử dụng tốt, sạch sẽ."},
+      {"key":"c7","label":"Môi trường trong khuôn viên bệnh viện xanh, sạch, đẹp."},
+      {"key":"c8","label":"Khu khám bệnh bảo đảm an ninh, trật tự, phòng ngừa trộm cắp cho người dân."}
+    ]},
+    {"key":"d","title":"D. Thái độ ứng xử, năng lực chuyên môn của nhân viên y tế","questions":[
+      {"key":"d1","label":"Nhân viên y tế (bác sỹ, điều dưỡng) có lời nói, thái độ, giao tiếp đúng mực."},
+      {"key":"d2","label":"Nhân viên phục vụ (hộ lý, bảo vệ, kế toán…) có lời nói, thái độ, giao tiếp đúng mực."},
+      {"key":"d3","label":"Được nhân viên y tế tôn trọng, đối xử công bằng, quan tâm, giúp đỡ."},
+      {"key":"d4","label":"Năng lực chuyên môn của bác sỹ, điều dưỡng đáp ứng mong đợi."}
+    ]},
+    {"key":"e","title":"E. Kết quả cung cấp dịch vụ","questions":[
+      {"key":"e1","label":"Kết quả khám bệnh đã đáp ứng được nguyện vọng của Ông/Bà."},
+      {"key":"e2","label":"Các hóa đơn, phiếu thu, đơn thuốc và kết quả khám bệnh được cung cấp đầy đủ, rõ ràng, minh bạch và được giải thích nếu có thắc mắc."},
+      {"key":"e3","label":"Đánh giá mức độ tin tưởng về chất lượng dịch vụ y tế."},
+      {"key":"e4","label":"Đánh giá mức độ hài lòng về giá cả dịch vụ y tế."}
+    ]}
+  ],
+  "costOptions":[
+    {"value":"1","label":"Rất đắt so với chất lượng"},
+    {"value":"2","label":"Đắt hơn so với chất lượng"},
+    {"value":"3","label":"Tương xứng so với chất lượng"},
+    {"value":"4","label":"Rẻ hơn so với chất lượng"},
+    {"value":"5","label":"Không tự chi trả nên không biết (do BHYT hoặc người khác thanh toán)"},
+    {"value":"6","label":"Ý kiến khác, ghi rõ"}
+  ],
+  "returnOptions":[
+    {"value":"1","label":"Chắc chắn không bao giờ quay lại"},
+    {"value":"2","label":"Không muốn quay lại nhưng có ít lựa chọn khác"},
+    {"value":"3","label":"Muốn chuyển sang bệnh viện khác"},
+    {"value":"4","label":"Có thể sẽ quay lại"},
+    {"value":"5","label":"Chắc chắn sẽ quay lại hoặc giới thiệu cho người khác"},
+    {"value":"6","label":"Khác (ghi rõ)"}
+  ]
+}

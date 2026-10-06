@@ -1,0 +1,15 @@
+# Runtime data and secrets
+data/
+tls/
+*.pem
+*.key
+*.crt
+
+# Local/generated files
+__pycache__/
+*.py[cod]
+tmp_login.html
+*.log
+
+# Cloudflare binaries and packages
+cloudflared*
