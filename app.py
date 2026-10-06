@@ -154,6 +154,8 @@ def validate_outpatient_answers(raw):
         "treatment_count": _number(profile.get("treatment_count"), "lần khám", 1, 9999),
         "phone": str(profile.get("phone") or "").strip()[:30],
     }
+    if not p["phone"]:
+        raise ValueError("Vui lòng nhập số di động.")
     if int(p["age"]) > 130 and not (1900 <= int(p["age"]) <= datetime.now().year):
         raise ValueError("Tuổi phải từ 0 đến 130, hoặc nhập năm sinh từ 1900 đến nay.")
     clean = {key: _choice(ratings.get(key), SCALE_VALUES, f"câu {key.upper()}") for key in OUTPATIENT_RATING_KEYS}
