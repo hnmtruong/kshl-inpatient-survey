@@ -7,6 +7,7 @@
   <title>Review phiếu khảo sát · Bệnh viện Nguyễn Tri Phương</title>
   <link rel="stylesheet" href="/app.css">
   <link rel="stylesheet" href="/staff.css">
+  <link rel="stylesheet" href="/staff-report.css">
   <script src="/staff.js" defer></script>
 </head>
 <body>
@@ -42,6 +43,10 @@
         <section class="dashboard" aria-labelledby="dashboardTitle">
           <div class="section-heading"><div><h2 id="dashboardTitle">Tổng quan hoạt động</h2><p>Theo dõi lượng phiếu, chất lượng phản hồi và tiến độ xử lý.</p></div></div>
           <div id="metrics" class="metrics" aria-live="polite"></div>
+          <section class="care-report-grid" aria-label="Báo cáo theo loại khảo sát">
+            <section class="care-report-panel" aria-labelledby="inpatientReportTitle"><div class="panel-heading"><div><p class="eyebrow">MẪU SỐ 1</p><h3 id="inpatientReportTitle">Nội trú theo khoa</h3><p>Số phiếu và điểm hài lòng trung bình của từng khoa.</p></div><span id="inpatientTotal" class="report-period">0 phiếu</span></div><div class="ward-table-wrap"><table class="ward-table"><thead><tr><th scope="col">Khoa điều trị</th><th scope="col">Phiếu</th><th scope="col">Điểm TB</th></tr></thead><tbody id="inpatientWardReport"><tr><td colspan="3" class="report-empty">Đang tải dữ liệu…</td></tr></tbody></table></div></section>
+            <section class="care-report-panel outpatient-summary" aria-labelledby="outpatientReportTitle"><p class="eyebrow">MẪU SỐ 2</p><h3 id="outpatientReportTitle">Ngoại trú</h3><strong id="outpatientTotal" class="outpatient-total">0</strong><span>phiếu khảo sát đã nhận</span><p>Thông tin được tách riêng khỏi báo cáo Nội trú để theo dõi rõ ràng.</p></section>
+          </section>
           <section class="trend-panel" aria-labelledby="trendTitle"><div class="panel-heading"><div><h3 id="trendTitle">Xu hướng tiếp nhận</h3><p>Phiếu nhận trong 7 ngày gần nhất</p></div><span class="report-period">7 ngày</span></div><div id="trendChart" class="trend-chart"></div></section>
         </section>
         <section class="management-section" aria-labelledby="queueTitle">

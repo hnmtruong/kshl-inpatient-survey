@@ -17,6 +17,9 @@
   const logoutButton = document.getElementById('logoutButton');
   const metrics = document.getElementById('metrics');
   const trendChart = document.getElementById('trendChart');
+  const inpatientWardReport = document.getElementById('inpatientWardReport');
+  const inpatientTotal = document.getElementById('inpatientTotal');
+  const outpatientTotal = document.getElementById('outpatientTotal');
   const dashboardUpdated = document.getElementById('dashboardUpdated');
   let schema = null;
   let outpatientSchema = null;
@@ -58,9 +61,9 @@
       metrics.replaceChildren();
       const items = [
         ['Tổng số phiếu', data.total, 'neutral'],
-        ['Phiếu hôm nay', data.today, 'accent'],
+        ['Nội trú', data.inpatient?.total || 0, 'accent'],
+        ['Ngoại trú', data.outpatient?.total || 0, 'info'],
         ['Chờ kiểm duyệt', data.counts.pending || 0, 'warning'],
-        ['Đã kiểm duyệt', data.counts.approved || 0, 'info'],
         ['Đã gửi BYT', data.counts.sent || 0, 'success'],
         ['Điểm hài lòng TB', data.average_score === null ? '—' : `${data.average_score}/5`, 'score'],
       ];
@@ -68,6 +71,20 @@
         const card = el('article',`metric metric-${tone}`);
         card.append(el('p','metric-label',label), el('strong','metric-value',String(value)));
         metrics.append(card);
+      }
+      inpatientTotal.textContent = `${data.inpatient?.total || 0} phiếu`;
+      outpatientTotal.textContent = String(data.outpatient?.total || 0);
+      inpatientWardReport.replaceChildren();
+      const wards = data.inpatient?.wards || [];
+      if (!wards.length) {
+        const row = el('tr');
+        const cell = el('td','report-empty','Chưa có phiếu Nội trú theo khoa.'); cell.colSpan = 3;
+        row.append(cell); inpatientWardReport.append(row);
+      }
+      for (const ward of wards) {
+        const row = el('tr');
+        row.append(el('td','ward-name',ward.ward), el('td','ward-count',String(ward.count)), el('td','ward-score',ward.average_score === null ? '—' : `${ward.average_score}/5`));
+        inpatientWardReport.append(row);
       }
       trendChart.replaceChildren();
       const max = Math.max(1, ...data.daily.map(day=>day.count));

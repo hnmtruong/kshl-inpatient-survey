@@ -1,0 +1,12 @@
+.care-report-grid { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(220px, .7fr); gap: 16px; margin-top: 16px; }
+.care-report-panel { padding: 17px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.care-report-panel h3 { margin: 0; color: #314f60; font-size: 15px; }
+.care-report-panel p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+.ward-table-wrap { max-height: 300px; overflow: auto; margin-top: 13px; border-top: 1px solid #e6eef1; }
+.ward-table { width: 100%; border-collapse: collapse; }
+.ward-table th, .ward-table td { padding: 10px 8px; border-bottom: 1px solid #e6eef1; text-align: left; font-size: 12px; }
+.ward-table th { position: sticky; top: 0; z-index: 1; background: #f8fbfc; color: #637884; font-size: 11px; font-weight: 700; }
+.ward-table th:nth-child(n+2), .ward-table td:nth-child(n+2) { text-align: right; white-space: nowrap; }
+.ward-name { color: #314f60; font-weight: 600; }.ward-count { color: #49616e; }.ward-score { color: #23704d; font-weight: 700; }.report-empty { padding: 20px 8px !important; color: var(--muted); text-align: center !important; }
+.outpatient-summary { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 180px; background: #fbfdfe; }.outpatient-total { display: block; margin-top: 8px; color: #176c98; font-size: 42px; line-height: 1; }.outpatient-summary > span { margin-top: 4px; color: #50646f; font-size: 12px; font-weight: 600; }
+@media (max-width: 760px) { .care-report-grid { grid-template-columns: 1fr; }.ward-table-wrap { max-height: 260px; } }

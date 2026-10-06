@@ -256,23 +256,48 @@ class Handler(SimpleHTTPRequestHandler):
                 counts = {key: 0 for key in STATE_LABELS}
                 scores = []
                 daily = {}
+                inpatient_wards = {}
+                inpatient_total = 0
+                outpatient_total = 0
+                ward_labels = {ward["value"]: ward["label"] for ward in SCHEMA["wards"]}
                 for created, blob, state, survey_form in rows:
                     counts[state] = counts.get(state, 0) + 1
                     day = created[:10]
                     daily[day] = daily.get(day, 0) + 1
                     try:
-                        ratings = json.loads(blob).get("ratings", {})
+                        answers = json.loads(blob)
+                        ratings = answers.get("ratings", {})
+                        rating_values = []
                         for key in (OUTPATIENT_RATING_KEYS if survey_form == "2" else RATING_KEYS):
                             value = str(ratings.get(key, ""))
                             if value in {"1", "2", "3", "4", "5"}:
-                                scores.append(int(value))
+                                rating_values.append(int(value))
+                        scores.extend(rating_values)
+                        if survey_form == "2":
+                            outpatient_total += 1
+                        else:
+                            inpatient_total += 1
+                            profile = answers.get("profile", {})
+                            ward_value = profile.get("ward", "")
+                            ward_name = ward_labels.get(ward_value, ward_value or "Chưa chọn khoa")
+                            ward = inpatient_wards.setdefault(ward_name, {"ward": ward_name, "count": 0, "scores": []})
+                            ward["count"] += 1
+                            ward["scores"].extend(rating_values)
                     except (TypeError, ValueError, json.JSONDecodeError):
                         continue
                 days = []
                 for offset in range(6, -1, -1):
                     day = (now.date() - timedelta(days=offset)).isoformat()
                     days.append({"date": day, "count": daily.get(day, 0)})
-                self._json(200, {"total": len(rows), "today": daily.get(today, 0), "counts": counts, "average_score": round(sum(scores) / len(scores), 2) if scores else None, "daily": days})
+                ward_report = []
+                for ward in inpatient_wards.values():
+                    ward_report.append({
+                        "ward": ward["ward"],
+                        "count": ward["count"],
+                        "average_score": round(sum(ward["scores"]) / len(ward["scores"]), 2) if ward["scores"] else None,
+                    })
+                ward_report.sort(key=lambda item: (-item["count"], item["ward"]))
+                self._json(200, {"total": len(rows), "today": daily.get(today, 0), "counts": counts, "average_score": round(sum(scores) / len(scores), 2) if scores else None, "daily": days, "inpatient": {"total": inpatient_total, "wards": ward_report}, "outpatient": {"total": outpatient_total}})
                 return True
             if path == "/api/staff/submissions":
                 state = query.get("state", ["pending"])[0]
