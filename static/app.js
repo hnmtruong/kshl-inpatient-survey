@@ -105,7 +105,7 @@
       {value:'1',label:'1. Nam'}, {value:'2',label:'2. Nữ'}, {value:'3',label:'3. Khác'}
     ]);
     addField(patientGrid, 'age', 'A2. Tuổi hoặc năm sinh', 'number', {required:true,min:0,max:9999,step:1,helper:'Có thể nhập tuổi (0–130) hoặc năm sinh (1900–nay).'});
-    addField(patientGrid, 'phone', 'A3. Số di động', 'tel', {maxlength:30,helper:'Không bắt buộc.'});
+    addField(patientGrid, 'phone', 'A3. Số di động', 'tel', {required:true,maxlength:30,helper:'Vui lòng nhập số điện thoại để liên hệ khi cần thiết.'});
     addField(patientGrid, 'stay_days', 'A4. Số ngày nằm viện', 'number', {required:true,min:1,max:3650,step:1});
     addRadios(patientGrid, 'bhyt', 'A5. Ông/Bà có sử dụng thẻ BHYT cho lần điều trị này không?', [
       {value:'1',label:'1. Có'}, {value:'2',label:'2. Không'}

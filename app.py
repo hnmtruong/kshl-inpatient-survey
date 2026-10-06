@@ -110,6 +110,8 @@ def validate_answers(raw):
         "treatment_count": _number(profile.get("treatment_count"), "lần điều trị", 1, 9999),
         "ward": str(profile.get("ward") or ""),
     }
+    if not p["phone"]:
+        raise ValueError("Vui lòng nhập số di động.")
     if p["age"].isdigit() and int(p["age"]) > 130 and not (1900 <= int(p["age"]) <= datetime.now().year):
         raise ValueError("Tuổi phải từ 0 đến 130, hoặc nhập năm sinh từ 1900 đến nay.")
     if p["ward"] and p["ward"] not in WARD_VALUES:
