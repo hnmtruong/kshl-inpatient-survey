@@ -4,6 +4,11 @@
 .staff-shell { max-width: 1180px; margin: 0 auto; padding: 52px 24px 56px; }
 .dashboard { margin: 8px 0 26px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
 .dashboard-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 13px; }
+.dashboard-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.dashboard-logos { display: flex; align-items: center; gap: 7px; flex: 0 0 auto; }
+.dashboard-logos img { width: 46px; height: 46px; object-fit: contain; background: #fff; }
+.dashboard-logos img:first-child { border-radius: 5px; padding: 2px; box-shadow: 0 1px 3px rgba(26,67,92,.18); }
+.dashboard-logos img:last-child { border-radius: 50%; }
 .dashboard-head .eyebrow { margin: 0 0 3px; color: #5d7588; font-size: 11px; font-weight: 700; letter-spacing: .08em; }
 .dashboard-head h2 { margin: 0; color: #244b68; font-size: 21px; }
 .dashboard-updated { margin: 0; color: #6b747c; font-size: 12px; }

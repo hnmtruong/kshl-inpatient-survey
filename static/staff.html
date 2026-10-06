@@ -30,7 +30,16 @@
     <section id="workspace" hidden>
       <div class="workspace-actions"><button class="staff-logout" id="logoutButton" hidden>Đăng xuất</button></div>
       <section class="dashboard" aria-labelledby="dashboardTitle">
-        <div class="dashboard-head"><div><p class="eyebrow">TỔNG QUAN</p><h2 id="dashboardTitle">Dashboard khảo sát</h2></div><p id="dashboardUpdated" class="dashboard-updated">Đang tải số liệu…</p></div>
+        <div class="dashboard-head">
+          <div class="dashboard-brand">
+            <div class="dashboard-logos" aria-label="Đơn vị triển khai">
+              <img src="/assets/logo-nguyen-tri-phuong.jpg" alt="Bệnh viện Nguyễn Tri Phương">
+              <img src="/assets/logo-cong-tac-xa-hoi.png" alt="Phòng Công tác xã hội - Bệnh viện Nguyễn Tri Phương">
+            </div>
+            <div><p class="eyebrow">TỔNG QUAN</p><h2 id="dashboardTitle">Dashboard khảo sát</h2></div>
+          </div>
+          <p id="dashboardUpdated" class="dashboard-updated">Đang tải số liệu…</p>
+        </div>
         <div id="metrics" class="metrics" aria-live="polite"></div>
         <section class="trend-panel" aria-labelledby="trendTitle"><h3 id="trendTitle">Phiếu nhận trong 7 ngày gần nhất</h3><div id="trendChart" class="trend-chart"></div></section>
       </section>
