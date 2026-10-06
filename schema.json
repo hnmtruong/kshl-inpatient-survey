@@ -32,11 +32,6 @@
   ],
   "wards": [
     {
-      "value": "121211",
-      "label": "2027 Khoa Mắt",
-      "code": "2027"
-    },
-    {
       "value": "77241",
       "label": "2001 Khoa Cấp cứu",
       "code": "2001"
