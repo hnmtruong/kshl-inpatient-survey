@@ -32,11 +32,6 @@
   ],
   "wards": [
     {
-      "value": "77241",
-      "label": "2001 Khoa Cấp cứu",
-      "code": "2001"
-    },
-    {
       "value": "77242",
       "label": "2002 Khoa Hồi sức Tích cực - Chống độc",
       "code": "2002"
@@ -122,31 +117,6 @@
       "code": "2018"
     },
     {
-      "value": "77259",
-      "label": "2019 Khoa Nội tổng hợp",
-      "code": "2019"
-    },
-    {
-      "value": "77260",
-      "label": "2020 Khoa Phẫu thuật Gây mê Hồi sức",
-      "code": "2020"
-    },
-    {
-      "value": "77261",
-      "label": "2021 Khoa Phẫu thuật Tạo hình Thẩm Mỹ",
-      "code": "2021"
-    },
-    {
-      "value": "77262",
-      "label": "2022 Khoa Phụ sản",
-      "code": "2022"
-    },
-    {
-      "value": "77263",
-      "label": "2023 Khoa Y học Cổ truyền - VLTL - PHCN",
-      "code": "2023"
-    },
-    {
       "value": "77264",
       "label": "2024 Khoa Thận - Lọc máu",
       "code": "2024"
@@ -155,16 +125,6 @@
       "value": "77265",
       "label": "2025 Khoa Tim mạch can thiệp",
       "code": "2025"
-    },
-    {
-      "value": "77266",
-      "label": "2026 Khoa Dinh dưỡng tiết chế",
-      "code": "2026"
-    },
-    {
-      "value": "80268",
-      "label": "4001 Đơn vị điều trị Ung Bướu (trực thuộc khoa Ngoại tổng hợp)",
-      "code": "4001"
     }
   ],
   "groups": [
