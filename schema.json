@@ -32,64 +32,9 @@
   ],
   "wards": [
     {
-      "value": "77230",
-      "label": "Ban Giám đốc",
-      "code": ""
-    },
-    {
       "value": "121211",
       "label": "2027 Khoa Mắt",
       "code": "2027"
-    },
-    {
-      "value": "77231",
-      "label": "1001 Phòng Chỉ Đạo tuyến",
-      "code": "1001"
-    },
-    {
-      "value": "77232",
-      "label": "1002 Phòng Điều dưỡng",
-      "code": "1002"
-    },
-    {
-      "value": "77233",
-      "label": "1003 Phòng Hành chính Quản trị",
-      "code": "1003"
-    },
-    {
-      "value": "77234",
-      "label": "1004 Phòng Kế hoạch Tổng hợp",
-      "code": "1004"
-    },
-    {
-      "value": "77235",
-      "label": "1005 Phòng Tài chính Kế toán",
-      "code": "1005"
-    },
-    {
-      "value": "77236",
-      "label": "1006 Phòng Tổ chức Cán bộ",
-      "code": "1006"
-    },
-    {
-      "value": "77237",
-      "label": "1007 Phòng Quản lý Chất lượng",
-      "code": "1007"
-    },
-    {
-      "value": "77238",
-      "label": "1008 Phòng Vật tư Trang thiết bị y tế",
-      "code": "1008"
-    },
-    {
-      "value": "77239",
-      "label": "1009 Phòng Công nghệ Thông tin",
-      "code": "1009"
-    },
-    {
-      "value": "77240",
-      "label": "1010 Phòng Công tác xã hội",
-      "code": "1010"
     },
     {
       "value": "77241",
@@ -220,36 +165,6 @@
       "value": "77266",
       "label": "2026 Khoa Dinh dưỡng tiết chế",
       "code": "2026"
-    },
-    {
-      "value": "77267",
-      "label": "3001 Khoa Chẩn đoán hình ảnh",
-      "code": "3001"
-    },
-    {
-      "value": "77268",
-      "label": "3002 Khoa Dược",
-      "code": "3002"
-    },
-    {
-      "value": "77269",
-      "label": "3003 Khoa Giải phẫu Bệnh lý",
-      "code": "3003"
-    },
-    {
-      "value": "77270",
-      "label": "3004 Khoa Kiểm soát Nhiễm khuẩn",
-      "code": "3004"
-    },
-    {
-      "value": "77271",
-      "label": "3005 Khoa Xét nghiệm",
-      "code": "3005"
-    },
-    {
-      "value": "77272",
-      "label": "3006 Khoa Nội soi tiêu hóa",
-      "code": "3006"
     },
     {
       "value": "80268",
