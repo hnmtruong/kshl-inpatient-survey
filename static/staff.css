@@ -1,5 +1,6 @@
 :root { --ink: #333; --muted: #667; --line: #d8d8d8; --primary: #337ab7; --primary-dark: #286090; }
-.staff-header-inner { flex-direction: row; align-items: center; justify-content: space-between; }
+.staff-header-inner { min-height: 68px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; }
+.staff-header-inner .site-name { min-width: 0; font-size: 20px; line-height: 1.3; }
 .staff-shell { max-width: 1180px; margin: 0 auto; padding: 34px 24px 56px; }
 .dashboard { margin: 8px 0 26px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
 .dashboard-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 13px; }
