@@ -35,6 +35,7 @@ def update_easipage(upstream_url: str) -> None:
         headers={
             "Authorization": f"Bearer {TOKEN}",
             "Content-Type": "application/json",
+            "User-Agent": "kshl-easipage-sync/1.0",
         },
     )
     with urllib.request.urlopen(request, timeout=20) as response:
@@ -56,7 +57,11 @@ def main() -> int:
         return 0
     try:
         update_easipage(current_url)
-    except (urllib.error.URLError, urllib.error.HTTPError, RuntimeError) as error:
+    except urllib.error.HTTPError as error:
+        detail = error.read().decode(errors="replace")[:500]
+        print(f"EasiPage synchronization failed: HTTP {error.code}: {detail}", file=sys.stderr)
+        return 1
+    except (urllib.error.URLError, RuntimeError) as error:
         print(f"EasiPage synchronization failed: {error}", file=sys.stderr)
         return 1
     STATE_FILE.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
