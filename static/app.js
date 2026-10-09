@@ -265,13 +265,18 @@
     return true;
   };
   const updateProgress = () => {};
+  const readApiResponse = async response => {
+    const body = await response.text();
+    try { return JSON.parse(body); }
+    catch (_) { throw new Error('Không thể kết nối máy chủ khảo sát. Vui lòng kiểm tra mạng và thử gửi lại.'); }
+  };
   form.addEventListener('submit',async event=>{
     event.preventDefault();
     if (!validateActive()) return;
     submitButton.disabled=true; submitButton.textContent='Đang gửi lên Bộ Y tế…';
     try {
       const response = await fetch('/api/submissions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(state)});
-      const result = await response.json();
+      const result = await readApiResponse(response);
       if (!response.ok) throw new Error(result.error || 'Chưa lưu được phiếu. Vui lòng báo nhân viên hỗ trợ.');
       form.hidden=true;
       const success=el('section','success-panel');success.setAttribute('role','status');
