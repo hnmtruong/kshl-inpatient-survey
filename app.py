@@ -7,6 +7,7 @@ import argparse
 import http.cookies
 import ipaddress
 import json
+import os
 import re
 import secrets
 import sqlite3
@@ -39,6 +40,10 @@ SESSIONS = {}
 LOGIN_FAILURES = {}
 SESSION_LOCK = threading.Lock()
 SESSION_TTL = 8 * 60 * 60
+TRUSTED_ORIGIN_HOSTS = {
+    "khaosat-ntp.easipage.xyz",
+    *filter(None, (host.strip().lower() for host in os.environ.get("SURVEY_TRUSTED_ORIGINS", "").split(","))),
+}
 STATE_LABELS = {
     "pending": "Chờ kiểm duyệt",
     "approved": "Đã kiểm duyệt",
@@ -213,7 +218,10 @@ class Handler(SimpleHTTPRequestHandler):
 
     def _origin_ok(self):
         origin = self.headers.get("Origin")
-        return bool(origin and urlparse(origin).netloc == self.headers.get("Host"))
+        if not origin:
+            return False
+        origin_host = urlparse(origin).netloc.lower()
+        return origin_host == self.headers.get("Host", "").lower() or origin_host in TRUSTED_ORIGIN_HOSTS
 
     def _session(self):
         cookie = http.cookies.SimpleCookie()
@@ -360,7 +368,7 @@ class Handler(SimpleHTTPRequestHandler):
     def do_POST(self):
         path = urlparse(self.path).path
         if path.startswith("/api/staff/"):
-            if not self._origin_ok(): self.send_error(403, "Origin không hợp lệ"); return
+            if not self._origin_ok(): self._json(403, {"error": "Nguồn gửi yêu cầu không hợp lệ."}); return
             try: body = self._body_json()
             except (ValueError, UnicodeDecodeError, json.JSONDecodeError) as exc: self._json(400, {"error": str(exc)}); return
             if path == "/api/staff/login":
@@ -438,8 +446,8 @@ class Handler(SimpleHTTPRequestHandler):
             self._json(404, {"error": "Không tìm thấy đường dẫn."}); return
         if path not in {"/api/submissions", "/api/outpatient-submissions"}: self.send_error(404); return
         origin = self.headers.get("Origin")
-        if origin and urlparse(origin).netloc != self.headers.get("Host"):
-            self.send_error(403, "Origin không khớp máy chủ khảo sát"); return
+        if origin and not self._origin_ok():
+            self._json(403, {"error": "Nguồn gửi yêu cầu không hợp lệ."}); return
         try:
             raw = self._body_json()
             survey_form = "2" if path == "/api/outpatient-submissions" else "1"
