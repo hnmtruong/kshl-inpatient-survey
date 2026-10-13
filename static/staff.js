@@ -23,6 +23,7 @@
   const dashboardUpdated = document.getElementById('dashboardUpdated');
   let schema = null;
   let outpatientSchema = null;
+  let medinetSchema = null;
   let selectedId = '';
   let queuePage = 1;
   let searchTimer = null;
@@ -161,9 +162,9 @@
     if (item.state === 'pending') {
       const approve = el('button','button button-primary','Duyệt phiếu'); approve.type='button'; approve.addEventListener('click',()=>updateState(item.id,'approved')); actions.append(approve);
     } else if (['approved','reviewed','failed'].includes(item.state)) {
-      const sent = el('button','button button-primary',item.state==='failed'?'Thử gửi BYT lại':'Gửi BYT'); sent.type='button'; sent.addEventListener('click',()=>{if(window.confirm('Gửi toàn bộ nội dung phiếu này lên cổng Bộ Y tế? Thao tác này sẽ tạo phiếu chính thức.'))sendByt(item.id)}); actions.append(sent);
+      const destination=item.survey_form==='3'?'Medinet':'BYT', sent = el('button','button button-primary',item.state==='failed'?`Thử gửi ${destination} lại`:`Gửi ${destination}`); sent.type='button'; sent.addEventListener('click',()=>{if(window.confirm(`Gửi toàn bộ nội dung phiếu này lên cổng ${destination}? Thao tác này sẽ tạo phiếu chính thức.`))sendByt(item.id)}); actions.append(sent);
     }
-    if (!['sent','syncing'].includes(item.state)) { const edit=el('button','button button-secondary','Chỉnh sửa phiếu'); edit.type='button'; edit.addEventListener('click',()=>item.survey_form==='2'?renderOutpatientEditor(item):renderEditor(item)); actions.append(edit); }
+    if (!['sent','syncing'].includes(item.state) && item.survey_form !== '3') { const edit=el('button','button button-secondary','Chỉnh sửa phiếu'); edit.type='button'; edit.addEventListener('click',()=>item.survey_form==='2'?renderOutpatientEditor(item):renderEditor(item)); actions.append(edit); }
     return actions;
   };
   const renderOutpatientDetail = item => {
@@ -174,8 +175,16 @@
     for(const group of s.groups){const section=addSection(detailPanel,group.title); const list=el('div','answer-list'); for(const question of group.questions){const row=el('div','answer-item');row.append(el('span','answer-label',`${question.key.toUpperCase()}. ${question.label}`),el('span','answer-value',valueText(s.scale,ratings[question.key])));list.append(row)}section.append(list)}
     const outcome=addSection(detailPanel,'E5, F, G và H'); addPair(outcome,'E5. Chi phí',valueText(s.costOptions,ratings.e5_cost)); addPair(outcome,'F1. Đáp ứng mong đợi',ratings.overall_percent ? `${ratings.overall_percent}%`:''); addPair(outcome,'G. Khả năng quay lại',valueText(s.returnOptions,ratings.return_intent)); addPair(outcome,'H1. Lý do chưa hài lòng',ratings.unhappy_detail); addPair(outcome,'H2. Đề xuất',ratings.suggestions);
   };
+  const renderMedinetDetail = item => {
+    const profile=item.answers.profile,ratings=item.answers.ratings;
+    detailPanel.replaceChildren(); const head=el('div','detail-head'),title=el('div');title.append(el('h2','',item.id),el('p','',`Mẫu số 3 · Nhận lúc ${dateText(item.created_at)} · ${item.state_label}`));head.append(title,el('span',`state-badge ${item.state}`,item.state_label));detailPanel.append(head,detailActions(item));
+    const info=addSection(detailPanel,'Thông tin thủ tục hành chính'),grid=el('div','detail-grid');addPair(grid,'Khoa/Phòng',medinetSchema.departments.find(x=>x.value===profile.department)?.label);addPair(grid,'Năm sinh',profile.birth_year);addPair(grid,'Giới tính',profile.gender==='1'?'Nam':'Nữ');addPair(grid,'Loại dịch vụ',(profile.services||[]).map(value=>medinetSchema.serviceOptions.find(x=>x.value===value)?.label).filter(Boolean).join(', '));addPair(grid,'Hình thức cấp giấy',valueText(medinetSchema.certificateOptions,profile.certificate));info.append(grid);
+    for(const group of medinetSchema.groups){const section=addSection(detailPanel,group.title),list=el('div','answer-list');for(const question of group.questions){const row=el('div','answer-item');row.append(el('span','answer-label',question.label),el('span','answer-value',valueText(question.options,ratings[question.key])));list.append(row)}section.append(list)}
+    const opinion=addSection(detailPanel,'Ý kiến khác');addPair(opinion,'Nội dung',ratings.comment);
+  };
   const renderDetail = item => {
     if (item.survey_form === '2') { renderOutpatientDetail(item); return; }
+    if (item.survey_form === '3') { renderMedinetDetail(item); return; }
     const profile = item.answers.profile;
     const ratings = item.answers.ratings;
     detailPanel.replaceChildren();
@@ -362,8 +371,8 @@
   queueSearch?.addEventListener('input',()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(()=>{queuePage=1;loadQueue();},250); });
   queuePrev?.addEventListener('click',()=>{ if(queuePage>1){queuePage--;loadQueue();} });
   queueNext?.addEventListener('click',()=>{queuePage++;loadQueue();});
-  Promise.all([fetch('/schema.json').then(response=>response.json()),fetch('/schema2.json').then(response=>response.json()),call('/api/staff/session')]).then(([data,outpatient,session])=>{
-    schema=data;outpatientSchema=outpatient;setLoggedIn(session.authenticated);if(session.authenticated)loadQueue();
+  Promise.all([fetch('/schema.json').then(response=>response.json()),fetch('/schema2.json').then(response=>response.json()),fetch('/schema3.json').then(response=>response.json()),call('/api/staff/session')]).then(([data,outpatient,medinet,session])=>{
+    schema=data;outpatientSchema=outpatient;medinetSchema=medinet;setLoggedIn(session.authenticated);if(session.authenticated)loadQueue();
   }).catch(()=>{
     showError(loginError,'Không kết nối được máy chủ review. Vui lòng tải lại trang hoặc báo nhân viên hỗ trợ.');
   });

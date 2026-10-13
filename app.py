@@ -423,8 +423,6 @@ class Handler(SimpleHTTPRequestHandler):
                 rid = match.group(1)
                 row = self._record(rid)
                 if not row: self._json(404, {"error": "Không tìm thấy phiếu."}); return
-                if row[6] == "3":
-                    self._json(409, {"error": "Mẫu số 3 đã được lưu để kiểm duyệt. Chức năng gửi sang cổng Medinet sẽ được cấu hình riêng."}); return
                 current = row[3]
                 if current not in {"approved", "reviewed", "failed"}:
                     self._json(409, {"error": "Phiếu cần được kiểm duyệt trước khi gửi Bộ Y tế."}); return
@@ -432,18 +430,25 @@ class Handler(SimpleHTTPRequestHandler):
                     changed = connection.execute("UPDATE submissions SET state='syncing', byt_message=NULL WHERE id=? AND state=?", (rid, current)).rowcount
                 if not changed:
                     self._json(409, {"error": "Phiếu đang được xử lý bởi một phiên khác."}); return
+                from byt_submit import BYTSubmissionError
+                from medinet_submit import MedinetSubmissionError
                 try:
-                    from byt_submit import BYTSubmissionError, submit
-                    result = submit(rid, json.loads(row[2]), row[6])
-                except BYTSubmissionError as exc:
+                    if row[6] == "3":
+                        from medinet_submit import submit as submit_medinet
+                        _, message = submit_medinet(rid, json.loads(row[2]))
+                    else:
+                        from byt_submit import submit
+                        result = submit(rid, json.loads(row[2]), row[6])
+                        message = result["message"]
+                except (BYTSubmissionError, MedinetSubmissionError) as exc:
                     message = str(exc)
                     with db_connect() as connection:
                         connection.execute("UPDATE submissions SET state='failed', byt_message=? WHERE id=?", (message, rid))
                     self._json(502, {"error": message, "state": "failed", "state_label": STATE_LABELS["failed"]}); return
                 sent_at = datetime.now().astimezone().isoformat(timespec="seconds")
                 with db_connect() as connection:
-                    connection.execute("UPDATE submissions SET state='sent', sent_at=?, sent_by=?, byt_message=? WHERE id=?", (sent_at, session[1], result["message"], rid))
-                self._json(200, {"state": "sent", "state_label": STATE_LABELS["sent"], "message": result["message"]}); return
+                    connection.execute("UPDATE submissions SET state='sent', sent_at=?, sent_by=?, byt_message=? WHERE id=?", (sent_at, session[1], message, rid))
+                self._json(200, {"state": "sent", "state_label": STATE_LABELS["sent"], "message": message}); return
             match = re.fullmatch(r"/api/staff/submissions/(NTP-[A-F0-9]{12})/edit", path)
             if match:
                 rid = match.group(1)
@@ -455,7 +460,7 @@ class Handler(SimpleHTTPRequestHandler):
                 if not isinstance(supplied, dict):
                     self._json(400, {"error": "Dữ liệu chỉnh sửa không hợp lệ."}); return
                 supplied = {**supplied, "consent": True}
-                answers = validate_outpatient_answers(supplied) if row[6] == "2" else validate_answers(supplied)
+                answers = validate_medinet_answers(supplied) if row[6] == "3" else validate_outpatient_answers(supplied) if row[6] == "2" else validate_answers(supplied)
                 now = datetime.now().astimezone().isoformat(timespec="seconds")
                 with db_connect() as connection:
                     connection.execute("UPDATE submissions SET answers_json=?, state='pending', reviewed_at=NULL, reviewed_by=NULL, byt_message=? WHERE id=?", (json.dumps(answers, ensure_ascii=False), "Phiếu đã được chỉnh sửa và cần kiểm duyệt lại.", rid))
