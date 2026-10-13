@@ -64,7 +64,7 @@ def submit(record_id: str, answers: dict) -> tuple[str, str]:
             body = response.read().decode("utf-8", "replace")
             final_url = response.geturl()
     except Exception as exc:
-        raise MedinetSubmissionError("Medinet không nhận được phiếu. Vui lòng thử lại.") from exc
-    if "cảm ơn" not in body.lower() and "thành công" not in body.lower():
+        raise MedinetSubmissionError(f"Medinet không nhận được phiếu ({type(exc).__name__}: {exc}).") from exc
+    if "/KhaoSat/ThongBao/" not in final_url and "cảm ơn" not in body.lower() and "cám ơn" not in body.lower() and "thành công" not in body.lower():
         raise MedinetSubmissionError("Medinet chưa xác nhận phiếu. Phiếu được giữ ở trạng thái chưa gửi để kiểm tra lại.")
     return final_url, "Đã gửi Medinet thành công."
