@@ -30,8 +30,10 @@ DATA = ROOT / "data"
 DB = DATA / "submissions.sqlite3"
 SCHEMA = json.loads((ROOT / "schema.json").read_text(encoding="utf-8"))
 OUTPATIENT_SCHEMA = json.loads((ROOT / "schema2.json").read_text(encoding="utf-8"))
+MEDINET_SCHEMA = json.loads((ROOT / "schema3.json").read_text(encoding="utf-8"))
 RATING_KEYS = [q["key"] for g in SCHEMA["groups"] for q in g["questions"]]
 OUTPATIENT_RATING_KEYS = [q["key"] for g in OUTPATIENT_SCHEMA["groups"] for q in g["questions"]]
+MEDINET_RATING_KEYS = [q["key"] for g in MEDINET_SCHEMA["groups"] for q in g["questions"]]
 SCALE_VALUES = {item["value"] for item in SCHEMA["scale"]}
 WARD_VALUES = {item["value"] for item in SCHEMA["wards"]}
 WARD_CODES = {item["value"]: item.get("code", "") for item in SCHEMA["wards"]}
@@ -178,6 +180,28 @@ def validate_outpatient_answers(raw):
     return {"profile": p, "ratings": clean}
 
 
+def validate_medinet_answers(raw):
+    if not isinstance(raw, dict) or not isinstance(raw.get("profile"), dict) or not isinstance(raw.get("ratings"), dict):
+        raise ValueError("Thiếu thông tin phiếu khảo sát.")
+    profile, ratings = raw["profile"], raw["ratings"]
+    departments = {item["value"] for item in MEDINET_SCHEMA["departments"]}
+    services = {item["value"] for item in MEDINET_SCHEMA["serviceOptions"]}
+    selected = profile.get("services")
+    p = {
+        "department": _choice(profile.get("department"), departments, "khoa/phòng"),
+        "birth_year": _number(profile.get("birth_year"), "năm sinh", 1900, datetime.now().year),
+        "gender": _choice(profile.get("gender"), {"1", "2"}, "giới tính"),
+        "services": [str(value) for value in selected if str(value) in services] if isinstance(selected, list) else [],
+        "certificate": _choice(profile.get("certificate"), {"1", "2"}, "hình thức cấp giấy"),
+    }
+    if not p["services"]:
+        raise ValueError("Vui lòng chọn loại dịch vụ sử dụng.")
+    allowed = {q["key"]: {item["value"] for item in q["options"]} for g in MEDINET_SCHEMA["groups"] for q in g["questions"]}
+    clean = {key: _choice(ratings.get(key), allowed[key], f"câu {key}") for key in MEDINET_RATING_KEYS}
+    clean["comment"] = str(ratings.get("comment") or "").strip()[:3000]
+    return {"profile": p, "ratings": clean}
+
+
 class Handler(SimpleHTTPRequestHandler):
     server_version = "InpatientSurvey/1.0"
 
@@ -196,8 +220,8 @@ class Handler(SimpleHTTPRequestHandler):
 
     def translate_path(self, path):
         parsed = urlparse(path)
-        if parsed.path in ("/", "/mau-2", "/mau-2/", "/staff", "/staff/"):
-            parsed_path = "/index.html" if parsed.path == "/" else "/outpatient.html" if parsed.path.startswith("/mau-2") else "/staff.html"
+        if parsed.path in ("/", "/mau-2", "/mau-2/", "/mau-3", "/mau-3/", "/staff", "/staff/"):
+            parsed_path = "/index.html" if parsed.path == "/" else "/outpatient.html" if parsed.path.startswith("/mau-2") else "/medinet.html" if parsed.path.startswith("/mau-3") else "/staff.html"
         else:
             parsed_path = parsed.path
         return super().translate_path(parsed_path)
@@ -361,6 +385,9 @@ class Handler(SimpleHTTPRequestHandler):
         if parsed.path == "/schema2.json":
             payload = json.dumps(OUTPATIENT_SCHEMA, ensure_ascii=False).encode("utf-8")
             self.send_response(200); self.send_header("Content-Type", "application/json; charset=utf-8"); self.send_header("Content-Length", str(len(payload))); self.end_headers(); self.wfile.write(payload); return
+        if parsed.path == "/schema3.json":
+            payload = json.dumps(MEDINET_SCHEMA, ensure_ascii=False).encode("utf-8")
+            self.send_response(200); self.send_header("Content-Type", "application/json; charset=utf-8"); self.send_header("Content-Length", str(len(payload))); self.end_headers(); self.wfile.write(payload); return
         if parsed.path == "/health":
             self._json(200, {"status": "ok"}); return
         return super().do_GET()
@@ -444,14 +471,14 @@ class Handler(SimpleHTTPRequestHandler):
                     connection.execute("UPDATE submissions SET state=?, reviewed_at=?, reviewed_by=? WHERE id=? AND state=?", (target, now, session[1], rid, current))
                 self._json(200, {"state": target, "state_label": STATE_LABELS[target]}); return
             self._json(404, {"error": "Không tìm thấy đường dẫn."}); return
-        if path not in {"/api/submissions", "/api/outpatient-submissions"}: self.send_error(404); return
+        if path not in {"/api/submissions", "/api/outpatient-submissions", "/api/medinet-submissions"}: self.send_error(404); return
         origin = self.headers.get("Origin")
         if origin and not self._origin_ok():
             self._json(403, {"error": "Nguồn gửi yêu cầu không hợp lệ."}); return
         try:
             raw = self._body_json()
-            survey_form = "2" if path == "/api/outpatient-submissions" else "1"
-            answers = validate_outpatient_answers(raw) if survey_form == "2" else validate_answers(raw)
+            survey_form = "3" if path == "/api/medinet-submissions" else "2" if path == "/api/outpatient-submissions" else "1"
+            answers = validate_medinet_answers(raw) if survey_form == "3" else validate_outpatient_answers(raw) if survey_form == "2" else validate_answers(raw)
             record_id = "NTP-" + secrets.token_hex(6).upper()
             created = datetime.now().astimezone().isoformat(timespec="seconds")
             with db_connect() as connection:

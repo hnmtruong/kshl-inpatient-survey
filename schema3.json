@@ -1,0 +1,853 @@
+{
+  "formNumber": "3",
+  "formTitle": "Phiếu khảo sát dịch vụ liên quan đến thủ tục hành chính – Đợt 4/2026",
+  "officialIntro": "Nhằm giúp bệnh viện không ngừng cải tiến và phục vụ người bệnh tốt hơn, ông/bà vui lòng cho biết cảm nhận về quá trình sử dụng dịch vụ bằng cách trả lời các câu hỏi dưới đây.",
+  "sourceUrl": "https://tnnb.medinet.org.vn/phieu-khao-sat/697ae1ccc134eb50e91ede42/58d37041080f8a0dac8e55d6",
+  "departments": [
+    {
+      "value": "5dca644393f5a829ac9d6a58",
+      "label": "Khoa Bỏng"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a59",
+      "label": "Khoa Chấn thương chỉnh hình"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a5a",
+      "label": "Khoa da liễu"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a5b",
+      "label": "Khoa dị ứng"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a5c",
+      "label": "Khoa hồi sức cấp cứu"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a5d",
+      "label": "Khoa Huyết học"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a5e",
+      "label": "Khoa huyết học lâm sàng"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a5f",
+      "label": "Khoa Lao"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a60",
+      "label": "Khoa Lão học"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a61",
+      "label": "Khoa Lọc máu (thận nhân đạo)"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a62",
+      "label": "Khoa Mắt"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a63",
+      "label": "Khoa ngoại hồng lực"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a64",
+      "label": "Khoa Ngoại thận – tiết niệu"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a65",
+      "label": "Khoa Ngoại thần kinh"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a66",
+      "label": "Khoa ngoại tiêu hoá"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a67",
+      "label": "Khoa Ngoại tổng hợp"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a68",
+      "label": "Khoa Nhi"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a69",
+      "label": "Khoa Nội cơ – xương – khớp"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a6a",
+      "label": "Khoa Nội thận – tiết niệu"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a6b",
+      "label": "Khoa Nôị Tiết"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a6c",
+      "label": "Khoa Nội tiêu hoá"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a6d",
+      "label": "Khoa Nội tim mạch"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a6e",
+      "label": "Khoa Nội tổng hợp"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a6f",
+      "label": "Khoa Phụ sản"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a70",
+      "label": "Khoa Răng – Hàm – Mặt"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a71",
+      "label": "Khoa Tai – Mũi – Họng"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a72",
+      "label": "Khoa Tâm thần"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a73",
+      "label": "Khoa thần kinh"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a74",
+      "label": "Khoa Truyền máu"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a75",
+      "label": "Khoa truyền nhiễm"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a76",
+      "label": "Khoa Ung bướu"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a77",
+      "label": "Khoa vật lý trị liệu – Phục hồi chức năng"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a78",
+      "label": "Khoa Xạ"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a79",
+      "label": "Khoa Y học Cổ truyền"
+    }
+  ],
+  "serviceOptions": [
+    {
+      "value": "1",
+      "label": "Cấp Giấy nghỉ ốm hưởng BHXH"
+    },
+    {
+      "value": "2",
+      "label": "Cấp giấy chứng sinh"
+    },
+    {
+      "value": "3",
+      "label": "Cấp giấy chứng tử"
+    },
+    {
+      "value": "4",
+      "label": "Cấp giấy chứng nhận thương tích"
+    },
+    {
+      "value": "5",
+      "label": "Cấp giấy tóm tắt hồ sơ bệnh án"
+    }
+  ],
+  "certificateOptions": [
+    {
+      "value": "1",
+      "label": "Cấp mới"
+    },
+    {
+      "value": "2",
+      "label": "Cấp lại"
+    }
+  ],
+  "groups": [
+    {
+      "title": "B. Khả năng tiếp cận dịch vụ",
+      "questions": [
+        {
+          "key": "697ae1ccc134eb50e91ede4c",
+          "label": "B-1. Biển chỉ dẫn giữa các khu vực trong cơ sở y tế dễ quan sát không? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất dễ dàng"
+            },
+            {
+              "value": "2",
+              "label": "Dễ dàng"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Khó khăn"
+            },
+            {
+              "value": "5",
+              "label": "Rất khó khăn"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede4e",
+          "label": "B-2. Có ứng dụng công nghệ thông tin trong quảng bá về khả năng cung cấp dịch vụ của cơ sở giúp khách hàng dễ dàng tiếp cận không? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất dễ dàng"
+            },
+            {
+              "value": "2",
+              "label": "Dễ dàng"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Khó khăn"
+            },
+            {
+              "value": "5",
+              "label": "Rất khó khăn"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede4d",
+          "label": "B-3. Thời gian, thời điểm cung cấp dịch vụ có phù hợp không? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất dễ dàng"
+            },
+            {
+              "value": "2",
+              "label": "Dễ dàng"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Khó khăn"
+            },
+            {
+              "value": "5",
+              "label": "Rất khó khăn"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "C. Thông tin và thủ tục hành chính",
+      "questions": [
+        {
+          "key": "697ae1ccc134eb50e91ede46",
+          "label": "C-1. Thời gian cung cấp dịch vụ được niêm yết/ thông báo như thế nào? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất rõ ràng;; cụ thể"
+            },
+            {
+              "value": "2",
+              "label": "Rõ ràng;; cụ thể"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không rõ ràng;; cụ thể"
+            },
+            {
+              "value": "5",
+              "label": "Rất không rõ ràng;; cụ thể"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede50",
+          "label": "C-2. Các thủ tục cần đáp ứng khi sử dụng dịch vụ được thông báo như thế nào? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất rõ ràng;; cụ thể"
+            },
+            {
+              "value": "2",
+              "label": "Rõ ràng;; cụ thể"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không rõ ràng;; cụ thể"
+            },
+            {
+              "value": "5",
+              "label": "Rất không rõ ràng;; cụ thể"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede4f",
+          "label": "C-3. Thời gian chờ đợi trong sử dụng dịch vụ có được thông báo trước không? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất rõ ràng;; cụ thể"
+            },
+            {
+              "value": "2",
+              "label": "Rõ ràng;; cụ thể"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không rõ ràng;; cụ thể"
+            },
+            {
+              "value": "5",
+              "label": "Rất không rõ ràng;; cụ thể"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede51",
+          "label": "C-4. Sơ đồ các khoa/ phòng được niêm yết có rõ ràng không? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất rõ ràng;; cụ thể"
+            },
+            {
+              "value": "2",
+              "label": "Rõ ràng;; cụ thể"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không rõ ràng;; cụ thể"
+            },
+            {
+              "value": "5",
+              "label": "Rất không rõ ràng;; cụ thể"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede52",
+          "label": "C-5. Quy trình thủ tục hành chính cung cấp dịch vụ có được thông báo cụ thể không? (liệt kê theo danh mục các thủ tục tại phụ lục…) (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất rõ ràng;; cụ thể"
+            },
+            {
+              "value": "2",
+              "label": "Rõ ràng;; cụ thể"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không rõ ràng;; cụ thể"
+            },
+            {
+              "value": "5",
+              "label": "Rất không rõ ràng;; cụ thể"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede55",
+          "label": "C-6. Giá dịch vụ được niêm yết/ thông báo như thế nào? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất rõ ràng;; cụ thể"
+            },
+            {
+              "value": "2",
+              "label": "Rõ ràng;; cụ thể"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không rõ ràng;; cụ thể"
+            },
+            {
+              "value": "5",
+              "label": "Rất không rõ ràng;; cụ thể"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede54",
+          "label": "C-7. Các hóa đơn, phiếu thu, kết quả giải quyết TTHC, lịch hẹn (nếu có) được cung cấp đầy đủ, rõ ràng, minh bạch (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất rõ ràng;; cụ thể"
+            },
+            {
+              "value": "2",
+              "label": "Rõ ràng;; cụ thể"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không rõ ràng;; cụ thể"
+            },
+            {
+              "value": "5",
+              "label": "Rất không rõ ràng;; cụ thể"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede53",
+          "label": "C-8. Đơn vị có bộ phận/hình thức tiếp nhận thông tin phản hồi của khách hàng như thế nào? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất rõ ràng;; cụ thể"
+            },
+            {
+              "value": "2",
+              "label": "Rõ ràng;; cụ thể"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không rõ ràng;; cụ thể"
+            },
+            {
+              "value": "5",
+              "label": "Rất không rõ ràng;; cụ thể"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede56",
+          "label": "C-9. Ứng dụng công nghệ thông tin trong giải quyết các thủ tục hành chính như thế nào? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất rõ ràng;; cụ thể"
+            },
+            {
+              "value": "2",
+              "label": "Rõ ràng;; cụ thể"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không rõ ràng;; cụ thể"
+            },
+            {
+              "value": "5",
+              "label": "Rất không rõ ràng;; cụ thể"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "D. Cơ sở vật chất",
+      "questions": [
+        {
+          "key": "697ae1ccc134eb50e91ede47",
+          "label": "D-1. Diện tích địa điểm cung cấp dịch vụ có đáp ứng được như mong đợi của ông, bà không? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Đáp ứng rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Đáp ứng tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede59",
+          "label": "D-2. Bàn ghế, quạt và các vật dụng hỗ trợ đáp ứng như thế nào so với nhu cầu của Ông, bà? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Đáp ứng rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Đáp ứng tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede58",
+          "label": "D-3. Trang thiết bị cung cấp dịch vụ ra sao?",
+          "options": [
+            {
+              "value": "1",
+              "label": "Đáp ứng rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Đáp ứng tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede57",
+          "label": "D-4. Vệ sinh môi trường, quang cảnh tại địa điểm cung cấp dịch vụ so với mong đợi của ông bà như thế nào? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Đáp ứng rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Đáp ứng tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "E. Thái độ phục vụ",
+      "questions": [
+        {
+          "key": "697ae1ccc134eb50e91ede48",
+          "label": "E-1. Kỹ năng giao tiếp ra sao? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede5b",
+          "label": "E-2. Tác phong, thái độ phục vụ như thế nào? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede5a",
+          "label": "E-3. Năng lực giải quyết công việc như thế nào? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "F. Kết quả dịch vụ",
+      "questions": [
+        {
+          "key": "697ae1ccc134eb50e91ede49",
+          "label": "F-1. Kết quả đạt được so với mong đợi của ông, bà? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede60",
+          "label": "F-2. Kết quả ứng dụng công nghệ thông tin trong cung cấp dịch vụ như thế nào? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede5c",
+          "label": "F-3. Tín nhiệm của ông, bà đối với cơ sở như thế nào? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede5f",
+          "label": "F-4. Dịch vụ cung cấp có phù hợp với thời gian hẹn không? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede5e",
+          "label": "F-5. Mức thu phí dịch vụ như thế nào? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        },
+        {
+          "key": "697ae1ccc134eb50e91ede5d",
+          "label": "F-6. Khả năng chi trả của ông/ bà như thế nào? (*)",
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất tốt"
+            },
+            {
+              "value": "2",
+              "label": "Tốt"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Không tốt"
+            },
+            {
+              "value": "5",
+              "label": "Rất không tốt"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
