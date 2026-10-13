@@ -423,6 +423,8 @@ class Handler(SimpleHTTPRequestHandler):
                 rid = match.group(1)
                 row = self._record(rid)
                 if not row: self._json(404, {"error": "Không tìm thấy phiếu."}); return
+                if row[6] == "3":
+                    self._json(409, {"error": "Mẫu số 3 đã được lưu để kiểm duyệt. Chức năng gửi sang cổng Medinet sẽ được cấu hình riêng."}); return
                 current = row[3]
                 if current not in {"approved", "reviewed", "failed"}:
                     self._json(409, {"error": "Phiếu cần được kiểm duyệt trước khi gửi Bộ Y tế."}); return
