@@ -1,0 +1,1379 @@
+{
+  "formNumber": "4",
+  "formTitle": "PHIẾU KHẢO SÁT TRẢI NGHIỆM NGƯỜI BỆNH NỘI TRÚ ĐỢT 2/2026",
+  "officialIntro": "Nhằm giúp bệnh viện không ngừng cải tiến và phục vụ người bệnh tốt hơn, ông/bà vui lòng cho biết cảm nhận của mình trong quá trình nằm điều trị tại bệnh viện bằng cách trả lời các câu hỏi dưới đây (đánh dấu chéo (X) vào ô tương ứng).",
+  "sourceUrl": "https://tnnb.medinet.org.vn/phieu-khao-sat/697ae20ac134eb50e91ede61/58d37041080f8a0dac8e55d6",
+  "dotKhaoSatId": "697ae20ac134eb50e91ede61",
+  "departments": [
+    {
+      "value": "5dca644393f5a829ac9d6a58",
+      "label": "Khoa Bỏng"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a59",
+      "label": "Khoa Chấn thương chỉnh hình"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a5a",
+      "label": "Khoa da liễu"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a5b",
+      "label": "Khoa dị ứng"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a5c",
+      "label": "Khoa hồi sức cấp cứu"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a5d",
+      "label": "Khoa Huyết học"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a5e",
+      "label": "Khoa huyết học lâm sàng"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a5f",
+      "label": "Khoa Lao"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a60",
+      "label": "Khoa Lão học"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a61",
+      "label": "Khoa Lọc máu (thận nhân đạo)"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a62",
+      "label": "Khoa Mắt"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a63",
+      "label": "Khoa ngoại hồng lực"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a64",
+      "label": "Khoa Ngoại thận – tiết niệu"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a65",
+      "label": "Khoa Ngoại thần kinh"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a66",
+      "label": "Khoa ngoại tiêu hoá"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a67",
+      "label": "Khoa Ngoại tổng hợp"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a68",
+      "label": "Khoa Nhi"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a69",
+      "label": "Khoa Nội cơ – xương – khớp"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a6a",
+      "label": "Khoa Nội thận – tiết niệu"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a6b",
+      "label": "Khoa Nôị Tiết"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a6c",
+      "label": "Khoa Nội tiêu hoá"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a6d",
+      "label": "Khoa Nội tim mạch"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a6e",
+      "label": "Khoa Nội tổng hợp"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a6f",
+      "label": "Khoa Phụ sản"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a70",
+      "label": "Khoa Răng – Hàm – Mặt"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a71",
+      "label": "Khoa Tai – Mũi – Họng"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a72",
+      "label": "Khoa Tâm thần"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a73",
+      "label": "Khoa thần kinh"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a74",
+      "label": "Khoa Truyền máu"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a75",
+      "label": "Khoa truyền nhiễm"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a76",
+      "label": "Khoa Ung bướu"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a77",
+      "label": "Khoa vật lý trị liệu – Phục hồi chức năng"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a78",
+      "label": "Khoa Xạ"
+    },
+    {
+      "value": "5dca644393f5a829ac9d6a79",
+      "label": "Khoa Y học Cổ truyền"
+    }
+  ],
+  "groups": [
+    {
+      "title": "A. THÔNG TIN CHUNG CỦA NGƯỜI ĐƯỢC PHỎNG VẤN",
+      "questions": [
+        {
+          "key": "697ae20ac134eb50e91ede62",
+          "label": "A-1. Ông bà là (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Người bệnh"
+            },
+            {
+              "value": "2",
+              "label": "Thân nhân của người bệnh"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede63",
+          "label": "A-2. Địa chỉ (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "TP. Hồ Chí Minh"
+            },
+            {
+              "value": "2",
+              "label": "Tỉnh"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede64",
+          "label": "A-3. Giới tính (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Nam"
+            },
+            {
+              "value": "2",
+              "label": "Nữ"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede65",
+          "label": "A-4. Năm sinh (*)",
+          "required": true,
+          "options": [],
+          "freeTextKey": "697ae20ac134eb50e91ede65_tuluan",
+          "freeTextLabel": "A-4. Năm sinh (*)"
+        },
+        {
+          "key": "697ae20ac134eb50e91ede66",
+          "label": "A-5. Trình độ học vấn (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không biết chữ"
+            },
+            {
+              "value": "2",
+              "label": "Tiểu học (cấp I)"
+            },
+            {
+              "value": "3",
+              "label": "Trung học cơ sở (cấp II)"
+            },
+            {
+              "value": "4",
+              "label": "Trung học phổ thông (cấp III)"
+            },
+            {
+              "value": "5",
+              "label": "Trung cấp, cao đẳng"
+            },
+            {
+              "value": "6",
+              "label": "Đại học"
+            },
+            {
+              "value": "7",
+              "label": "Sau đại học"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede67",
+          "label": "A-6. Trong lần nằm viện tại đây, ông/bà có thuộc diện được bảo hiểm y tế thanh toán hay không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Có"
+            },
+            {
+              "value": "2",
+              "label": "Không"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede68",
+          "label": "A-7. Ông/bà đã được điều trị tại khoa/phòng thường hay khoa/phòng dịch vụ (theo yêu cầu)? (Có thể chọn cả 2 câu trả lời nếu ông/bà đã nằm điều trị tại cả 2 khoa/phòng này) (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Khoa / phòng thường"
+            },
+            {
+              "value": "2",
+              "label": "Khoa / phòng dịch vụ"
+            }
+          ],
+          "multiple": true
+        },
+        {
+          "key": "697ae20ac134eb50e91ede69",
+          "label": "A-8. Đây là lần thứ mấy ông/bà nằm điều trị ở bệnh viện này ? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Lần đầu tiên"
+            },
+            {
+              "value": "2",
+              "label": "Lần thứ:"
+            },
+            {
+              "value": "3",
+              "label": "Nhiều lần, không nhớ rõ"
+            }
+          ],
+          "freeTextKey": "697ae20ac134eb50e91ede69_morong",
+          "freeTextLabel": "A-8. Đây là lần thứ mấy ông/bà nằm điều trị ở bệnh viện này ? (*)",
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede6a",
+          "label": "A-9. Tại sao ông/bà biết và chọn bệnh viện này để điều trị? (Có thể chọn nhiều câu trả lời) (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Do đăng ký khám chữa bệnh bảo hiểm y tế tại bệnh viện này"
+            },
+            {
+              "value": "2",
+              "label": "Do được cơ sở y tế khác chuyển đến"
+            },
+            {
+              "value": "3",
+              "label": "Thông tin trên báo đài, internet"
+            },
+            {
+              "value": "4",
+              "label": "Bạn bè, người thân giới thiệu"
+            },
+            {
+              "value": "5",
+              "label": "Bản thân hoặc người thân từng điều trị tại bệnh viện này"
+            },
+            {
+              "value": "6",
+              "label": "Khác"
+            }
+          ],
+          "freeTextKey": "697ae20ac134eb50e91ede6a_morong",
+          "freeTextLabel": "A-9. Tại sao ông/bà biết và chọn bệnh viện này để điều trị? (Có thể chọn nhiều câu trả lời) (*)",
+          "multiple": true
+        }
+      ]
+    },
+    {
+      "title": "B. TRẢI NGHIỆM LÚC NHẬP VIỆN",
+      "questions": [
+        {
+          "key": "697ae20ac134eb50e91ede6b",
+          "label": "B-1. Khi mới đến bệnh viện, ông/bà đến khám tại khoa Cấp cứu hay khoa Khám bệnh (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Tại khoa Cấp cứu"
+            },
+            {
+              "value": "2",
+              "label": "Tại khoa Khám bệnh"
+            },
+            {
+              "value": "3",
+              "label": "Tại khoa Khám bệnh, sau đó được chuyển vào khoa Cấp cứu"
+            },
+            {
+              "value": "4",
+              "label": "Tại khoa Cấp cứu, sau đó được hướng dẫn ra khoa Khám bệnh để khám"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede6c",
+          "label": "B-2. Tại khoa Khám bệnh hoặc khoa Cấp cứu, ông/bà có được bác sĩ giải thích lý do nhập viện? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không được giải thích"
+            },
+            {
+              "value": "2",
+              "label": "Không được giải thích, phải hỏi nhưng bác sĩ giải thích không rõ"
+            },
+            {
+              "value": "3",
+              "label": "Không được giải thích, phải hỏi mới được bác sĩ giải thích rõ"
+            },
+            {
+              "value": "4",
+              "label": "Được bác sĩ giải thích rõ lý do phải nằm viện"
+            },
+            {
+              "value": "5",
+              "label": "Do tôi/gia đình yêu cầu bác sĩ cho nhập viện"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede6d",
+          "label": "B-3. Từ lúc được bác sĩ thông báo nhập viện, ông/bà phải chờ khoảng bao lâu mới được nhập vào khoa nội trú? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Phải chờ"
+            },
+            {
+              "value": "2",
+              "label": "Không phải chờ"
+            }
+          ],
+          "freeTextKey": "697ae20ac134eb50e91ede6d_morong",
+          "freeTextLabel": "B-3. Từ lúc được bác sĩ thông báo nhập viện, ông/bà phải chờ khoảng bao lâu mới được nhập vào khoa nội trú? (*)",
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede6e",
+          "label": "B-4. Khi nhập viện vào khoa nội trú, ông/bà có được bác sĩ khám ngay không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Phải chờ"
+            },
+            {
+              "value": "2",
+              "label": "Được khám ngay"
+            }
+          ],
+          "freeTextKey": "697ae20ac134eb50e91ede6e_morong",
+          "freeTextLabel": "B-4. Khi nhập viện vào khoa nội trú, ông/bà có được bác sĩ khám ngay không? (*)",
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede6f",
+          "label": "B-5. Khi mới nhập viện vào khoa nội trú, ông/bà có được bác sĩ giải thích tình trạng bệnh và hướng điều trị hay không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không được giải thích gì"
+            },
+            {
+              "value": "2",
+              "label": "Không được giải thích, phải hỏi nhưng bác sĩ giải thích không rõ"
+            },
+            {
+              "value": "3",
+              "label": "Không được giải thích, phải hỏi và được bác sĩ giải thích rõ"
+            },
+            {
+              "value": "4",
+              "label": "Được bác sĩ chủ động giải thích rõ về bệnh và hướng điều trị"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không nhớ"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede70",
+          "label": "B-6. Khi vào khoa, ông/bà nhận thấy việc công khai giá các loại dịch vụ kỹ thuật của bệnh viện như thế nào? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không thấy bảng công khai giá"
+            },
+            {
+              "value": "2",
+              "label": "Khó tìm, phải hỏi mới được cung cấp bảng giá"
+            },
+            {
+              "value": "3",
+              "label": "Có bảng công khai giá, nhưng không đầy đủ"
+            },
+            {
+              "value": "4",
+              "label": "Khoa có bảng công khai giá, đầy đủ, dễ thấy"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không quan tâm đến giá"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede71",
+          "label": "B-7. Khi vào khoa, ông/bà có được nhân viên y tế giải thích các khoản bảo hiểm y tế chi trả, các khoản phải tự chi trả? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không được giải thích"
+            },
+            {
+              "value": "2",
+              "label": "Không được giải thích, phải hỏi nhưng được giải thích không rõ"
+            },
+            {
+              "value": "3",
+              "label": "Không được giải thích, phải hỏi mới được giải thích rõ"
+            },
+            {
+              "value": "4",
+              "label": "Được nhân viên y tế chủ động giải thích rõ về các khoản viện phí nào sẽ được bảo hiểm y tế chi trả, các khoản nào người bệnh sẽ tự chi trả"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không nhớ"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede72",
+          "label": "B-8. Lần đầu tiên vào khoa nội trú, ông/bà cảm nhận thái độ của nhân viên y tế đối với người bệnh như thế nào? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Cộc cằn, không tôn trọng người bệnh"
+            },
+            {
+              "value": "2",
+              "label": "Thờ ơ, hỏi không trả lời"
+            },
+            {
+              "value": "3",
+              "label": "Bình thường"
+            },
+            {
+              "value": "4",
+              "label": "Nhân viên của khoa rất cởi mở, vui vẻ"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không có ý kiến"
+            }
+          ],
+          "multiple": false
+        }
+      ]
+    },
+    {
+      "title": "C. TRẢI NGHIỆM TRONG THỜI GIAN NẰM VIỆN: Cơ sở vật chất – Tiện ích phục vụ người bệnh",
+      "questions": [
+        {
+          "key": "697ae20ac134eb50e91ede73",
+          "label": "C-1. Ông/bà có phải nằm chung giường với người bệnh khác? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Tôi nằm ghép trong suốt quá trình điều trị"
+            },
+            {
+              "value": "2",
+              "label": "Tôi nằm ghép, sau đó được nằm giường riêng"
+            },
+            {
+              "value": "3",
+              "label": "Tôi được bố trí 1 giường riêng ngay từ đầu"
+            }
+          ],
+          "freeTextKey": "697ae20ac134eb50e91ede73_morong",
+          "freeTextLabel": "C-1. Ông/bà có phải nằm chung giường với người bệnh khác? (*)",
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede74",
+          "label": "C-2. Ông/bà đánh giá tình trạng nhà vệ sinh tại bệnh viện như thế nào? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Rất bẩn, hôi và không đủ nhà vệ sinh"
+            },
+            {
+              "value": "2",
+              "label": "Bẩn và không đủ nhà vệ sinh"
+            },
+            {
+              "value": "3",
+              "label": "Chấp nhận được, thỉnh thoảng chỉ bị bẩn trong thời gian ngắn"
+            },
+            {
+              "value": "4",
+              "label": "Nhà vệ sinh của bệnh viện khá đủ, luôn sạch sẽ"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không để ý"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede75",
+          "label": "C-3. Bệnh viện có trang bị dung dịch rửa tay (dung dịch sát trùng) tại buồng bệnh không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không có"
+            },
+            {
+              "value": "2",
+              "label": "Lúc có, lúc không"
+            },
+            {
+              "value": "3",
+              "label": "Có, nhưng vị trí đặt chưa được thuận tiện"
+            },
+            {
+              "value": "4",
+              "label": "Luôn có dung dịch rửa tay tại buồng bệnh và thuận tiện cho người bệnh sử dụng"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không để ý"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede76",
+          "label": "C-4. Ông/bà cảm thấy tình hình an ninh, trật tự của bệnh viện như thế nào trong thời gian nằm viện? (Có thể chọn nhiều câu trả lời) (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Có người bị mất trộm"
+            },
+            {
+              "value": "2",
+              "label": "Có người buôn bán hàng rong ra vào khoa"
+            },
+            {
+              "value": "3",
+              "label": "Có qui định giờ ra vào khoa"
+            },
+            {
+              "value": "4",
+              "label": "Khá yên tâm về an ninh, trật tự của bệnh viện, bệnh viện có kiểm soát người ra vào khoa"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không để ý"
+            }
+          ],
+          "multiple": true
+        },
+        {
+          "key": "697ae20ac134eb50e91ede77",
+          "label": "C-5. Ông/bà nhận xét như thế nào về các dịch vụ tiện ích của bệnh viện? (Như căn-tin, siêu thị mini, nước uống, photocopy, sạc điện thoại, giặt ủi, dịch vụ vận chuyển, taxi …) (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không có gì cả"
+            },
+            {
+              "value": "2",
+              "label": "Chỉ có 1 đến 2 dịch vụ, giá cao hơn bên ngoài"
+            },
+            {
+              "value": "3",
+              "label": "Dịch vụ đa dạng nhưng giá cao hơn bên ngoài"
+            },
+            {
+              "value": "4",
+              "label": "Bệnh viện cung ứng các dịch vụ tiện ích khá đa dạng và giá hợp lý"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không để ý"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede78",
+          "label": "C-6. Bệnh viện có các hoạt động hỗ trợ người bệnh có hoàn cảnh khó khăn về các tiện ích tối thiểu trong sinh hoạt hàng ngày không? (Như cơm/cháo, nước uống,…) (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không có"
+            },
+            {
+              "value": "2",
+              "label": "Thỉnh thoảng có"
+            },
+            {
+              "value": "3",
+              "label": "Thường xuyên, nhưng chỉ có hỗ trợ bữa cơm cho người có hoàn cảnh khó khăn"
+            },
+            {
+              "value": "4",
+              "label": "Bệnh viện thường xuyên hỗ trợ bữa cơm và các tiện ích tối thiểu khác cho người có hoàn cảnh khó khăn"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không để ý"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede79",
+          "label": "C-7. Vào buổi tối, bệnh viện có yên tĩnh để người bệnh nghỉ ngơi? (Có thể chọn nhiều câu trả lời) (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không nghỉ ngơi được vì thường xuyên ồn ào"
+            },
+            {
+              "value": "2",
+              "label": "Có tiếng ồn từ bên ngoài bệnh viện vọng vào"
+            },
+            {
+              "value": "3",
+              "label": "Tương đối yên tĩnh"
+            },
+            {
+              "value": "4",
+              "label": "Bệnh viện rất yên tĩnh vào buổi tối"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không để ý"
+            }
+          ],
+          "multiple": true
+        },
+        {
+          "key": "697ae20ac134eb50e91ede7a",
+          "label": "C-8. Theo cảm nhận của ông/bà, bệnh viện này có đạt tiêu chí “xanh - sạch - đẹp” không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Ngược lại thì đúng hơn (bệnh viện dơ và cũ)"
+            },
+            {
+              "value": "2",
+              "label": "Chưa đạt"
+            },
+            {
+              "value": "3",
+              "label": "Đạt ở mức chấp nhận được"
+            },
+            {
+              "value": "4",
+              "label": "Bệnh viện có nhiều cây xanh, sạch và đẹp"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không để ý"
+            }
+          ],
+          "multiple": false
+        }
+      ]
+    },
+    {
+      "title": "D. TRẢI NGHIỆM TRONG THỜI GIAN NẰM VIỆN - Tinh thần thái độ phục vụ của nhân viên y tế",
+      "questions": [
+        {
+          "key": "697ae20ac134eb50e91ede7b",
+          "label": "D-1. Khi tiếp xúc với ông/bà, trang phục của nhân viên y tế như thế nào? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Có nhiều nhân viên không mặc trang phục y tế"
+            },
+            {
+              "value": "2",
+              "label": "Nhân viên ăn mặc luộm thuộm (quần áo ngả màu, nhăn, không đeo bảng tên)"
+            },
+            {
+              "value": "3",
+              "label": "Chấp nhận được"
+            },
+            {
+              "value": "4",
+              "label": "Nhân viên bệnh viện mặc trang phục đẹp, lịch sự"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không có ý kiến"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede7c",
+          "label": "D-2. Trong suốt thời gian nằm viện, ông/bà có được nhân viên y tế đối xử tử tế và được tôn trọng không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Nhiều nhân viên cư xử không tôn trọng bệnh nhân và thân nhân người bệnh"
+            },
+            {
+              "value": "2",
+              "label": "Thỉnh thoảng, tùy người"
+            },
+            {
+              "value": "3",
+              "label": "Chấp nhận được"
+            },
+            {
+              "value": "4",
+              "label": "Nhân viên bệnh viện đều đối xử tử tế và rất tôn trọng người bệnh, thân nhân người bệnh"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không có ý kiến"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede7d",
+          "label": "D-3. Trong thời gian nằm viện, ông/bà có được bác sĩ, điều dưỡng thông tin, giải thích rõ ràng về tình trạng và diễn tiến bệnh không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không được giải thích gì"
+            },
+            {
+              "value": "2",
+              "label": "Không được giải thích, phải hỏi nhưng được giải thích cũng chưa rõ"
+            },
+            {
+              "value": "3",
+              "label": "Không được giải thích, phải hỏi và được giải thích rõ"
+            },
+            {
+              "value": "4",
+              "label": "Bác sĩ, điều dưỡng luôn chủ động giải thích rõ ràng về tình trạng bệnh"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không nhớ"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede7e",
+          "label": "D-4. Khi ông/bà có thắc mắc về bệnh của mình, ông/bà có nhận được câu trả lời thỏa đáng của bác sĩ hoặc điều dưỡng không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không bao giờ nhận được câu trả lời"
+            },
+            {
+              "value": "2",
+              "label": "Có, nhưng trả lời chưa thỏa đáng"
+            },
+            {
+              "value": "3",
+              "label": "Có, chấp nhận được"
+            },
+            {
+              "value": "4",
+              "label": "Bác sĩ, điều dưỡng luôn trả lời thỏa đáng những thắc mắc của người bệnh"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không có thắc mắc gì"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20ac134eb50e91ede7f",
+          "label": "D-5. Ông/bà có bao giờ nhận được các câu trả lời khác nhau (thậm chí ngược nhau) từ các bác sĩ, điều dưỡng về tình trạng, diễn tiến bệnh của mình? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Thường xuyên khác nhau"
+            },
+            {
+              "value": "2",
+              "label": "Thỉnh thoảng có"
+            },
+            {
+              "value": "3",
+              "label": "Hiếm khi"
+            },
+            {
+              "value": "4",
+              "label": "Các câu trả lời của bác sĩ, điều dưỡng về tình trạng bệnh rất thống nhất nhau"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không có thắc mắc gì"
+            }
+          ],
+          "multiple": false
+        }
+      ]
+    },
+    {
+      "title": "E. TRẢI NGHIỆM TRONG THỜI GIAN NẰM VIỆN: Hoạt động khám chữa bệnh",
+      "questions": [
+        {
+          "key": "697ae20bc134eb50e91ede80",
+          "label": "E-1. Ông/bà có được bác sĩ thông tin và giải thích lý do sử dụng thuốc? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không được giải thích"
+            },
+            {
+              "value": "2",
+              "label": "Chỉ nói tên thuốc"
+            },
+            {
+              "value": "3",
+              "label": "Có, nhưng giải thích chưa rõ ràng"
+            },
+            {
+              "value": "4",
+              "label": "Bác sĩ luôn giải thích đầy đủ và rõ ràng cho người bệnh biết lý do phải sử dụng thuốc"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không nhớ"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede81",
+          "label": "E-2. Ông/bà có được bác sĩ thông tin và giải thích lý do sẽ thực hiện xét nghiệm, cận lâm sàng? (Như xét nghiệm máu, siêu âm, X-quang, …) (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không được giải thích"
+            },
+            {
+              "value": "2",
+              "label": "Chỉ được thông báo đi làm xét nghiệm, cận lâm sàng"
+            },
+            {
+              "value": "3",
+              "label": "Có, nhưng giải thích chưa rõ"
+            },
+            {
+              "value": "4",
+              "label": "Bác sĩ luôn giải thích đầy đủ và rõ ràng cho người bệnh biết lý do phải làm xét nghiệm"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không nhớ"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede82",
+          "label": "E-3. Trước khi thực hiện phẫu thuật hoặc làm thủ thuật, bác sĩ có thông tin và giải thích lý do không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không được giải thích"
+            },
+            {
+              "value": "2",
+              "label": "Chỉ được thông báo phải đi làm phẫu thuật, thủ thuật"
+            },
+            {
+              "value": "3",
+              "label": "Có, nhưng giải thích chưa rõ"
+            },
+            {
+              "value": "4",
+              "label": "Bác sĩ giải thích đầy đủ và rõ ràng cho người bệnh biết lý do phải phẫu thuật (hoặc thủ thuật"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không có làm phẫu thuật (hoặc thủ thuật)"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede83",
+          "label": "E-4. Trong thời gian nằm viện, ông/bà có được điều dưỡng hướng dẫn sử dụng thuốc hàng ngày không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không được hướng dẫn"
+            },
+            {
+              "value": "2",
+              "label": "Có, nhưng không thực hiện hàng ngày"
+            },
+            {
+              "value": "3",
+              "label": "Được hướng dẫn hàng ngày"
+            },
+            {
+              "value": "4",
+              "label": "Điều dưỡng hướng dẫn hàng ngày rất rõ ràng cách sử dụng thuốc"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không nhớ"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede84",
+          "label": "E-5. Khi có những triệu chứng bất thường (đau bụng, sốt, mệt…), ông/bà có được bác sĩ khám bệnh lại ngay không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không có bác sĩ đến khám lại, cũng không có điều dưỡng đến hỏi"
+            },
+            {
+              "value": "2",
+              "label": "Chỉ có điều dưỡng đến hỏi và lấy mạch, huyết áp"
+            },
+            {
+              "value": "3",
+              "label": "Bác sĩ có khám lại, nhưng không kịp thời"
+            },
+            {
+              "value": "4",
+              "label": "Bác sĩ có khám lại, kịp thời"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không có triệu chứng bất thường nào cần báo bác sĩ"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede85",
+          "label": "E-6. Ông/bà có được bác sĩ tư vấn để lựa chọn phương pháp điều trị thích hợp không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không được tư vấn"
+            },
+            {
+              "value": "2",
+              "label": "Có, nhưng tư vấn chưa rõ ràng và không đầy đủ"
+            },
+            {
+              "value": "3",
+              "label": "Bác sĩ tư vấn còn chung chung"
+            },
+            {
+              "value": "4",
+              "label": "Bác sĩ tư vấn rất rõ ràng và đầy đủ"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không nhớ"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede86",
+          "label": "E-7. Bệnh viện có đảm bảo sự riêng tư cho người bệnh khi bác sĩ thăm khám hoặc điều dưỡng chăm sóc không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không tôn trọng sự riêng tư của người bệnh"
+            },
+            {
+              "value": "2",
+              "label": "Lúc có, lúc không"
+            },
+            {
+              "value": "3",
+              "label": "Có, chấp nhận được"
+            },
+            {
+              "value": "4",
+              "label": "Bệnh viện rất tôn trọng sự riêng tư của người bệnh"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không để ý"
+            }
+          ],
+          "multiple": false
+        }
+      ]
+    },
+    {
+      "title": "F. TRẢI NGHIỆM CHI TRẢ VIỆN PHÍ",
+      "questions": [
+        {
+          "key": "697ae20bc134eb50e91ede87",
+          "label": "F-1. Bệnh viện có công khai cho ông/bà biết tất cả những khoản thu trên hoá đơn thanh toán viện phí không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không công khai"
+            },
+            {
+              "value": "2",
+              "label": "Có, nhưng công khai không đầy đủ"
+            },
+            {
+              "value": "3",
+              "label": "Có, công khai đầy đủ nhưng không chi tiết"
+            },
+            {
+              "value": "4",
+              "label": "Bệnh viện công khai đầy đủ và chi tiết các khoản thu trên hoá đơn thanh toán viện phí"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không để ý"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede88",
+          "label": "F-2. Ngoài những khoản viện phí đóng cho bệnh viện, ông/bà có chi thêm tiền bồi dưỡng cho nhân viên bệnh viện không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Có"
+            },
+            {
+              "value": "2",
+              "label": "Không"
+            }
+          ],
+          "freeTextKey": "697ae20bc134eb50e91ede88_morong",
+          "freeTextLabel": "F-2. Ngoài những khoản viện phí đóng cho bệnh viện, ông/bà có chi thêm tiền bồi dưỡng cho nhân viên bệnh viện không? (*)",
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede89",
+          "label": "F-3. Ông/bà có biết bệnh viện có hoạt động hỗ trợ thanh toán viện phí cho người có hoàn cảnh khó khăn hay không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không có"
+            },
+            {
+              "value": "2",
+              "label": "Có, nhưng thủ tục rất khó khăn và mất nhiều thời gian"
+            },
+            {
+              "value": "3",
+              "label": "Có, thủ tục đơn giản thuận tiện"
+            },
+            {
+              "value": "4",
+              "label": "Bệnh viện chủ động hướng dẫn thủ tục và hỗ trợ cho người có hoàn cảnh khó khăn"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không để ý"
+            }
+          ],
+          "multiple": false
+        }
+      ]
+    },
+    {
+      "title": "G. TRẢI NGHIỆM TRƯỚC KHI XUẤT VIỆN",
+      "questions": [
+        {
+          "key": "697ae20bc134eb50e91ede8a",
+          "label": "G-1. Khi xuất viện, ông/bà có được nhân viên bệnh viện hướng dẫn sử dụng thuốc, chế độ ăn, cách tự chăm sóc khi về nhà? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không được hướng dẫn gì"
+            },
+            {
+              "value": "2",
+              "label": "Không được hướng dẫn, phải hỏi mới được hướng dẫn nhưng không rõ ràng"
+            },
+            {
+              "value": "3",
+              "label": "Được hướng dẫn, nhưng phải hỏi thêm mới được hướng dẫn rõ ràng"
+            },
+            {
+              "value": "4",
+              "label": "Được nhân viên y tế chủ động hướng dẫn, giải thích rõ ràng trước khi xuất viện"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không để ý"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede8b",
+          "label": "G-2. Ông/bà có được bác sĩ hoặc điều dưỡng thông tin, hướng dẫn về những dấu hiệu và thời gian cần quay lại để tái khám? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không được hướng dẫn"
+            },
+            {
+              "value": "2",
+              "label": "Không được hướng dẫn, phải hỏi mới được hướng dẫn nhưng không rõ ràng"
+            },
+            {
+              "value": "3",
+              "label": "Được hướng dẫn, nhưng phải hỏi thêm mới được hướng dẫn rõ ràng"
+            },
+            {
+              "value": "4",
+              "label": "Được hướng dẫn rõ ràng khi nào quay lại ngay và tái khám"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không để ý"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede8c",
+          "label": "G-3. Khi làm thủ tục xuất viện, ông/bà có gặp khó khăn nào không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "1",
+              "label": "Không được hướng dẫn làm thủ tục xuất viện"
+            },
+            {
+              "value": "2",
+              "label": "Thời gian chờ đóng viện phí lâu"
+            },
+            {
+              "value": "3",
+              "label": "Nơi thanh toán viện phí ở xa hoặc khó tìm"
+            },
+            {
+              "value": "4",
+              "label": "Thời gian chờ giấy xuất viện lâu"
+            },
+            {
+              "value": "5",
+              "label": "Tôi không gặp bất tiện nào trong quá trình làm thủ tục xuất viện"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede8d",
+          "label": "G-4. Từ lúc ông/bà được thông báo xuất viện đến khi nhận giấy ra viện trong thời gian bao lâu? (*)",
+          "required": true,
+          "options": []
+        }
+      ]
+    },
+    {
+      "title": "H. NHẬN XÉT CHUNG VỀ BỆNH VIỆN",
+      "questions": [
+        {
+          "key": "697ae20bc134eb50e91ede8e",
+          "label": "H-1. Nếu chấm điểm bệnh viện này, ông/bà đánh giá trải nghiệm khi nằm điều trị nội trú tại bệnh viện này được bao nhiêu điểm? (vui lòng khoanh tròn vào điểm được chọn) (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "0",
+              "label": "0 - Rất không tốt"
+            },
+            {
+              "value": "1",
+              "label": "1"
+            },
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4"
+            },
+            {
+              "value": "5",
+              "label": "5"
+            },
+            {
+              "value": "6",
+              "label": "6"
+            },
+            {
+              "value": "7",
+              "label": "7"
+            },
+            {
+              "value": "8",
+              "label": "8"
+            },
+            {
+              "value": "9",
+              "label": "9"
+            },
+            {
+              "value": "10",
+              "label": "10 - Rất tốt"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede8f",
+          "label": "H-2. Nếu có nhu cầu khám, chữa những bệnh tương tự, ông/bà có quay trở lại hoặc giới thiệu cho người khác đến bệnh viện này không? (*)",
+          "required": true,
+          "options": [
+            {
+              "value": "0",
+              "label": "Tôi sẽ không bao giờ quay lại bệnh viện này"
+            },
+            {
+              "value": "0",
+              "label": "Tôi phải quay lại điều trị tại bệnh viện này vì không còn lựa chọn nào khác"
+            },
+            {
+              "value": "0",
+              "label": "Có thể tôi sẽ quay lại bệnh viện này nhưng cũng có thể tôi sẽ chọn bệnh viện khác"
+            },
+            {
+              "value": "0",
+              "label": "Chắc chắn tôi sẽ quay lại và sẽ giới thiệu cho người khác nên đến bệnh viện này"
+            }
+          ],
+          "multiple": false
+        },
+        {
+          "key": "697ae20bc134eb50e91ede90",
+          "label": "H-3. Trong thời gian nằm điều trị tại bệnh viện này, điều gì làm ông/bà hài lòng nhất? (*)",
+          "required": true,
+          "options": []
+        },
+        {
+          "key": "697ae20bc134eb50e91ede91",
+          "label": "H-4. Trong thời gian nằm điều trị tại bệnh viện này, điều gì làm ông/bà không hài lòng nhất? (*)",
+          "required": true,
+          "options": []
+        },
+        {
+          "key": "697ae20bc134eb50e91ede92",
+          "label": "H-5. Theo ông/bà, bệnh viện cần làm gì để có thể đáp ứng hơn nữa mong đợi của người bệnh? (*)",
+          "required": true,
+          "options": []
+        }
+      ]
+    }
+  ]
+}

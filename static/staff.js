@@ -24,6 +24,7 @@
   let schema = null;
   let outpatientSchema = null;
   let medinetSchema = null;
+  let medinetInpatientSchema = null;
   let selectedId = '';
   let queuePage = 1;
   let searchTimer = null;
@@ -162,9 +163,9 @@
     if (item.state === 'pending') {
       const approve = el('button','button button-primary','Duyệt phiếu'); approve.type='button'; approve.addEventListener('click',()=>updateState(item.id,'approved')); actions.append(approve);
     } else if (['approved','reviewed','failed'].includes(item.state)) {
-      const destination=item.survey_form==='3'?'Medinet':'BYT', sent = el('button','button button-primary',item.state==='failed'?`Thử gửi ${destination} lại`:`Gửi ${destination}`); sent.type='button'; sent.addEventListener('click',()=>{if(window.confirm(`Gửi toàn bộ nội dung phiếu này lên cổng ${destination}? Thao tác này sẽ tạo phiếu chính thức.`))sendByt(item.id)}); actions.append(sent);
+      const destination=['3','4'].includes(item.survey_form)?'Medinet':'BYT', sent = el('button','button button-primary',item.state==='failed'?`Thử gửi ${destination} lại`:`Gửi ${destination}`); sent.type='button'; sent.addEventListener('click',()=>{if(window.confirm(`Gửi toàn bộ nội dung phiếu này lên cổng ${destination}? Thao tác này sẽ tạo phiếu chính thức.`))sendByt(item.id)}); actions.append(sent);
     }
-    if (!['sent','syncing'].includes(item.state) && item.survey_form !== '3') { const edit=el('button','button button-secondary','Chỉnh sửa phiếu'); edit.type='button'; edit.addEventListener('click',()=>item.survey_form==='2'?renderOutpatientEditor(item):renderEditor(item)); actions.append(edit); }
+    if (!['sent','syncing'].includes(item.state) && !['3','4'].includes(item.survey_form)) { const edit=el('button','button button-secondary','Chỉnh sửa phiếu'); edit.type='button'; edit.addEventListener('click',()=>item.survey_form==='2'?renderOutpatientEditor(item):renderEditor(item)); actions.append(edit); }
     return actions;
   };
   const renderOutpatientDetail = item => {
@@ -182,9 +183,16 @@
     for(const group of medinetSchema.groups){const section=addSection(detailPanel,group.title),list=el('div','answer-list');for(const question of group.questions){const row=el('div','answer-item');row.append(el('span','answer-label',question.label),el('span','answer-value',valueText(question.options,ratings[question.key])));list.append(row)}section.append(list)}
     const opinion=addSection(detailPanel,'Ý kiến khác');addPair(opinion,'Nội dung',ratings.comment);
   };
+  const renderMedinetInpatientDetail = item => {
+    const profile=item.answers.profile,ratings=item.answers.ratings,notes=item.answers.notes||{},s=medinetInpatientSchema;
+    detailPanel.replaceChildren();const head=el('div','detail-head'),title=el('div');title.append(el('h2','',item.id),el('p','',`Mẫu số 4 · Nhận lúc ${dateText(item.created_at)} · ${item.state_label}`));head.append(title,el('span',`state-badge ${item.state}`,item.state_label));detailPanel.append(head,detailActions(item));
+    const info=addSection(detailPanel,'Thông tin khảo sát'),grid=el('div','detail-grid');addPair(grid,'Khoa/Phòng',s.departments.find(x=>x.value===profile.department)?.label);addPair(grid,'Ngày khảo sát',profile.survey_date);info.append(grid);
+    for(const group of s.groups){const section=addSection(detailPanel,group.title),list=el('div','answer-list');for(const question of group.questions){const value=ratings[question.key],answer=Array.isArray(value)?value.map(v=>valueText(question.options,v)).join(', '):question.options.length?valueText(question.options,value):value;const row=el('div','answer-item');row.append(el('span','answer-label',question.label),el('span','answer-value',answer||''));list.append(row);if(notes[question.key])addPair(section,'Nội dung ghi thêm',notes[question.key])}section.append(list)}
+  };
   const renderDetail = item => {
     if (item.survey_form === '2') { renderOutpatientDetail(item); return; }
     if (item.survey_form === '3') { renderMedinetDetail(item); return; }
+    if (item.survey_form === '4') { renderMedinetInpatientDetail(item); return; }
     const profile = item.answers.profile;
     const ratings = item.answers.ratings;
     detailPanel.replaceChildren();
@@ -371,8 +379,8 @@
   queueSearch?.addEventListener('input',()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(()=>{queuePage=1;loadQueue();},250); });
   queuePrev?.addEventListener('click',()=>{ if(queuePage>1){queuePage--;loadQueue();} });
   queueNext?.addEventListener('click',()=>{queuePage++;loadQueue();});
-  Promise.all([fetch('/schema.json').then(response=>response.json()),fetch('/schema2.json').then(response=>response.json()),fetch('/schema3.json').then(response=>response.json()),call('/api/staff/session')]).then(([data,outpatient,medinet,session])=>{
-    schema=data;outpatientSchema=outpatient;medinetSchema=medinet;setLoggedIn(session.authenticated);if(session.authenticated)loadQueue();
+  Promise.all([fetch('/schema.json').then(response=>response.json()),fetch('/schema2.json').then(response=>response.json()),fetch('/schema3.json').then(response=>response.json()),fetch('/schema4.json').then(response=>response.json()),call('/api/staff/session')]).then(([data,outpatient,medinet,medinetInpatient,session])=>{
+    schema=data;outpatientSchema=outpatient;medinetSchema=medinet;medinetInpatientSchema=medinetInpatient;setLoggedIn(session.authenticated);if(session.authenticated)loadQueue();
   }).catch(()=>{
     showError(loginError,'Không kết nối được máy chủ review. Vui lòng tải lại trang hoặc báo nhân viên hỗ trợ.');
   });
