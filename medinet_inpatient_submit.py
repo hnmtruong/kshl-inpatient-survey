@@ -15,7 +15,7 @@ FORM_ID = "697ae20ac134eb50e91ede61"
 
 def _choices(page: str, question_id: str) -> dict[str, str]:
     values = re.findall(rf'<input[^>]+name="{re.escape(question_id)}(?:\[\])?"[^>]+value="([^"]+)"', page)
-    return {value.rsplit("==", 1)[-1]: value for value in values}
+    return {value.split("==")[1]: value for value in values}
 
 
 def submit(record_id: str, answers: dict) -> tuple[str, str]:

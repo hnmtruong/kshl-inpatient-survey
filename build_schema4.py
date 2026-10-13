@@ -62,11 +62,16 @@ def build() -> dict:
                     input_id = item.get("id", "")
                     label_match = re.search(rf'<label\s+for="{re.escape(input_id)}"[^>]*>(.*?)</label>', fragment, re.S)
                     raw = item["value"]
-                    value = raw.rsplit("==", 1)[-1]
+                    value = raw.split("==")[1]
                     question["options"].append({"value": value, "label": plain(label_match.group(1)) if label_match else value, "inputType": input_type})
                 elif input_type in {"text", "number"}:
                     question["freeTextKey"] = item.get("name") or item.get("id")
                     question["freeTextLabel"] = label
+            textarea = re.search(r'<textarea\b[^>]*>', fragment, re.S)
+            if textarea:
+                item = attrs(textarea.group(0))
+                question["freeTextKey"] = item.get("name") or item.get("id")
+                question["freeTextLabel"] = label
             if question["options"]:
                 types = {option["inputType"] for option in question["options"]}
                 question["multiple"] = types == {"checkbox"}

@@ -1272,7 +1272,9 @@
           "key": "697ae20bc134eb50e91ede8d",
           "label": "G-4. Từ lúc ông/bà được thông báo xuất viện đến khi nhận giấy ra viện trong thời gian bao lâu? (*)",
           "required": true,
-          "options": []
+          "options": [],
+          "freeTextKey": "697ae20bc134eb50e91ede8d_tuluan",
+          "freeTextLabel": "G-4. Từ lúc ông/bà được thông báo xuất viện đến khi nhận giấy ra viện trong thời gian bao lâu? (*)"
         }
       ]
     },
@@ -1285,47 +1287,47 @@
           "required": true,
           "options": [
             {
-              "value": "0",
+              "value": "1",
               "label": "0 - Rất không tốt"
             },
             {
-              "value": "1",
+              "value": "2",
               "label": "1"
             },
             {
-              "value": "2",
+              "value": "3",
               "label": "2"
             },
             {
-              "value": "3",
+              "value": "4",
               "label": "3"
             },
             {
-              "value": "4",
+              "value": "5",
               "label": "4"
             },
             {
-              "value": "5",
+              "value": "6",
               "label": "5"
             },
             {
-              "value": "6",
+              "value": "7",
               "label": "6"
             },
             {
-              "value": "7",
+              "value": "8",
               "label": "7"
             },
             {
-              "value": "8",
+              "value": "9",
               "label": "8"
             },
             {
-              "value": "9",
+              "value": "10",
               "label": "9"
             },
             {
-              "value": "10",
+              "value": "11",
               "label": "10 - Rất tốt"
             }
           ],
@@ -1337,19 +1339,19 @@
           "required": true,
           "options": [
             {
-              "value": "0",
+              "value": "1",
               "label": "Tôi sẽ không bao giờ quay lại bệnh viện này"
             },
             {
-              "value": "0",
+              "value": "2",
               "label": "Tôi phải quay lại điều trị tại bệnh viện này vì không còn lựa chọn nào khác"
             },
             {
-              "value": "0",
+              "value": "3",
               "label": "Có thể tôi sẽ quay lại bệnh viện này nhưng cũng có thể tôi sẽ chọn bệnh viện khác"
             },
             {
-              "value": "0",
+              "value": "4",
               "label": "Chắc chắn tôi sẽ quay lại và sẽ giới thiệu cho người khác nên đến bệnh viện này"
             }
           ],
@@ -1359,19 +1361,25 @@
           "key": "697ae20bc134eb50e91ede90",
           "label": "H-3. Trong thời gian nằm điều trị tại bệnh viện này, điều gì làm ông/bà hài lòng nhất? (*)",
           "required": true,
-          "options": []
+          "options": [],
+          "freeTextKey": "697ae20bc134eb50e91ede90_tuluan",
+          "freeTextLabel": "H-3. Trong thời gian nằm điều trị tại bệnh viện này, điều gì làm ông/bà hài lòng nhất? (*)"
         },
         {
           "key": "697ae20bc134eb50e91ede91",
           "label": "H-4. Trong thời gian nằm điều trị tại bệnh viện này, điều gì làm ông/bà không hài lòng nhất? (*)",
           "required": true,
-          "options": []
+          "options": [],
+          "freeTextKey": "697ae20bc134eb50e91ede91_tuluan",
+          "freeTextLabel": "H-4. Trong thời gian nằm điều trị tại bệnh viện này, điều gì làm ông/bà không hài lòng nhất? (*)"
         },
         {
           "key": "697ae20bc134eb50e91ede92",
           "label": "H-5. Theo ông/bà, bệnh viện cần làm gì để có thể đáp ứng hơn nữa mong đợi của người bệnh? (*)",
           "required": true,
-          "options": []
+          "options": [],
+          "freeTextKey": "697ae20bc134eb50e91ede92_tuluan",
+          "freeTextLabel": "H-5. Theo ông/bà, bệnh viện cần làm gì để có thể đáp ứng hơn nữa mong đợi của người bệnh? (*)"
         }
       ]
     }

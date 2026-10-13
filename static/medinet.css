@@ -1,0 +1,26 @@
+/* Shared layout for the two Medinet survey pages. */
+.brand { width: min(1170px, calc(100% - 30px)); min-height: 80px; margin: auto; display: grid; grid-template-columns: 56px minmax(0, 1fr) 56px; align-items: center; gap: 14px; }
+.brand > img { width: 56px; height: 56px; object-fit: contain; background: white; border-radius: 5px; }
+.brand > img.social-logo { border-radius: 50%; }
+.brand a { color: white; font-size: 20px; font-weight: bold; text-decoration: none; }
+.brand span { display: block; margin-top: 4px; font-size: 11px; }
+.page-wrap { width: min(1170px, calc(100% - 30px)); margin: auto; padding: 14px 25px 36px; background: white; min-height: 100vh; box-shadow: 0 0 10px rgba(0,0,0,.08); }
+.official-intro { padding-bottom: 14px; border-bottom: 1px solid #ddd; }
+.ministry { float: left; margin-top: 0; }
+.form-number { text-align: right; margin-top: 0; }
+.official-intro h1 { clear: both; }
+.field > input, .field > select, .field > textarea, .question > textarea { display: block; width: 100%; margin-top: 7px; padding: 9px 12px; border: 1px solid #bbb; border-radius: 4px; background: white; }
+.field > input, .field > select { min-height: 42px; }
+.question > textarea { min-height: 100px; resize: vertical; }
+.question .choice-row { margin-top: 10px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+.question .choice-card { display: flex; align-items: flex-start; gap: 10px; padding: 12px; border: 1px solid #d4d9df; border-radius: 4px; cursor: pointer; }
+.question .choice-card input { flex: 0 0 16px; width: 16px; height: 16px; margin: 3px 0 0; accent-color: #337ab7; }
+.question .choice-card span { min-width: 0; overflow-wrap: anywhere; }
+.rating-scale { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 10px; }
+.rating-option { align-items: flex-start; gap: 10px; border: 1px solid #d4d9df; padding: 12px; border-radius: 4px; }
+.rating-option input { flex: 0 0 16px; margin-top: 3px; }
+.rating-option span { font-weight: normal; }
+.rating-option:has(input:checked) { background: #edf6fc; border-color: #5c9dcc; }
+#submitButton { display: block; margin: 24px auto 0; min-height: 44px; }
+input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible { outline: 3px solid #5c9dcc; outline-offset: 2px; }
+@media(max-width:680px) { .brand { width: 100%; padding: 10px 14px; grid-template-columns: 42px minmax(0,1fr) 42px; gap: 8px; }.brand > img { width: 42px; height: 42px; }.brand a { font-size: 16px; }.brand span { font-size: 9px; }.page-wrap { width: 100%; padding: 12px 14px 28px; }.question .choice-row, .rating-scale { grid-template-columns: 1fr; }.question legend { font-weight: bold; }.question { padding: 14px 10px; } }
