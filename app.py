@@ -400,7 +400,10 @@ class Handler(SimpleHTTPRequestHandler):
                 items = []
                 for rid, created, blob, status, survey_form in rows:
                     profile = json.loads(blob).get("profile", {})
-                    items.append({"id": rid, "created_at": created, "state": status, "state_label": STATE_LABELS.get(status, status), "survey_form": survey_form, "patient_name": profile.get("patient_name", ""), "respondent": profile.get("respondent", ""), "ward_label": profile.get("ward", "")})
+                    departments = MEDINET_INPATIENT_SCHEMA["departments"] if survey_form == "4" else MEDINET_SCHEMA["departments"] if survey_form == "3" else SCHEMA["wards"]
+                    department_value = profile.get("department", profile.get("ward", ""))
+                    ward_label = next((item["label"] for item in departments if item["value"] == department_value), department_value)
+                    items.append({"id": rid, "created_at": created, "state": status, "state_label": STATE_LABELS.get(status, status), "survey_form": survey_form, "patient_name": profile.get("patient_name", ""), "respondent": profile.get("respondent", ""), "ward_label": ward_label})
                 self._json(200, {"items": items, "total": total, "page": page, "page_size": page_size}); return True
             match = re.fullmatch(r"/api/staff/submissions/(NTP-[A-F0-9]{12})(?:/(export))?", path)
             if match:

@@ -13,3 +13,16 @@
 @media(min-width:1001px){.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}.metric:nth-child(4n){border-right:0}.metric:nth-child(-n+4){border-bottom:1px solid var(--line)}}
 @media(min-width:1600px){.metrics{grid-template-columns:repeat(8,minmax(0,1fr))}.metric:nth-child(4n){border-right:1px solid var(--line)}.metric:last-child{border-right:0}.metric:nth-child(-n+4){border-bottom:0}}
 @media(max-width:560px){.login-card{margin:24px 14px}}
+.staff-layout{grid-template-columns:minmax(0,1fr)}
+.survey-tables{display:grid;gap:24px;margin-top:18px}
+.survey-table-panel{min-width:0}
+.survey-table-panel .card-heading{padding-bottom:12px}
+.survey-table-panel h3{font-size:15px}
+.survey-table-scroll{overflow-x:auto}
+.survey-table{width:100%;border-collapse:collapse;text-align:left}
+.survey-table th{padding:12px;color:var(--muted);background:var(--canvas);font-size:12px;font-weight:600;white-space:nowrap}
+.survey-table td{padding:12px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:middle}
+.survey-table tr.is-selected td{background:#edf6fc}
+.survey-table td:first-child,.survey-table td:nth-child(4),.survey-table td:last-child{white-space:nowrap}
+.survey-table-panel .queue-pager{display:flex;align-items:center;justify-content:flex-end;gap:12px;padding-top:12px;font-size:12px;color:var(--muted)}
+.detail-card{scroll-margin-top:20px}

@@ -8,10 +8,6 @@
   const queueCount = document.getElementById('queueCount');
   const navQueueCount = document.getElementById('navQueueCount');
   const queueSearch = document.getElementById('queueSearch');
-  const queuePager = document.getElementById('queuePager');
-  const queuePrev = document.getElementById('queuePrev');
-  const queueNext = document.getElementById('queueNext');
-  const queuePageInfo = document.getElementById('queuePageInfo');
   const detailPanel = document.getElementById('detailPanel');
   const formFilter = document.getElementById('formFilter');
   const stateFilter = document.getElementById('stateFilter');
@@ -27,7 +23,8 @@
   let medinetSchema = null;
   let medinetInpatientSchema = null;
   let selectedId = '';
-  let queuePage = 1;
+  const tablePages = {'1':1,'2':1,'3':1,'4':1};
+  let queueRequest = 0;
   let searchTimer = null;
 
   const el = (tag, cls, text) => {
@@ -105,40 +102,44 @@
       dashboardUpdated.textContent = 'Không tải được số liệu';
     }
   };
+  const surveyNames = {'1':'Nội trú · Bộ Y tế','2':'Ngoại trú · Bộ Y tế','3':'Thủ tục hành chính · Medinet','4':'Trải nghiệm nội trú · Medinet'};
+  const resetTablePages = () => { for (const key of Object.keys(tablePages)) tablePages[key]=1; };
   const loadQueue = async () => {
-    showError(staffError, '');
-    queueList.replaceChildren(el('p','empty-queue','Đang tải danh sách…'));
+    const request=++queueRequest;
+    showError(staffError,'');
+    queueList.setAttribute('aria-busy','true');
+    const forms=formFilter.value==='all'?['1','2','3','4']:[formFilter.value];
+    const search=(queueSearch.value||'').trim(), state=stateFilter.value;
     try {
-      const search = (queueSearch?.value || '').trim();
-      const result = await call(`/api/staff/submissions?state=${encodeURIComponent(stateFilter.value)}&form=${encodeURIComponent(formFilter.value)}&q=${encodeURIComponent(search)}&page=${queuePage}`);
+      const results=await Promise.all(forms.map(async number=>({number,result:await call(`/api/staff/submissions?state=${encodeURIComponent(state)}&form=${number}&q=${encodeURIComponent(search)}&page=${tablePages[number]}`)})));
+      if(request!==queueRequest)return;
       queueList.replaceChildren();
-      const items = result.items;
-      const total = result.total ?? items.length;
-      const totalPages = Math.max(1, Math.ceil(total / (result.page_size || 30)));
-      if (queuePage > totalPages) { queuePage = totalPages; return loadQueue(); }
-      queueCount.textContent = String(total);
-      if (navQueueCount) navQueueCount.textContent = String(total);
-      queuePager.hidden = totalPages <= 1;
-      queuePageInfo.textContent = `Trang ${result.page}/${totalPages}`;
-      queuePrev.disabled = result.page <= 1;
-      queueNext.disabled = result.page >= totalPages;
-      if (!items.length) queueList.append(el('p','empty-queue',search ? 'Không tìm thấy phiếu phù hợp.' : 'Không có phiếu ở trạng thái này.'));
-      for (const item of items) {
-        const button = el('button','queue-item');
-        button.type = 'button';
-        button.setAttribute('aria-current', item.id === selectedId ? 'true' : 'false');
-        button.append(el('span','queue-id',item.id));
-        button.append(el('span','',item.patient_name || (item.respondent === '2' ? 'Người nhà trả lời' : 'Người bệnh')));
-        button.append(el('span','queue-meta',`Mẫu số ${item.survey_form || '1'} · ${item.ward_label || ({'1':'Nội trú BYT','2':'Ngoại trú BYT','3':'Hành chính Medinet','4':'Nội trú Medinet'}[item.survey_form] || '')} · ${dateText(item.created_at)}`));
-        button.addEventListener('click',()=>openDetail(item.id));
-        queueList.append(button);
+      let count=0;
+      for(const {number,result} of results){
+        count+=result.total;
+        const pages=Math.max(1,Math.ceil(result.total/result.page_size));
+        if(tablePages[number]>pages){tablePages[number]=pages;return loadQueue();}
+        const panel=el('section','survey-table-panel');panel.setAttribute('aria-labelledby',`table-title-${number}`);
+        const heading=el('div','card-heading'),title=el('h3','',`Mẫu ${number} — ${surveyNames[number]}`);title.id=`table-title-${number}`;
+        heading.append(title,el('span','count-pill',String(result.total)));panel.append(heading);
+        const wrap=el('div','survey-table-scroll'),table=el('table','survey-table'),thead=el('thead'),header=el('tr');
+        for(const text of ['Mã phiếu','Người trả lời','Khoa / Phòng','Ngày tiếp nhận','Trạng thái','Thao tác']){const th=el('th','',text);th.scope='col';header.append(th)}
+        thead.append(header);table.append(thead);const body=el('tbody');
+        for(const item of result.items){
+          const row=el('tr',item.id===selectedId?'is-selected':'');
+          row.append(el('td','queue-id',item.id),el('td','',item.patient_name||(item.respondent==='2'?'Người nhà':'Người trả lời khảo sát')),el('td','',item.ward_label||'—'),el('td','',dateText(item.created_at)));
+          const status=el('td'),label=(item.state_label||'').replaceAll('BYT',Number(number)>2?'Medinet':'BYT');status.append(el('span',`state-badge ${item.state}`,label));row.append(status);
+          const action=el('td'),button=el('button','pager-button','Xem phiếu');button.type='button';button.setAttribute('aria-label',`Xem phiếu ${item.id}`);button.addEventListener('click',async()=>{await openDetail(item.id);detailPanel.scrollIntoView({behavior:'smooth',block:'start'})});action.append(button);row.append(action);body.append(row);
+        }
+        if(!result.items.length){const row=el('tr'),cell=el('td','report-empty',search?'Không tìm thấy phiếu phù hợp.':'Chưa có phiếu ở trạng thái đã chọn.');cell.colSpan=6;row.append(cell);body.append(row)}
+        table.append(body);wrap.append(table);panel.append(wrap);
+        const pager=el('div','queue-pager'),prev=el('button','pager-button','Trước'),next=el('button','pager-button','Sau');prev.type=next.type='button';prev.disabled=result.page<=1;next.disabled=result.page>=pages;
+        prev.addEventListener('click',()=>{tablePages[number]--;loadQueue()});next.addEventListener('click',()=>{tablePages[number]++;loadQueue()});pager.append(prev,el('span','',`Trang ${result.page}/${pages} · ${result.total} phiếu`),next);panel.append(pager);queueList.append(panel);
       }
+      queueCount.textContent=String(count);navQueueCount.textContent=String(count);
       await loadDashboard();
-    } catch (error) {
-      if (error.message === 'Đăng nhập lại để tiếp tục.') setLoggedIn(false);
-      showError(staffError,error.message);
-      queueList.replaceChildren();
-    }
+    }catch(error){if(request!==queueRequest)return;if(error.message==='Đăng nhập lại để tiếp tục.')setLoggedIn(false);showError(staffError,error.message)}
+    finally{if(request===queueRequest)queueList.setAttribute('aria-busy','false')}
   };
   const addPair = (host, label, value) => {
     const dl = el('dl','detail-pair');
@@ -378,11 +379,9 @@
     await call('/api/staff/logout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}).catch(()=>{});
     selectedId='';setLoggedIn(false);loginForm.reset();
   });
-  formFilter.addEventListener('change',()=>{queuePage=1;loadQueue();});
-  stateFilter.addEventListener('change',()=>{ queuePage=1; loadQueue(); });
-  queueSearch?.addEventListener('input',()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(()=>{queuePage=1;loadQueue();},250); });
-  queuePrev?.addEventListener('click',()=>{ if(queuePage>1){queuePage--;loadQueue();} });
-  queueNext?.addEventListener('click',()=>{queuePage++;loadQueue();});
+  formFilter.addEventListener('change',()=>{resetTablePages();loadQueue();});
+  stateFilter.addEventListener('change',()=>{ resetTablePages(); loadQueue(); });
+  queueSearch?.addEventListener('input',()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(()=>{resetTablePages();loadQueue();},250); });
   Promise.all([fetch('/schema.json').then(response=>response.json()),fetch('/schema2.json').then(response=>response.json()),fetch('/schema3.json').then(response=>response.json()),fetch('/schema4.json').then(response=>response.json()),call('/api/staff/session')]).then(([data,outpatient,medinet,medinetInpatient,session])=>{
     schema=data;outpatientSchema=outpatient;medinetSchema=medinet;medinetInpatientSchema=medinetInpatient;setLoggedIn(session.authenticated);if(session.authenticated)loadQueue();
   }).catch(()=>{
