@@ -13,6 +13,7 @@
   const queueNext = document.getElementById('queueNext');
   const queuePageInfo = document.getElementById('queuePageInfo');
   const detailPanel = document.getElementById('detailPanel');
+  const formFilter = document.getElementById('formFilter');
   const stateFilter = document.getElementById('stateFilter');
   const logoutButton = document.getElementById('logoutButton');
   const metrics = document.getElementById('metrics');
@@ -65,8 +66,10 @@
         ['Tổng số phiếu', data.total, 'neutral'],
         ['Nội trú', data.inpatient?.total || 0, 'accent'],
         ['Ngoại trú', data.outpatient?.total || 0, 'info'],
+        ['Mẫu 3 · Hành chính Medinet', data.medinet_administrative_total || 0, 'info'],
+        ['Mẫu 4 · Nội trú Medinet', data.medinet_inpatient_total || 0, 'accent'],
         ['Chờ kiểm duyệt', data.counts.pending || 0, 'warning'],
-        ['Đã gửi BYT', data.counts.sent || 0, 'success'],
+        ['Đã gửi', data.counts.sent || 0, 'success'],
         ['Điểm hài lòng TB', data.average_score === null ? '—' : `${data.average_score}/5`, 'score'],
       ];
       for (const [label, value, tone] of items) {
@@ -107,7 +110,7 @@
     queueList.replaceChildren(el('p','empty-queue','Đang tải danh sách…'));
     try {
       const search = (queueSearch?.value || '').trim();
-      const result = await call(`/api/staff/submissions?state=${encodeURIComponent(stateFilter.value)}&q=${encodeURIComponent(search)}&page=${queuePage}`);
+      const result = await call(`/api/staff/submissions?state=${encodeURIComponent(stateFilter.value)}&form=${encodeURIComponent(formFilter.value)}&q=${encodeURIComponent(search)}&page=${queuePage}`);
       queueList.replaceChildren();
       const items = result.items;
       const total = result.total ?? items.length;
@@ -126,7 +129,7 @@
         button.setAttribute('aria-current', item.id === selectedId ? 'true' : 'false');
         button.append(el('span','queue-id',item.id));
         button.append(el('span','',item.patient_name || (item.respondent === '2' ? 'Người nhà trả lời' : 'Người bệnh')));
-        button.append(el('span','queue-meta',`Mẫu số ${item.survey_form || '1'} · ${item.ward_label || 'Ngoại trú'} · ${dateText(item.created_at)}`));
+        button.append(el('span','queue-meta',`Mẫu số ${item.survey_form || '1'} · ${item.ward_label || ({'1':'Nội trú BYT','2':'Ngoại trú BYT','3':'Hành chính Medinet','4':'Nội trú Medinet'}[item.survey_form] || '')} · ${dateText(item.created_at)}`));
         button.addEventListener('click',()=>openDetail(item.id));
         queueList.append(button);
       }
@@ -375,6 +378,7 @@
     await call('/api/staff/logout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}).catch(()=>{});
     selectedId='';setLoggedIn(false);loginForm.reset();
   });
+  formFilter.addEventListener('change',()=>{queuePage=1;loadQueue();});
   stateFilter.addEventListener('change',()=>{ queuePage=1; loadQueue(); });
   queueSearch?.addEventListener('input',()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(()=>{queuePage=1;loadQueue();},250); });
   queuePrev?.addEventListener('click',()=>{ if(queuePage>1){queuePage--;loadQueue();} });

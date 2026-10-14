@@ -338,6 +338,8 @@ class Handler(SimpleHTTPRequestHandler):
                     counts[state] = counts.get(state, 0) + 1
                     day = created[:10]
                     daily[day] = daily.get(day, 0) + 1
+                    if survey_form in {"3", "4"}:
+                        continue
                     try:
                         answers = json.loads(blob)
                         ratings = answers.get("ratings", {})
@@ -371,18 +373,22 @@ class Handler(SimpleHTTPRequestHandler):
                         "average_score": round(sum(ward["scores"]) / len(ward["scores"]), 2) if ward["scores"] else None,
                     })
                 ward_report.sort(key=lambda item: (-item["count"], item["ward"]))
-                self._json(200, {"total": len(rows), "today": daily.get(today, 0), "counts": counts, "average_score": round(sum(scores) / len(scores), 2) if scores else None, "daily": days, "inpatient": {"total": inpatient_total, "wards": ward_report}, "outpatient": {"total": outpatient_total}})
+                self._json(200, {"medinet_administrative_total": sum(1 for r in rows if r[3] == "3"), "medinet_inpatient_total": sum(1 for r in rows if r[3] == "4"), "total": len(rows), "today": daily.get(today, 0), "counts": counts, "average_score": round(sum(scores) / len(scores), 2) if scores else None, "daily": days, "inpatient": {"total": inpatient_total, "wards": ward_report}, "outpatient": {"total": outpatient_total}})
                 return True
             if path == "/api/staff/submissions":
                 state = query.get("state", ["pending"])[0]
                 if state not in (*STATE_LABELS, "all"):
                     self._json(400, {"error": "Trạng thái không hợp lệ."}); return True
                 search = query.get("q", [""])[0].strip()[:120]
+                survey_filter = query.get("form", ["all"])[0]
+                if survey_filter not in {"all", "1", "2", "3", "4"}:
+                    self._json(400, {"error": "Mẫu khảo sát không hợp lệ."}); return True
                 try: page = max(1, int(query.get("page", ["1"])[0]))
                 except ValueError: page = 1
                 page_size = 30
                 with db_connect() as connection:
                     clauses, params = [], []
+                    if survey_filter != "all": clauses.append("survey_form=?"); params.append(survey_filter)
                     if state != "all": clauses.append("state=?"); params.append(state)
                     if search:
                         clauses.append("(id LIKE ? OR answers_json LIKE ?)")
