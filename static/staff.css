@@ -26,3 +26,14 @@
 .survey-table td:first-child,.survey-table td:nth-child(4),.survey-table td:last-child{white-space:nowrap}
 .survey-table-panel .queue-pager{display:flex;align-items:center;justify-content:flex-end;gap:12px;padding-top:12px;font-size:12px;color:var(--muted)}
 .detail-card{scroll-margin-top:20px}
+.survey-modal{width:min(1080px,calc(100vw - 40px));max-width:none;max-height:calc(100dvh - 40px);padding:0;border:1px solid var(--line);border-radius:12px;color:var(--ink);background:var(--surface);box-shadow:0 20px 80px rgba(0,0,0,.25)}
+.survey-modal::backdrop{background:rgba(15,35,49,.6)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;border-bottom:1px solid var(--line);background:var(--surface)}
+.modal-header h2{margin:0;color:var(--navy);font-size:18px}
+.modal-body{max-height:calc(100dvh - 160px);overflow:auto;padding:24px}
+.survey-modal>.form-error{margin:10px 24px}
+.modal-open{overflow:hidden}
+.modal-checkbox{display:flex;align-items:center;gap:9px;font-weight:normal;padding:7px 0}
+.modal-checkbox input{width:16px;min-height:16px;flex:0 0 16px}
+.modal-body .answer-item{grid-template-columns:minmax(0,1fr) minmax(100px,.6fr)}
+@media(max-width:560px){.survey-modal{width:calc(100vw - 16px);max-height:calc(100dvh - 16px)}.modal-header{padding:12px 16px}.modal-body{padding:16px;max-height:calc(100dvh - 130px)}.modal-body .answer-item{grid-template-columns:1fr}}

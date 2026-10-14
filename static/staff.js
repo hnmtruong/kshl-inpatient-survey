@@ -8,6 +8,10 @@
   const queueCount = document.getElementById('queueCount');
   const navQueueCount = document.getElementById('navQueueCount');
   const queueSearch = document.getElementById('queueSearch');
+  const surveyModal = document.getElementById('surveyModal');
+  const modalError = document.getElementById('modalError');
+  document.getElementById('closeSurveyModal').addEventListener('click',()=>surveyModal.close());
+  surveyModal.addEventListener('close',()=>document.body.classList.remove('modal-open'));
   const detailPanel = document.getElementById('detailPanel');
   const formFilter = document.getElementById('formFilter');
   const stateFilter = document.getElementById('stateFilter');
@@ -129,7 +133,7 @@
           const row=el('tr',item.id===selectedId?'is-selected':'');
           row.append(el('td','queue-id',item.id),el('td','',item.patient_name||(item.respondent==='2'?'Người nhà':'Người trả lời khảo sát')),el('td','',item.ward_label||'—'),el('td','',dateText(item.created_at)));
           const status=el('td'),label=(item.state_label||'').replaceAll('BYT',Number(number)>2?'Medinet':'BYT');status.append(el('span',`state-badge ${item.state}`,label));row.append(status);
-          const action=el('td'),button=el('button','pager-button','Xem phiếu');button.type='button';button.setAttribute('aria-label',`Xem phiếu ${item.id}`);button.addEventListener('click',async()=>{await openDetail(item.id);detailPanel.scrollIntoView({behavior:'smooth',block:'start'})});action.append(button);row.append(action);body.append(row);
+          const action=el('td'),button=el('button','pager-button','Xem phiếu');button.type='button';button.setAttribute('aria-label',`Xem phiếu ${item.id}`);button.addEventListener('click',()=>openDetail(item.id));action.append(button);row.append(action);body.append(row);
         }
         if(!result.items.length){const row=el('tr'),cell=el('td','report-empty',search?'Không tìm thấy phiếu phù hợp.':'Chưa có phiếu ở trạng thái đã chọn.');cell.colSpan=6;row.append(cell);body.append(row)}
         table.append(body);wrap.append(table);panel.append(wrap);
@@ -169,7 +173,7 @@
     } else if (['approved','reviewed','failed'].includes(item.state)) {
       const destination=['3','4'].includes(item.survey_form)?'Medinet':'BYT', sent = el('button','button button-primary',item.state==='failed'?`Thử gửi ${destination} lại`:`Gửi ${destination}`); sent.type='button'; sent.addEventListener('click',()=>{if(window.confirm(`Gửi toàn bộ nội dung phiếu này lên cổng ${destination}? Thao tác này sẽ tạo phiếu chính thức.`))sendByt(item.id)}); actions.append(sent);
     }
-    if (!['sent','syncing'].includes(item.state) && !['3','4'].includes(item.survey_form)) { const edit=el('button','button button-secondary','Chỉnh sửa phiếu'); edit.type='button'; edit.addEventListener('click',()=>item.survey_form==='2'?renderOutpatientEditor(item):renderEditor(item)); actions.append(edit); }
+    if (!['sent','syncing'].includes(item.state)) { const edit=el('button','button button-secondary','Chỉnh sửa phiếu'); edit.type='button'; edit.addEventListener('click',()=>['3','4'].includes(item.survey_form)?renderMedinetEditor(item):item.survey_form==='2'?renderOutpatientEditor(item):renderEditor(item)); actions.append(edit); }
     return actions;
   };
   const renderOutpatientDetail = item => {
@@ -276,6 +280,21 @@
     if (type === 'textarea') input.value = value || '';
     wrap.append(input); host.append(wrap); return input;
   };
+  const renderMedinetEditor = item => {
+    const profile=item.answers.profile,ratings=item.answers.ratings,notes=item.answers.notes||{},s=item.survey_form==='4'?medinetInpatientSchema:medinetSchema;
+    detailPanel.replaceChildren();detailPanel.append(el('h2','',`Chỉnh sửa ${item.id}`),el('p','edit-note','Lưu thay đổi sẽ đưa phiếu về trạng thái chờ kiểm duyệt lại.'));
+    const form=el('form','edit-form'),section=addSection(form,'Thông tin khảo sát'),grid=el('div','edit-grid');
+    optionInput(grid,'profile.department','Khoa/Phòng',s.departments,profile.department);
+    const multiple=(host,name,label,options,values)=>{const wrap=el('fieldset','edit-field');wrap.append(el('legend','',label));for(const o of options){const l=el('label','modal-checkbox'),i=document.createElement('input');i.type='checkbox';i.name=name;i.value=o.value;i.checked=(values||[]).includes(o.value);l.append(i,el('span','',o.label));wrap.append(l)}host.append(wrap)};
+    if(item.survey_form==='4'){textInput(grid,'profile.survey_date','Ngày khảo sát (dd/mm/yyyy)',profile.survey_date)}else{
+      textInput(grid,'profile.birth_year','Năm sinh',profile.birth_year,'number');optionInput(grid,'profile.gender','Giới tính',[{value:'1',label:'Nam'},{value:'2',label:'Nữ'}],profile.gender);multiple(grid,'profile.services','Loại dịch vụ',s.serviceOptions,profile.services);optionInput(grid,'profile.certificate','Hình thức cấp giấy',s.certificateOptions,profile.certificate);
+    }
+    section.append(grid);
+    for(const group of s.groups){const section=addSection(form,group.title),grid=el('div','edit-grid');for(const q of group.questions){if(q.multiple)multiple(grid,`ratings.${q.key}`,q.label,q.options,ratings[q.key]);else if(q.options.length)optionInput(grid,`ratings.${q.key}`,q.label,q.options,ratings[q.key]);else textInput(grid,`ratings.${q.key}`,q.label,ratings[q.key],'textarea');if(q.options.length&&q.freeTextKey)textInput(grid,`notes.${q.key}`,'Nội dung ghi thêm',notes[q.key],'textarea')}section.append(grid)}
+    if(item.survey_form==='3')textInput(form,'ratings.comment','Ý kiến khác',ratings.comment,'textarea');
+    const actions=el('div','detail-actions'),cancel=el('button','button button-secondary','Hủy'),save=el('button','button button-primary','Lưu thay đổi');cancel.type='button';save.type='submit';cancel.addEventListener('click',()=>renderDetail(item));actions.append(cancel,save);form.append(actions);
+    form.addEventListener('submit',e=>{e.preventDefault();saveEdits(item.id,form)});detailPanel.append(form);detailPanel.scrollTop=0;
+  };
   const renderOutpatientEditor = item => {
     const profile=item.answers.profile, ratings=item.answers.ratings, s=outpatientSchema;
     detailPanel.replaceChildren(); detailPanel.append(el('h2','',`Chỉnh sửa ${item.id}`),el('p','edit-note','Lưu thay đổi sẽ đưa phiếu về trạng thái chờ kiểm duyệt lại.'));
@@ -332,9 +351,13 @@
     selectedId = id;
     try {
       const result = await call(`/api/staff/submissions/${encodeURIComponent(id)}`);
+      result.item.state_label=(result.item.state_label||'').replaceAll('BYT',['3','4'].includes(result.item.survey_form)?'Medinet':'BYT');
       renderDetail(result.item);
+      showError(modalError,'');
+      if(!surveyModal.open){surveyModal.showModal();document.body.classList.add('modal-open');}
+      detailPanel.scrollTop=0;
       await loadQueue();
-    } catch (error) { showError(staffError,error.message); }
+    } catch (error) { showError(surveyModal.open?modalError:staffError,error.message); }
   };
   const updateState = async (id,nextState) => {
     try {
@@ -342,7 +365,7 @@
         method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({state:nextState})
       });
       await openDetail(id);
-    } catch (error) { showError(staffError,error.message); }
+    } catch (error) { showError(surveyModal.open?modalError:staffError,error.message); }
   };
   const sendByt = async id => {
     try {
@@ -350,20 +373,22 @@
         method:'POST',headers:{'Content-Type':'application/json'},body:'{}'
       });
       await openDetail(id);
-    } catch (error) { showError(staffError,error.message); await loadQueue(); }
+    } catch (error) { await loadQueue(); showError(surveyModal.open?modalError:staffError,error.message); }
   };
   const saveEdits = async (id, form) => {
     const data = new FormData(form);
-    const answers = {profile:{},ratings:{}};
+    const answers = {profile:{},ratings:{},notes:{}};
     for (const [key,value] of data.entries()) {
-      const [group, field] = key.split('.'); answers[group][field] = String(value).trim();
+      const [group, field] = key.split('.');
+      const multi=Array.from(form.elements).some(i=>i.name===key&&i.type==='checkbox');
+      if(multi){answers[group][field]??=[];answers[group][field].push(String(value).trim());}else answers[group][field] = String(value).trim();
     }
     try {
       await call(`/api/staff/submissions/${encodeURIComponent(id)}/edit`,{
         method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({answers})
       });
       await openDetail(id);
-    } catch (error) { showError(staffError,error.message); }
+    } catch (error) { showError(surveyModal.open?modalError:staffError,error.message); }
   };
   loginForm.addEventListener('submit',async event=>{
     event.preventDefault(); showError(loginError,'');
@@ -377,7 +402,7 @@
   });
   logoutButton.addEventListener('click',async()=>{
     await call('/api/staff/logout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}).catch(()=>{});
-    selectedId='';setLoggedIn(false);loginForm.reset();
+    if(surveyModal.open)surveyModal.close();selectedId='';setLoggedIn(false);loginForm.reset();
   });
   formFilter.addEventListener('change',()=>{resetTablePages();loadQueue();});
   stateFilter.addEventListener('change',()=>{ resetTablePages(); loadQueue(); });
