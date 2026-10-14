@@ -52,6 +52,18 @@
     workspace.hidden = !loggedIn;
     logoutButton.hidden = !loggedIn;
   };
+  const viewNames=['overview','management','reports','surveys'];
+  const showView = name => {
+    if(!viewNames.includes(name))name='overview';
+    for(const view of document.querySelectorAll('.admin-view'))view.hidden=view.id!==`view-${name}`;
+    for(const link of document.querySelectorAll('[data-view]')){const active=link.dataset.view===name;link.classList.toggle('is-active',active);if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current')}
+  };
+  const navigateView = name => {showView(name);history.replaceState(null,'',`#${name}`);window.scrollTo({top:0,behavior:'smooth'})};
+  document.querySelectorAll('[data-view]').forEach(link=>link.addEventListener('click',e=>{e.preventDefault();navigateView(link.dataset.view)}));
+  document.querySelectorAll('[data-open-view]').forEach(button=>button.addEventListener('click',()=>navigateView(button.dataset.openView)));
+  window.addEventListener('hashchange',()=>showView(location.hash.slice(1)));
+  showView(location.hash.slice(1));
+  document.getElementById('refreshDashboard').addEventListener('click',async e=>{e.currentTarget.disabled=true;try{await loadQueue()}finally{document.getElementById('refreshDashboard').disabled=false}});
   const checkSession = async () => {
     try {
       const result = await call('/api/staff/session');
@@ -65,8 +77,8 @@
       metrics.replaceChildren();
       const items = [
         ['Tổng số phiếu', data.total, 'neutral'],
-        ['Nội trú', data.inpatient?.total || 0, 'accent'],
-        ['Ngoại trú', data.outpatient?.total || 0, 'info'],
+        ['Mẫu 1 · Nội trú BYT', data.inpatient?.total || 0, 'accent'],
+        ['Mẫu 2 · Ngoại trú BYT', data.outpatient?.total || 0, 'info'],
         ['Mẫu 3 · Hành chính Medinet', data.medinet_administrative_total || 0, 'info'],
         ['Mẫu 4 · Nội trú Medinet', data.medinet_inpatient_total || 0, 'accent'],
         ['Chờ kiểm duyệt', data.counts.pending || 0, 'warning'],
