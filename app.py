@@ -503,6 +503,12 @@ class Handler(SimpleHTTPRequestHandler):
                     with db_connect() as connection:
                         connection.execute("UPDATE submissions SET state='failed', byt_message=? WHERE id=?", (message, rid))
                     self._json(502, {"error": message, "state": "failed", "state_label": state_label("failed", row[6])}); return
+                except Exception:
+                    # Delivery may be uncertain; keep the send lock to prevent duplicates.
+                    message = "Có lỗi khi xử lý gửi phiếu. Cần kiểm tra kết quả trên cổng nhận trước khi thử gửi lại."
+                    with db_connect() as connection:
+                        connection.execute("UPDATE submissions SET byt_message=? WHERE id=?", (message, rid))
+                    self._json(500, {"error": message, "state": "syncing"}); return
                 sent_at = datetime.now().astimezone().isoformat(timespec="seconds")
                 with db_connect() as connection:
                     connection.execute("UPDATE submissions SET state='sent', sent_at=?, sent_by=?, byt_message=? WHERE id=?", (sent_at, session[1], message, rid))

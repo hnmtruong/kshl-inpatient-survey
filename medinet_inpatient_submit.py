@@ -34,7 +34,8 @@ def submit(record_id: str, answers: dict) -> tuple[str, str]:
         ("DonViConId", ""), ("nhomDonViId", ""), ("tenKiosk", ""), ("nhomKhaoSat", ""), ("save", "save"),
     ]
     for question in MEDINET_INPATIENT_QUESTIONS:
-        key, value = question["key"], ratings[key]
+        key = question["key"]
+        value = ratings[key]
         if question["options"]:
             choices = _choices(page, key)
             selected = value if question.get("multiple") else [value]
