@@ -479,8 +479,10 @@ class Handler(SimpleHTTPRequestHandler):
                 row = self._record(rid)
                 if not row: self._json(404, {"error": "Không tìm thấy phiếu."}); return
                 current = row[3]
+                if current in {"syncing", "sent"}:
+                    self._json(200, {"state": current, "state_label": state_label(current, row[6])}); return
                 if current not in {"approved", "reviewed", "failed"}:
-                    self._json(409, {"error": "Phiếu cần được kiểm duyệt trước khi gửi."}); return
+                    self._json(409, {"error": "Phiếu chưa được duyệt hoặc đã được chỉnh sửa. Vui lòng mở lại phiếu và kiểm duyệt trước khi gửi.", "state": current}); return
                 with db_connect() as connection:
                     changed = connection.execute("UPDATE submissions SET state='syncing', byt_message=NULL WHERE id=? AND state=?", (rid, current)).rowcount
                 if not changed:

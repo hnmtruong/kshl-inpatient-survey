@@ -391,13 +391,24 @@
       await openDetail(id);
     } catch (error) { showError(surveyModal.open?modalError:staffError,error.message); }
   };
+  const sendingIds=new Set();
   const sendByt = async id => {
+    if(sendingIds.has(id))return;
+    sendingIds.add(id);
+    const buttons=[...detailPanel.querySelectorAll('.detail-actions button')];buttons.forEach(b=>b.disabled=true);
+    showError(modalError,'');
     try {
+      const latest=await call(`/api/staff/submissions/${encodeURIComponent(id)}`);
+      if(['sent','syncing'].includes(latest.item.state)){await openDetail(id);return;}
+      if(!['approved','reviewed','failed'].includes(latest.item.state)){await openDetail(id);throw Error('Phiếu chưa được duyệt hoặc đã được chỉnh sửa. Vui lòng kiểm tra và duyệt lại.');}
       await call(`/api/staff/submissions/${encodeURIComponent(id)}/send-byt`,{
         method:'POST',headers:{'Content-Type':'application/json'},body:'{}'
       });
       await openDetail(id);
-    } catch (error) { await loadQueue(); showError(surveyModal.open?modalError:staffError,error.message); }
+    } catch (error) {
+      try{await openDetail(id)}catch(_){}
+      showError(surveyModal.open?modalError:staffError,error instanceof TypeError?'Kết nối bị gián đoạn. Trạng thái phiếu đã được tải lại; vui lòng kiểm tra trước khi thao tác tiếp.':error.message);
+    } finally {sendingIds.delete(id);buttons.forEach(b=>{if(b.isConnected)b.disabled=false});}
   };
   const saveEdits = async (id, form) => {
     const data = new FormData(form);
