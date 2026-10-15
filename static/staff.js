@@ -118,6 +118,16 @@
       dashboardUpdated.textContent = 'Không tải được số liệu';
     }
   };
+  const destinations = {
+    '1':{name:'Bộ Y tế',url:'https://hailong.chatluongbenhvien.vn/nguoi-benh-noi-tru-v2'},
+    '2':{name:'Bộ Y tế',url:'https://hailong.chatluongbenhvien.vn/nguoi-benh-ngoai-tru-v2'},
+    '3':{name:'Medinet',url:'https://tnnb.medinet.org.vn/phieu-khao-sat/697ae1ccc134eb50e91ede42/58d37041080f8a0dac8e55d6'},
+    '4':{name:'Medinet',url:'https://tnnb.medinet.org.vn/phieu-khao-sat/697ae20ac134eb50e91ede61/58d37041080f8a0dac8e55d6'}
+  };
+  const destinationNotice = number => {
+    const destination=destinations[number],notice=el('div',`destination-notice destination-${destination.name==='Medinet'?'medinet':'byt'}`);
+    const label=el('strong','',`Mẫu ${number} → Gửi ${destination.name}`),link=el('a','',new URL(destination.url).hostname);link.href=destination.url;link.target='_blank';link.rel='noopener';link.title=destination.url;notice.append(label,link);return notice;
+  };
   const surveyNames = {'1':'Nội trú · Bộ Y tế','2':'Ngoại trú · Bộ Y tế','3':'Thủ tục hành chính · Medinet','4':'Trải nghiệm nội trú · Medinet'};
   const resetTablePages = () => { for (const key of Object.keys(tablePages)) tablePages[key]=1; };
   const loadQueue = async () => {
@@ -137,7 +147,7 @@
         if(tablePages[number]>pages){tablePages[number]=pages;return loadQueue();}
         const panel=el('section','survey-table-panel');panel.setAttribute('aria-labelledby',`table-title-${number}`);
         const heading=el('div','card-heading'),title=el('h3','',`Mẫu ${number} — ${surveyNames[number]}`);title.id=`table-title-${number}`;
-        heading.append(title,el('span','count-pill',String(result.total)));panel.append(heading);
+        heading.append(title,el('span','count-pill',String(result.total)));panel.append(heading,destinationNotice(number));
         const wrap=el('div','survey-table-scroll'),table=el('table','survey-table'),thead=el('thead'),header=el('tr');
         for(const text of ['Mã phiếu','Người trả lời','Khoa / Phòng','Ngày tiếp nhận','Trạng thái','Thao tác']){const th=el('th','',text);th.scope='col';header.append(th)}
         thead.append(header);table.append(thead);const body=el('tbody');
@@ -183,7 +193,7 @@
     if (item.state === 'pending') {
       const approve = el('button','button button-primary','Duyệt phiếu'); approve.type='button'; approve.addEventListener('click',()=>updateState(item.id,'approved')); actions.append(approve);
     } else if (['approved','reviewed','failed'].includes(item.state)) {
-      const destination=['3','4'].includes(item.survey_form)?'Medinet':'BYT', sent = el('button','button button-primary',item.state==='failed'?`Thử gửi ${destination} lại`:`Gửi ${destination}`); sent.type='button'; sent.addEventListener('click',()=>{if(window.confirm(`Gửi toàn bộ nội dung phiếu này lên cổng ${destination}? Thao tác này sẽ tạo phiếu chính thức.`))sendByt(item.id)}); actions.append(sent);
+      const destination=destinations[item.survey_form].name, sent = el('button','button button-primary',item.state==='failed'?`Thử gửi ${destination} lại`:`Gửi ${destination}`); sent.type='button'; sent.addEventListener('click',()=>{if(window.confirm(`Gửi toàn bộ nội dung phiếu này lên cổng ${destination}? Thao tác này sẽ tạo phiếu chính thức.`))sendByt(item.id)}); actions.append(sent);
     }
     if (!['sent','syncing'].includes(item.state)) { const edit=el('button','button button-secondary','Chỉnh sửa phiếu'); edit.type='button'; edit.addEventListener('click',()=>['3','4'].includes(item.survey_form)?renderMedinetEditor(item):item.survey_form==='2'?renderOutpatientEditor(item):renderEditor(item)); actions.append(edit); }
     return actions;
@@ -228,7 +238,7 @@
       reviewed.type = 'button'; reviewed.addEventListener('click',()=>updateState(item.id,'approved'));
       actions.append(reviewed);
     } else if (item.state === 'approved' || item.state === 'reviewed' || item.state === 'failed') {
-      const sent = el('button','button button-primary',item.state === 'failed' ? 'Thử gửi BYT lại' : 'Gửi BYT');
+      const sent = el('button','button button-primary',item.state === 'failed' ? 'Thử gửi Bộ Y tế lại' : 'Gửi Bộ Y tế');
       sent.type = 'button'; sent.addEventListener('click',()=>{
         if (window.confirm('Gửi toàn bộ nội dung phiếu này lên cổng Bộ Y tế? Thao tác này sẽ tạo phiếu chính thức.')) sendByt(item.id);
       });
@@ -365,6 +375,8 @@
       const result = await call(`/api/staff/submissions/${encodeURIComponent(id)}`);
       result.item.state_label=(result.item.state_label||'').replaceAll('BYT',['3','4'].includes(result.item.survey_form)?'Medinet':'BYT');
       renderDetail(result.item);
+      detailPanel.prepend(destinationNotice(result.item.survey_form));
+      document.getElementById('modalTitle').textContent=`Mẫu ${result.item.survey_form} · Gửi ${destinations[result.item.survey_form].name}`;
       showError(modalError,'');
       if(!surveyModal.open){surveyModal.showModal();document.body.classList.add('modal-open');}
       detailPanel.scrollTop=0;

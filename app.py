@@ -81,6 +81,11 @@ def db_connect() -> sqlite3.Connection:
     return connection
 
 
+def state_label(state, survey_form):
+    destination = "Medinet" if survey_form in {"3", "4"} else "Bộ Y tế"
+    return STATE_LABELS.get(state, state).replace("BYT", destination)
+
+
 def _choice(value, allowed, label):
     value = str(value or "")
     if value not in allowed:
@@ -403,7 +408,7 @@ class Handler(SimpleHTTPRequestHandler):
                     departments = MEDINET_INPATIENT_SCHEMA["departments"] if survey_form == "4" else MEDINET_SCHEMA["departments"] if survey_form == "3" else SCHEMA["wards"]
                     department_value = profile.get("department", profile.get("ward", ""))
                     ward_label = next((item["label"] for item in departments if item["value"] == department_value), department_value)
-                    items.append({"id": rid, "created_at": created, "state": status, "state_label": STATE_LABELS.get(status, status), "survey_form": survey_form, "patient_name": profile.get("patient_name", ""), "respondent": profile.get("respondent", ""), "ward_label": ward_label})
+                    items.append({"id": rid, "created_at": created, "state": status, "state_label": state_label(status, survey_form), "survey_form": survey_form, "patient_name": profile.get("patient_name", ""), "respondent": profile.get("respondent", ""), "ward_label": ward_label})
                 self._json(200, {"items": items, "total": total, "page": page, "page_size": page_size}); return True
             match = re.fullmatch(r"/api/staff/submissions/(NTP-[A-F0-9]{12})(?:/(export))?", path)
             if match:
@@ -418,7 +423,7 @@ class Handler(SimpleHTTPRequestHandler):
                         self._json(400, {"error": "Chọn kiểu khảo sát trước khi tải gói chuyển BYT."}); return True
                     payload = json.dumps({"id": rid, "created_at": created, "survey_form": survey_form, "survey_type": survey_type, "answers": answers}, ensure_ascii=False, indent=2).encode("utf-8")
                     self.send_response(200); self.send_header("Content-Type", "application/json; charset=utf-8"); self.send_header("Content-Disposition", f'attachment; filename="{rid}.json"'); self.send_header("Content-Length", str(len(payload))); self.end_headers(); self.wfile.write(payload); return True
-                self._json(200, {"item": {"id": rid, "created_at": created, "state": status, "state_label": STATE_LABELS.get(status, status), "survey_form": survey_form, "reviewed_at": reviewed_at, "sent_at": sent_at, "consent": True, "answers": answers}}); return True
+                self._json(200, {"item": {"id": rid, "created_at": created, "state": status, "state_label": state_label(status, survey_form), "survey_form": survey_form, "reviewed_at": reviewed_at, "sent_at": sent_at, "consent": True, "answers": answers}}); return True
             self._json(404, {"error": "Không tìm thấy đường dẫn."}); return True
         return False
 
@@ -475,7 +480,7 @@ class Handler(SimpleHTTPRequestHandler):
                 if not row: self._json(404, {"error": "Không tìm thấy phiếu."}); return
                 current = row[3]
                 if current not in {"approved", "reviewed", "failed"}:
-                    self._json(409, {"error": "Phiếu cần được kiểm duyệt trước khi gửi Bộ Y tế."}); return
+                    self._json(409, {"error": "Phiếu cần được kiểm duyệt trước khi gửi."}); return
                 with db_connect() as connection:
                     changed = connection.execute("UPDATE submissions SET state='syncing', byt_message=NULL WHERE id=? AND state=?", (rid, current)).rowcount
                 if not changed:
@@ -497,18 +502,18 @@ class Handler(SimpleHTTPRequestHandler):
                     message = str(exc)
                     with db_connect() as connection:
                         connection.execute("UPDATE submissions SET state='failed', byt_message=? WHERE id=?", (message, rid))
-                    self._json(502, {"error": message, "state": "failed", "state_label": STATE_LABELS["failed"]}); return
+                    self._json(502, {"error": message, "state": "failed", "state_label": state_label("failed", row[6])}); return
                 sent_at = datetime.now().astimezone().isoformat(timespec="seconds")
                 with db_connect() as connection:
                     connection.execute("UPDATE submissions SET state='sent', sent_at=?, sent_by=?, byt_message=? WHERE id=?", (sent_at, session[1], message, rid))
-                self._json(200, {"state": "sent", "state_label": STATE_LABELS["sent"], "message": message}); return
+                self._json(200, {"state": "sent", "state_label": state_label("sent", row[6]), "message": message}); return
             match = re.fullmatch(r"/api/staff/submissions/(NTP-[A-F0-9]{12})/edit", path)
             if match:
                 rid = match.group(1)
                 row = self._record(rid)
                 if not row: self._json(404, {"error": "Không tìm thấy phiếu."}); return
                 if row[3] in {"sent", "syncing"}:
-                    self._json(409, {"error": "Không thể sửa phiếu đang gửi hoặc đã gửi Bộ Y tế."}); return
+                    self._json(409, {"error": "Không thể sửa phiếu đang gửi hoặc đã gửi."}); return
                 supplied = body.get("answers")
                 if not isinstance(supplied, dict):
                     self._json(400, {"error": "Dữ liệu chỉnh sửa không hợp lệ."}); return

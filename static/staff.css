@@ -51,3 +51,9 @@
 .survey-table-panel .card-heading{background:var(--canvas);padding:12px;border-bottom:1px solid var(--line)}
 @media(min-width:821px) and (max-width:1000px){.admin-workspace{grid-template-columns:210px minmax(0,1fr)}.nav-item{font-size:13px;justify-content:flex-start}.nav-badge{position:static;margin:0 0 0 auto}.sidebar-brand div,.sidebar-footer span{display:block}}
 @media(max-width:680px){.survey-catalog{grid-template-columns:1fr}.overview-actions{align-items:stretch;flex-direction:column}.catalog-card{padding:20px}.workflow-note{font-size:12px}}
+.destination-guide{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:16px}
+.destination-guide p{margin:0;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.destination-guide strong,.destination-guide span{display:block}.destination-guide span{margin-top:5px;color:var(--muted);font-size:12px}
+.destination-notice{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;padding:12px;margin:0 0 12px;background:#edf6fc;color:#1b5e8d;font-size:13px}
+.destination-medinet{background:#edf7f1;color:#246044}.destination-notice a{color:inherit;overflow-wrap:anywhere}
+@media(max-width:680px){.destination-guide{grid-template-columns:1fr}}
