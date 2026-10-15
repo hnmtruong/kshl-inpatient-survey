@@ -51,6 +51,8 @@ TRUSTED_ORIGIN_HOSTS = {
 STATE_LABELS = {
     "pending": "Chờ kiểm duyệt",
     "approved": "Đã kiểm duyệt",
+    "queued": "Chờ đến lượt gửi BYT",
+    "uncertain": "Cần đối chiếu kết quả BYT",
     "syncing": "Đang gửi BYT",
     "sent": "Đã gửi BYT",
     "failed": "Gửi BYT chưa thành công",
@@ -77,6 +79,7 @@ def db_connect() -> sqlite3.Connection:
     for name in ("survey_form", "reviewed_at", "reviewed_by", "sent_at", "sent_by", "byt_message"):
         if name not in columns:
             connection.execute(f"ALTER TABLE submissions ADD COLUMN {name} TEXT")
+    connection.execute("CREATE TABLE IF NOT EXISTS delivery_queue (seq INTEGER PRIMARY KEY AUTOINCREMENT, submission_id TEXT NOT NULL UNIQUE, requested_by TEXT NOT NULL)")
     connection.commit()
     return connection
 
@@ -423,7 +426,9 @@ class Handler(SimpleHTTPRequestHandler):
                         self._json(400, {"error": "Chọn kiểu khảo sát trước khi tải gói chuyển BYT."}); return True
                     payload = json.dumps({"id": rid, "created_at": created, "survey_form": survey_form, "survey_type": survey_type, "answers": answers}, ensure_ascii=False, indent=2).encode("utf-8")
                     self.send_response(200); self.send_header("Content-Type", "application/json; charset=utf-8"); self.send_header("Content-Disposition", f'attachment; filename="{rid}.json"'); self.send_header("Content-Length", str(len(payload))); self.end_headers(); self.wfile.write(payload); return True
-                self._json(200, {"item": {"id": rid, "created_at": created, "state": status, "state_label": state_label(status, survey_form), "survey_form": survey_form, "reviewed_at": reviewed_at, "sent_at": sent_at, "consent": True, "answers": answers}}); return True
+                with db_connect() as connection:
+                    delivery_message = connection.execute('SELECT byt_message FROM submissions WHERE id=?', (rid,)).fetchone()[0]
+                self._json(200, {"item": {"id": rid, "created_at": created, "state": status, "state_label": state_label(status, survey_form), "survey_form": survey_form, "reviewed_at": reviewed_at, "sent_at": sent_at, "consent": True, "byt_message": delivery_message, "answers": answers}}); return True
             self._json(404, {"error": "Không tìm thấy đường dẫn."}); return True
         return False
 
@@ -478,49 +483,18 @@ class Handler(SimpleHTTPRequestHandler):
                 rid = match.group(1)
                 row = self._record(rid)
                 if not row: self._json(404, {"error": "Không tìm thấy phiếu."}); return
-                current = row[3]
-                if current in {"syncing", "sent"}:
-                    self._json(200, {"state": current, "state_label": state_label(current, row[6])}); return
-                if current not in {"approved", "reviewed", "failed"}:
-                    self._json(409, {"error": "Phiếu chưa được duyệt hoặc đã được chỉnh sửa. Vui lòng mở lại phiếu và kiểm duyệt trước khi gửi.", "state": current}); return
-                with db_connect() as connection:
-                    changed = connection.execute("UPDATE submissions SET state='syncing', byt_message=NULL WHERE id=? AND state=?", (rid, current)).rowcount
-                if not changed:
-                    self._json(409, {"error": "Phiếu đang được xử lý bởi một phiên khác."}); return
-                from byt_submit import BYTSubmissionError
-                from medinet_submit import MedinetSubmissionError
+                from delivery_queue import enqueue
                 try:
-                    if row[6] == "3":
-                        from medinet_submit import submit as submit_medinet
-                        _, message = submit_medinet(rid, json.loads(row[2]))
-                    elif row[6] == "4":
-                        from medinet_inpatient_submit import submit as submit_medinet_inpatient
-                        _, message = submit_medinet_inpatient(rid, json.loads(row[2]))
-                    else:
-                        from byt_submit import submit
-                        result = submit(rid, json.loads(row[2]), row[6])
-                        message = result["message"]
-                except (BYTSubmissionError, MedinetSubmissionError) as exc:
-                    message = str(exc)
-                    with db_connect() as connection:
-                        connection.execute("UPDATE submissions SET state='failed', byt_message=? WHERE id=?", (message, rid))
-                    self._json(502, {"error": message, "state": "failed", "state_label": state_label("failed", row[6])}); return
-                except Exception:
-                    # Delivery may be uncertain; keep the send lock to prevent duplicates.
-                    message = "Có lỗi khi xử lý gửi phiếu. Cần kiểm tra kết quả trên cổng nhận trước khi thử gửi lại."
-                    with db_connect() as connection:
-                        connection.execute("UPDATE submissions SET byt_message=? WHERE id=?", (message, rid))
-                    self._json(500, {"error": message, "state": "syncing"}); return
-                sent_at = datetime.now().astimezone().isoformat(timespec="seconds")
-                with db_connect() as connection:
-                    connection.execute("UPDATE submissions SET state='sent', sent_at=?, sent_by=?, byt_message=? WHERE id=?", (sent_at, session[1], message, rid))
-                self._json(200, {"state": "sent", "state_label": state_label("sent", row[6]), "message": message}); return
+                    state, number = enqueue(db_connect, rid, session[1])
+                except ValueError as exc:
+                    self._json(409, {"error": str(exc)}); return
+                self._json(202 if state == 'queued' else 200, {"state": state, "state_label": state_label(state, number), "message": "Đã xếp hàng. Hệ thống gửi từng phiếu theo thứ tự."}); return
             match = re.fullmatch(r"/api/staff/submissions/(NTP-[A-F0-9]{12})/edit", path)
             if match:
                 rid = match.group(1)
                 row = self._record(rid)
                 if not row: self._json(404, {"error": "Không tìm thấy phiếu."}); return
-                if row[3] in {"sent", "syncing"}:
+                if row[3] in {"sent", "syncing", "queued", "uncertain"}:
                     self._json(409, {"error": "Không thể sửa phiếu đang gửi hoặc đã gửi."}); return
                 supplied = body.get("answers")
                 if not isinstance(supplied, dict):
@@ -579,6 +553,17 @@ class SurveyServer(ThreadingHTTPServer):
     allow_reuse_address = True
 
 
+def deliver_survey(rid, answers, number):
+    if number == '3':
+        from medinet_submit import submit
+        return submit(rid, answers)[1]
+    if number == '4':
+        from medinet_inpatient_submit import submit
+        return submit(rid, answers)[1]
+    from byt_submit import submit
+    return submit(rid, answers, number)['message']
+
+
 def main():
     parser = argparse.ArgumentParser(description="Chạy biểu mẫu nội trú trên mạng nội bộ.")
     parser.add_argument("--host", default="127.0.0.1", help="Mặc định chỉ máy này; dùng 0.0.0.0 để phục vụ máy khác qua Wi-Fi")
@@ -606,12 +591,17 @@ def main():
         protocol = "http"
     print(f"Khảo sát đang chạy tại {protocol}://{args.host}:{args.port}")
     print(f"Dữ liệu được lưu trong: {DB}")
-    print("Phiếu gửi từ người bệnh được đồng bộ trực tiếp lên cổng Bộ Y tế khi đã cấu hình byt_credentials.json.")
+    from delivery_queue import DeliveryQueue
+    sender = DeliveryQueue(db_connect, DATA / "delivery.lock", deliver_survey)
+    sender.start()
+    print("Các phiếu đã duyệt được gửi tuần tự qua hàng chờ.")
     try:
         server.serve_forever()
     except KeyboardInterrupt:
         print("Đã dừng máy chủ.")
     finally:
+        sender.stop.set()
+        if sender.thread: sender.thread.join(timeout=110)
         server.server_close()
 
 

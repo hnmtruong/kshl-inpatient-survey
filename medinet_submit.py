@@ -60,7 +60,7 @@ def submit(record_id: str, answers: dict) -> tuple[str, str]:
         fields.append((question_id, choice))
     request = urllib.request.Request(SUBMIT_URL, data=urllib.parse.urlencode(fields).encode(), headers={"Content-Type":"application/x-www-form-urlencoded", "Referer":FORM_URL, "User-Agent":"NTP-survey-bridge/1.0"})
     try:
-        with opener.open(request, timeout=30) as response:
+        with opener.open(request, timeout=90) as response:
             body = response.read().decode("utf-8", "replace")
             final_url = response.geturl()
     except Exception as exc:

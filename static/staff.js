@@ -193,9 +193,9 @@
     if (item.state === 'pending') {
       const approve = el('button','button button-primary','Duyệt phiếu'); approve.type='button'; approve.addEventListener('click',()=>updateState(item.id,'approved')); actions.append(approve);
     } else if (['approved','reviewed','failed'].includes(item.state)) {
-      const destination=destinations[item.survey_form].name, sent = el('button','button button-primary',item.state==='failed'?`Thử gửi ${destination} lại`:`Gửi ${destination}`); sent.type='button'; sent.addEventListener('click',()=>{if(window.confirm(`Gửi toàn bộ nội dung phiếu này lên cổng ${destination}? Thao tác này sẽ tạo phiếu chính thức.`))sendByt(item.id)}); actions.append(sent);
+      const destination=destinations[item.survey_form].name, sent = el('button','button button-primary',item.state==='failed'?`Thử gửi ${destination} lại`:`Xếp hàng gửi ${destination}`); sent.type='button'; sent.addEventListener('click',()=>{if(window.confirm(`Xếp phiếu này vào hàng chờ gửi ${destination}? Thao tác này sẽ tạo phiếu chính thức.`))sendByt(item.id)}); actions.append(sent);
     }
-    if (!['sent','syncing'].includes(item.state)) { const edit=el('button','button button-secondary','Chỉnh sửa phiếu'); edit.type='button'; edit.addEventListener('click',()=>['3','4'].includes(item.survey_form)?renderMedinetEditor(item):item.survey_form==='2'?renderOutpatientEditor(item):renderEditor(item)); actions.append(edit); }
+    if (!['sent','syncing','queued','uncertain'].includes(item.state)) { const edit=el('button','button button-secondary','Chỉnh sửa phiếu'); edit.type='button'; edit.addEventListener('click',()=>['3','4'].includes(item.survey_form)?renderMedinetEditor(item):item.survey_form==='2'?renderOutpatientEditor(item):renderEditor(item)); actions.append(edit); }
     return actions;
   };
   const renderOutpatientDetail = item => {
@@ -238,13 +238,13 @@
       reviewed.type = 'button'; reviewed.addEventListener('click',()=>updateState(item.id,'approved'));
       actions.append(reviewed);
     } else if (item.state === 'approved' || item.state === 'reviewed' || item.state === 'failed') {
-      const sent = el('button','button button-primary',item.state === 'failed' ? 'Thử gửi Bộ Y tế lại' : 'Gửi Bộ Y tế');
+      const sent = el('button','button button-primary',item.state === 'failed' ? 'Thử gửi Bộ Y tế lại' : 'Xếp hàng gửi Bộ Y tế');
       sent.type = 'button'; sent.addEventListener('click',()=>{
         if (window.confirm('Gửi toàn bộ nội dung phiếu này lên cổng Bộ Y tế? Thao tác này sẽ tạo phiếu chính thức.')) sendByt(item.id);
       });
       actions.append(sent);
     }
-    if (!['sent','syncing'].includes(item.state)) {
+    if (!['sent','syncing','queued','uncertain'].includes(item.state)) {
       const edit = el('button','button button-secondary','Chỉnh sửa phiếu');
       edit.type = 'button'; edit.addEventListener('click',()=>renderEditor(item));
       actions.append(edit);
@@ -375,7 +375,9 @@
       const result = await call(`/api/staff/submissions/${encodeURIComponent(id)}`);
       result.item.state_label=(result.item.state_label||'').replaceAll('BYT',['3','4'].includes(result.item.survey_form)?'Medinet':'BYT');
       renderDetail(result.item);
+      detailPanel.dataset.state=result.item.state;
       detailPanel.prepend(destinationNotice(result.item.survey_form));
+      if(result.item.byt_message && ['queued','syncing','uncertain'].includes(result.item.state))detailPanel.prepend(el('p','workflow-note',result.item.byt_message));
       document.getElementById('modalTitle').textContent=`Mẫu ${result.item.survey_form} · Gửi ${destinations[result.item.survey_form].name}`;
       showError(modalError,'');
       if(!surveyModal.open){surveyModal.showModal();document.body.classList.add('modal-open');}
@@ -399,7 +401,7 @@
     showError(modalError,'');
     try {
       const latest=await call(`/api/staff/submissions/${encodeURIComponent(id)}`);
-      if(['sent','syncing'].includes(latest.item.state)){await openDetail(id);return;}
+      if(['sent','syncing','queued','uncertain'].includes(latest.item.state)){await openDetail(id);return;}
       if(!['approved','reviewed','failed'].includes(latest.item.state)){await openDetail(id);throw Error('Phiếu chưa được duyệt hoặc đã được chỉnh sửa. Vui lòng kiểm tra và duyệt lại.');}
       await call(`/api/staff/submissions/${encodeURIComponent(id)}/send-byt`,{
         method:'POST',headers:{'Content-Type':'application/json'},body:'{}'
@@ -410,6 +412,18 @@
       showError(surveyModal.open?modalError:staffError,error instanceof TypeError?'Kết nối bị gián đoạn. Trạng thái phiếu đã được tải lại; vui lòng kiểm tra trước khi thao tác tiếp.':error.message);
     } finally {sendingIds.delete(id);buttons.forEach(b=>{if(b.isConnected)b.disabled=false});}
   };
+  let queuePolling=false;
+  setInterval(async()=>{
+    if(queuePolling||workspace.hidden||document.hidden)return;
+    queuePolling=true;
+    try{
+      if(surveyModal.open&&['queued','syncing'].includes(detailPanel.dataset.state)){
+        const data=await call(`/api/staff/submissions/${encodeURIComponent(selectedId)}`);
+        if(data.item.state!==detailPanel.dataset.state)await openDetail(selectedId);
+      }
+      if(!document.getElementById('view-management').hidden)await loadQueue();
+    }catch(_){}finally{queuePolling=false;}
+  },5000);
   const saveEdits = async (id, form) => {
     const data = new FormData(form);
     const answers = {profile:{},ratings:{},notes:{}};
