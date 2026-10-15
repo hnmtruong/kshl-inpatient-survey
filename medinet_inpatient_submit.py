@@ -8,6 +8,10 @@ import urllib.request
 from medinet_submit import MedinetSubmissionError
 
 
+class MedinetDeliveryUncertain(RuntimeError):
+    """The POST was attempted but its outcome cannot be confirmed safely."""
+
+
 FORM_URL = "https://tnnb.medinet.org.vn/phieu-khao-sat/697ae20ac134eb50e91ede61/58d37041080f8a0dac8e55d6"
 SUBMIT_URL = "https://tnnb.medinet.org.vn/KhaoSat/GuiBaiKhaoSat"
 FORM_ID = "697ae20ac134eb50e91ede61"
@@ -30,8 +34,8 @@ def submit(record_id: str, answers: dict) -> tuple[str, str]:
         raise MedinetSubmissionError("Không tải được biểu mẫu nội trú Medinet để gửi phiếu.") from exc
     fields = [
         ("danhSachKhoaPhong", profile["department"]), ("ngaykhaosat", profile["survey_date"]),
-        ("DotKhaoSatId", FORM_ID), ("keyThongTin", ""), ("DonViKhaoSatId", ""),
-        ("DonViConId", ""), ("nhomDonViId", ""), ("tenKiosk", ""), ("nhomKhaoSat", ""), ("save", "save"),
+        ("DotKhaoSatId", FORM_ID), ("keyThongTin", ""), ("DonViKhaoSatId", "58d37041080f8a0dac8e55d6"),
+        ("DonViConId", profile["department"]), ("nhomDonViId", ""), ("tenKiosk", ""), ("nhomKhaoSat", ""), ("save", "save"),
     ]
     for question in MEDINET_INPATIENT_QUESTIONS:
         key = question["key"]
@@ -54,7 +58,14 @@ def submit(record_id: str, answers: dict) -> tuple[str, str]:
             body = response.read().decode("utf-8", "replace")
             final_url = response.geturl()
     except Exception as exc:
-        raise MedinetSubmissionError("Medinet không nhận được phiếu nội trú.") from exc
+        raise MedinetDeliveryUncertain("Đã gọi gửi Medinet nhưng kết nối bị gián đoạn hoặc quá thời gian chờ. Cần đối chiếu trên Medinet trước khi gửi lại để tránh trùng phiếu.") from exc
     if "/KhaoSat/ThongBao/" not in final_url and not any(text in body.lower() for text in ("cảm ơn", "cám ơn", "thành công")):
+        # Keep the response private for diagnosing receiver validation without resubmitting.
+        from pathlib import Path
+        diagnostics = Path(__file__).resolve().parent / "data" / "delivery-diagnostics"
+        diagnostics.mkdir(parents=True, exist_ok=True, mode=0o700)
+        diagnostic = diagnostics / f"{record_id}.html"
+        diagnostic.write_text(body, encoding="utf-8")
+        diagnostic.chmod(0o600)
         raise MedinetSubmissionError("Medinet chưa xác nhận phiếu nội trú. Phiếu được giữ để kiểm tra lại.")
     return final_url, "Đã gửi Medinet thành công."
