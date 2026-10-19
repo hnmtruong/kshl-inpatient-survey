@@ -13,8 +13,8 @@ TARGET = ROOT / "data" / "byt_credentials.json"
 
 username = input("Tài khoản BYT: ").strip()
 password = getpass.getpass("Mật khẩu BYT: ")
-survey_type = input("Kiểu khảo sát BYT [1]: ").strip() or "1"
-if not username or not password or survey_type not in {"1", "2", "3", "4", "5", "6"}:
+survey_type = "1"
+if not username or not password:
     raise SystemExit("Cấu hình chưa hợp lệ; không ghi tệp.")
 TARGET.parent.mkdir(parents=True, exist_ok=True)
 temp = TARGET.with_suffix(".tmp")

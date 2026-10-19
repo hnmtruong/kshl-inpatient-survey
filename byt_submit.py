@@ -30,6 +30,7 @@ FORM_URLS = {
     "2": f"{BASE_URL}/nguoi-benh-ngoai-tru-v2",
 }
 HOSPITAL_CODE = "60242"
+SURVEY_TYPE = "1"  # Bệnh viện tự đánh giá hàng tháng/quý, for both forms.
 
 
 class BYTSubmissionError(RuntimeError):
@@ -78,11 +79,10 @@ def load_config() -> dict[str, Any]:
         raise BYTSubmissionError("Tệp cấu hình đồng bộ Bộ Y tế không hợp lệ.") from exc
     if not isinstance(config, dict) or not config.get("enabled"):
         raise BYTSubmissionError("Đồng bộ tự động Bộ Y tế chưa được bật.")
-    for key in ("username", "password", "survey_type"):
+    for key in ("username", "password"):
         if not isinstance(config.get(key), str) or not config[key]:
             raise BYTSubmissionError("Thiếu cấu hình tài khoản hoặc kiểu khảo sát Bộ Y tế.")
-    if config["survey_type"] not in {"1", "2", "3", "4", "5", "6"}:
-        raise BYTSubmissionError("Kiểu khảo sát Bộ Y tế trong cấu hình không hợp lệ.")
+    config["survey_type"] = SURVEY_TYPE
     return config
 
 
@@ -98,7 +98,7 @@ def _payload(record_id: str, answers: dict[str, Any], tokens: dict[str, str], su
         "form_build_id": tokens.get("form_build_id", ""),
         "form_token": tokens.get("form_token", ""),
         "form_id": "webform_client_form_206847",
-        "submitted[kieu_khao_sat]": survey_type,
+        "submitted[kieu_khao_sat]": SURVEY_TYPE,
         "submitted[guibyt]": "1",
         "submitted[ttp][masophieu]": record_id,
         "submitted[ttp][bvn][1_ten_benh_vien]": HOSPITAL_CODE,
@@ -146,7 +146,7 @@ def _outpatient_payload(record_id: str, answers: dict[str, Any], tokens: dict[st
         "details[sid]": tokens.get("details[sid]", ""), "details[page_num]": tokens.get("details[page_num]", "1"),
         "details[page_count]": tokens.get("details[page_count]", "1"), "details[finished]": tokens.get("details[finished]", "0"),
         "form_build_id": tokens.get("form_build_id", ""), "form_token": tokens.get("form_token", ""),
-        "form_id": tokens.get("form_id", ""), "submitted[kieu_khao_sat]": "2", "submitted[guibyt]": "1",
+        "form_id": tokens.get("form_id", ""), "submitted[kieu_khao_sat]": SURVEY_TYPE, "submitted[guibyt]": "1",
         "submitted[ttp][masophieu]": record_id, "submitted[ttp][bvn][1_ten_benh_vien]": HOSPITAL_CODE,
         "submitted[ttp][bvn][mabv]": HOSPITAL_CODE, "submitted[ttp][bvn][ngay_dien_phieu][day]": str(now.day),
         "submitted[ttp][bvn][ngay_dien_phieu][month]": str(now.month), "submitted[ttp][bvn][ngay_dien_phieu][year]": str(now.year),
